@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+Options -indexes
+DirectoryIndex index.php
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+</IfModule>
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>
+
+deny from 37.60.254.111
+deny from 119.81.84.158

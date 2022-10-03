@@ -1,0 +1,7 @@
+<--------------------Start_Page  2018-09-09 16:01:34-------------------->
+
+ creating attendee details 
+
+http://console.mrai.org.in/api/Attendee_Api//payment_redirect/14
+
+<--------------------End_Page  2018-09-09 16:01:34-------------------->
