@@ -87,7 +87,7 @@ class Api_login_model extends CI_Model
 							$returnArr["email"] = $user->email;
 							$returnArr["phone"] = $user->phone;
 							$returnArr["city"] = $user->city;
-							$returnArr["image"] = $user->image;
+							$returnArr["image"] = $user->user_image;
 							$response["status"] = 'true';
 			                $response['message'] = 'User Found';
 			                $response['data'] = $returnArr;
