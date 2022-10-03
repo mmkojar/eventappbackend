@@ -17,10 +17,10 @@
 								<thead>
 									<th>ID</th>
 									<th>Name</th>
+									<th>Image</th>
 									<th>Company Name</th>
 									<th>Designation</th>
-									<th>Image</th>
-									<th>Status</th>									
+									<th>Status</th>
 									<th>Requested On</th>
 									<th>Operations</th>
 								</thead>

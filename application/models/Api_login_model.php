@@ -38,7 +38,7 @@ class Api_login_model extends CI_Model
 			return $returnArr;
 		}
 
-		$query = $this->db->select($this->identity_column . ', first_name, last_name ,email, id, phone, city, active, last_login')
+		$query = $this->db->select($this->identity_column . ', first_name, last_name ,email, id, phone, city, user_image, active, last_login')
 				  ->where($this->identity_column, $identity)
 				  ->or_where('phone', $identity)
 				  ->limit(1)
