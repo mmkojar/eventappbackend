@@ -405,7 +405,7 @@ class Note extends MY_Controller
 			fclose($fh);
 			die();
 		}
-	
+		$notes["updated_on"] = date("Y-m-d H:i:s");
 		$update_note = $this->note_model->update_note($notes["notes_id"],$notes);
 		
 		if($update_note){

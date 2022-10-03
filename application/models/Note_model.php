@@ -53,8 +53,7 @@ class Note_model extends CI_Model
 		$data = array(
 			'user_id'   => $user_id,
 			'note'   => $note,
-		    'created_on' => date("Y-m-d H:i:s"),
-		    'updated_on' => date("Y-m-d H:i:s")
+		    'created_on' => date("Y-m-d H:i:s")
 		);
 
 		// filter out any data passed that doesnt have a matching column in the users table
