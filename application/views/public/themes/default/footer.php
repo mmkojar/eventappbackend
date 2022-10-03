@@ -79,14 +79,14 @@
                 <?php unset($_SESSION['success']); unset($_SESSION['message']); unset($_SESSION['message1']); unset($_SESSION['error']); ?>
             }, 2500);
             
-            <!-- lbd.checkFullPageBackgroundImage();-->
+            // lbd.checkFullPageBackgroundImage();
             
-            <!--setTimeout(function(){-->
-            <!--    // after 1000 ms we add the class animated to the login/register card-->
-            <!--    $('.card').removeClass('card-hidden');-->
-            <!--}, 200)-->
+            setTimeout(function(){
+              // after 1000 ms we add the class animated to the login/register card-
+               $('.card').removeClass('card-hidden')
+            }, 200)
 
-            $('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
+            $('#datepicker').datetimepicker({format: 'DD-MM-YYYY',minDate: new Date()});
 	        $('#timepicker').datetimepicker({format: 'LT'});
             
             <?php if(isset($dttable_tab) && $dttable_tab == 'jqdatatable'): ?>

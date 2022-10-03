@@ -16,9 +16,7 @@ class User extends MY_Controller
 	}
 
     public function headers() {
-		$headers = getallheaders();
-		$inputJSON = file_get_contents('php://input');
-		$input = json_decode($inputJSON, TRUE); //convert JSON into array
+		$headers = getallheaders();		
 		
 		if(array_key_exists('encryptedd',$headers)){
 		
@@ -73,6 +71,9 @@ class User extends MY_Controller
 	public function edit($id=FALSE)
 	{	
 		$this->headers();
+		
+		$inputJSON = file_get_contents('php://input');
+		$input = json_decode($inputJSON, TRUE); //convert JSON into array
 		
 		if(isset($id) && !empty($id)){
 			$user_id = cleanQueryParameter($id);

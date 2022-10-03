@@ -33,7 +33,7 @@
                         <?php echo form_open('',array('class'=>'form-vertical form_validation','novalidate'=>'novalidate','name'=>'loginform','id'=>'loginform'));?>
                             
                         <!--   if you want to have the card without animation please remove the ".card-hidden" class   -->
-                            <div class="card">
+                            <div class="card card-hidden">
 								<?php $this->load->view('public/themes/default/error_msg'); ?>
                                 <div class="header text-center">Login</div>
                                 <div class="content">
