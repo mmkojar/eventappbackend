@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-           <a class="navbar-brand" href="http://www.mrai.org.in/imrc/" target="_blank">Indian Metal Recycling Conference</a>
+           <a class="navbar-brand" href="<?php echo base_url(); ?>">Event App</a>
         </div>
         <div class="collapse navbar-collapse">       
             

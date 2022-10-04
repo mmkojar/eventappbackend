@@ -174,28 +174,4 @@ class Agenda extends Admin_Controller
 		}
 		redirect('admin/agenda','refresh');
 	}
-
-	
-	function image_upload($input_file_name,$file_name,$path)
-    {
-        $this->load->library('upload');
-        $config['file_name'] =$file_name; 
-        $config['upload_path'] =$path;
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['overwrite'] = false;
-        $config['remove_spaces'] = true;
-        $config['file_ext_tolower'] = true;
-        $this->upload->initialize($config); 
-        if ($this->upload->do_upload($input_file_name))
-        {
-			$this->data['file_upload_error'] = '';
-			return true;
-        }
-		else {
-			$this->data['file_upload_error'] = $this->upload->display_errors();
-			return false;
-		}
-    }
-	
-
 }

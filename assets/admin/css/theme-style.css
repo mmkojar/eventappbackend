@@ -8432,10 +8432,7 @@ star {
   body > .navbar-collapse.collapse {
     display: none !important;
   }
-
-  .card form [class*="col-"] {
-    padding: 0 6px;
-  }
+  
   /* .card form [class*="col-"]:first-child {
     padding-left: 15px;
   }

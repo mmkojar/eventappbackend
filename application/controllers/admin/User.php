@@ -83,15 +83,42 @@ class User extends MY_Controller
 	  }
 	  else
 	  {
+		
 		$new_data = array(
 		  'first_name' => $this->input->post('first_name'),
 		  'last_name' => $this->input->post('last_name'),
 		  'company' => $this->input->post('company'),
 		  'phone' => $this->input->post('phone')
 		);
+
 		if(strlen($this->input->post('password'))>=6) $new_data['password'] = $this->input->post('password');
+		
+		// For Image Upload	
+		$this->load->helper('imageupload');
+		$new_data["user_image"] = "";
+		$upload_dir = './assets/upload/images/users/';
+		
+		if(!empty($_FILES['imageprofile'])) {
+			if($_FILES['imageprofile']['name'] != "" || $_FILES['imageprofile']['name'] != null){
+				$ext = pathinfo($_FILES['imageprofile']['name'], PATHINFO_EXTENSION);
+				$file_name=date("dmY").time().'_'.$_FILES['imageprofile']['name'];
+
+				$fileUpload = ImageUpload("imageprofile",$file_name,$upload_dir);
+				if($fileUpload['status'] == '0') {
+					$this->session->set_flashdata('error',$fileUpload['msg']);
+					redirect('admin/user/profile','refresh');
+				}
+				if(file_exists($this->input->post('hidden_image'))) {
+					unlink($this->input->post('hidden_image'));
+				}
+				$new_data["user_image"] = $upload_dir."".str_replace(' ','_',$file_name);				
+			}else{
+				$new_data["user_image"] = $this->input->post('hidden_image');
+			}
+		}
+		
 		$this->ion_auth->update($user->id, $new_data);
-	 
+
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
 		redirect('admin/user/profile','refresh');
 	  }

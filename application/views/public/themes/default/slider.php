@@ -21,7 +21,7 @@
 	<div class="sidebar-wrapper">
 		<div class="user">
 			<div class="photo">
-				<img src="<?php echo base_url(); ?>assets/admin/img/default-avatar.png" />
+				<img src="<?php echo ($this->ion_auth->user()->row()->user_image !== null) ? base_url($this->ion_auth->user()->row()->user_image) : base_url('assets/admin/img/default-avatar.png'); ?>" />
 			</div>
 			<div class="info">
 				<a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -46,6 +46,7 @@
 					<li class = "<?php echo ($current_tab == 'message' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/message_notification'); ?>"><i class="pe-7s-add-user"></i><p>Message Notification</p></a></li>
 					<li class = "<?php echo ($current_tab == 'Polling' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/polling'); ?>"><i class="pe-7s-add-user"></i><p>Polling</p></a></li>
 					<li class = "<?php echo ($current_tab == 'about_event' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/about_event'); ?>"><i class="pe-7s-mail"></i><p>About Event</p></a></li>
+					<li class = "<?php echo ($current_tab == 'gallery' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/gallery'); ?>"><i class="pe-7s-mail"></i><p>Gallery</p></a></li>
 					<li class = "<?php echo ($current_tab == 'agenda' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/agenda'); ?>"><i class="pe-7s-mail"></i><p>Event Agenda</p></a></li>
 					
 					<li class = "<?php echo ($current_tab == 'exhibitors' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/exhibitors'); ?>"><i class="pe-7s-mail"></i><p>Exhibitors</p></a></li>

@@ -1,7 +1,7 @@
 		<footer class="footer">
             <div class="container-fluid">
                 <p class="copyright pull-right">
-                    &copy; <?php echo date("Y"); ?> <a href=https://info2ideas.com/" style="color:#23CCEF;    font-size: 18px;">info2ideas</a>, made with love for a better web
+                    &copy; <?php echo date("Y"); ?> <a href="https://info2ideas.com/" target="_blank" style="color:#23CCEF;font-size: 18px;">info2ideas</a>, made with love for a better web
                 </p>
             </div>
         </footer>

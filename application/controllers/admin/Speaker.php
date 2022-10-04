@@ -11,6 +11,7 @@ class Speaker extends Admin_Controller
 		$this->load->model('speaker_model');
 		// $this->load->helper('email');
 		$this->load->helper(array('form', 'url'));
+		$this->load->helper('imageupload');
 		$this->data['current_tab'] = 'speaker';
 	}
 
@@ -86,10 +87,10 @@ class Speaker extends Admin_Controller
 				if($_FILES['speaker_image']['name'] != "" || $_FILES['speaker_image']['name'] != null){
 					$ext = pathinfo($_FILES['speaker_image']['name'], PATHINFO_EXTENSION);
 					$file_name=date("dmY").time().'_'.$_FILES['speaker_image']['name'];
-					
-					if(!$this->image_upload("speaker_image",$file_name,$upload_dir)) {
-						$file_upload_error = $this->data['file_upload_error'];
-						$this->session->set_flashdata('error', $file_upload_error);
+										
+					$fileUpload = ImageUpload("speaker_image",$file_name,$upload_dir);
+					if($fileUpload['status'] == '0') {
+						$this->session->set_flashdata('error',$fileUpload['msg']);
 						$this->render('admin/speaker/create_speaker_view');
 					}
 					else {
@@ -135,10 +136,10 @@ class Speaker extends Admin_Controller
 				if($_FILES['speaker_image']['name'] != "" || $_FILES['speaker_image']['name'] != null){
 					$ext = pathinfo($_FILES['speaker_image']['name'], PATHINFO_EXTENSION);
 					$file_name=date("dmY").time().'_'.$_FILES['speaker_image']['name'];
-					
-					if(!$this->image_upload("speaker_image",$file_name,$upload_dir)) {
-						$file_upload_error = $this->data['file_upload_error'];
-						$this->session->set_flashdata('error',$file_upload_error);
+										
+					$fileUpload = ImageUpload("speaker_image",$file_name,$upload_dir);
+					if($fileUpload['status'] == '0') {
+						$this->session->set_flashdata('error',$fileUpload['msg']);
 						redirect('admin/speaker/edit/'.$id,'refresh');
 					}
 					if(file_exists($this->input->post('hidden_image'))) {
@@ -178,28 +179,4 @@ class Speaker extends Admin_Controller
 		}
 		redirect('admin/speaker','refresh');
 	}
-
-	
-	public function image_upload($input_file_name,$file_name,$path)
-    {
-        $this->load->library('upload');
-        $config['file_name'] =$file_name;
-        $config['upload_path'] =$path;
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['overwrite'] = false;
-        $config['remove_spaces'] = true;
-        $config['file_ext_tolower'] = true;
-        $this->upload->initialize($config); 
-        if ($this->upload->do_upload($input_file_name))
-        {
-			$this->data['file_upload_error'] = '';
-			return true;
-        }
-		else {
-			$this->data['file_upload_error'] = $this->upload->display_errors();
-			return false;
-		}
-    }
-	
-
 }

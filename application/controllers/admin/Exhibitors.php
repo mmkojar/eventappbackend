@@ -12,6 +12,7 @@ class Exhibitors extends Admin_Controller
 		// $this->load->helper('email');
 		$this->load->helper('form');
 		$this->load->helper('url');
+		$this->load->helper('imageupload');
 		$this->data['current_tab'] = 'exhibitors';
 	}
 
@@ -85,10 +86,10 @@ class Exhibitors extends Admin_Controller
 				if($_FILES['ex_image']['name'] != "" || $_FILES['ex_image']['name'] != null){
 					$ext = pathinfo($_FILES['ex_image']['name'], PATHINFO_EXTENSION);
 					$file_name=date("dmY").time().'_'.$_FILES['ex_image']['name'];
-					
-					if(!$this->image_upload("ex_image",$file_name,$upload_dir)) {
-						$file_upload_error = $this->data['file_upload_error'];
-						$this->session->set_flashdata('error', $file_upload_error);
+										
+					$fileUpload = ImageUpload("ex_image",$file_name,$upload_dir);
+					if($fileUpload['status'] == '0') {
+						$this->session->set_flashdata('error',$fileUpload['msg']);
 						$this->render('admin/exhibitors/create_exhibitor_view');
 					}
 					else {
@@ -137,10 +138,10 @@ class Exhibitors extends Admin_Controller
 				if($_FILES['ex_image']['name'] != "" || $_FILES['ex_image']['name'] != null){
 					$ext = pathinfo($_FILES['ex_image']['name'], PATHINFO_EXTENSION);
 					$file_name=date("dmY").time().'_'.$_FILES['ex_image']['name'];
-					
-					if(!$this->image_upload("ex_image",$file_name,$upload_dir)) {
-						$file_upload_error = $this->data['file_upload_error'];
-						$this->session->set_flashdata('error',$file_upload_error);
+										
+					$fileUpload = ImageUpload("ex_image",$file_name,$upload_dir);
+					if($fileUpload['status'] == '0') {
+						$this->session->set_flashdata('error',$fileUpload['msg']);
 						redirect('admin/exhibitors/edit/'.$id,'refresh');
 					}
 					if(file_exists($this->input->post('hidden_image'))) {

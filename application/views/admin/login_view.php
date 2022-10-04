@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <img class="img-responsive" src="https://info2ideas.com/wp-content/uploads/2021/09/cropped-Favicon-32x32.png" />
+            <!-- <img class="img-responsive" src="https://info2ideas.com/wp-content/uploads/2021/09/cropped-Favicon-32x32.png" /> -->
             <a class="navbar-brand" href="<?php echo base_url() ?>">Event App</a>
         </div>
         <div class="collapse navbar-collapse">       

@@ -12,6 +12,7 @@ class Sponsor extends Admin_Controller
 		// $this->load->helper('email');
 		$this->load->helper('form');
 		$this->load->helper('url');
+		$this->load->helper('imageupload');
 		$this->data['current_tab'] = 'sponsor';
 	}
 
@@ -78,7 +79,8 @@ class Sponsor extends Admin_Controller
 			$this->render('admin/sponsor/create_sponsor_view');
 		}
 		else
-		{
+		{	
+			
 			$register_data["sponsor_image_url"] ="";
 			$upload_dir = './assets/upload/images/sponsor/';
 			
@@ -87,10 +89,10 @@ class Sponsor extends Admin_Controller
 					$ext = pathinfo($_FILES['sponsor_image']['name'], PATHINFO_EXTENSION);
 					$file_name=date("dmY").time().'_'.$_FILES['sponsor_image']['name'];
 
-					if(!$this->image_upload("sponsor_image",$file_name,$upload_dir)) {
-						$file_upload_error = $this->data['file_upload_error'];
-						$this->session->set_flashdata('error',$file_upload_error);						
-						$this->render('admin/sponsor/create_sponsor_view');				
+					$fileUpload = ImageUpload("sponsor_image",$file_name,$upload_dir);
+					if($fileUpload['status'] == '0') {
+						$this->session->set_flashdata('error',$fileUpload['msg']);
+						$this->render('admin/sponsor/create_sponsor_view');
 					}
 					else {
 						$register_data["name"] = $this->input->post('name');
@@ -134,10 +136,10 @@ class Sponsor extends Admin_Controller
 				if($_FILES['sponsor_image']['name'] != "" || $_FILES['sponsor_image']['name'] != null){
 					$ext = pathinfo($_FILES['sponsor_image']['name'], PATHINFO_EXTENSION);
 					$file_name=date("dmY").time().'_'.$_FILES['sponsor_image']['name'];
-
-					if(!$this->image_upload("sponsor_image",$file_name,$upload_dir)) {
-						$file_upload_error = $this->data['file_upload_error'];
-						$this->session->set_flashdata('error',$file_upload_error);						
+											
+					$fileUpload = ImageUpload("sponsor_image",$file_name,$upload_dir);
+					if($fileUpload['status'] == '0') {
+						$this->session->set_flashdata('error',$fileUpload['msg']);
 						redirect('admin/sponsor/edit/'.$id,'refresh');
 					}
 					if(file_exists($this->input->post('hidden_image'))) {
@@ -175,29 +177,5 @@ class Sponsor extends Admin_Controller
 			$this->sponsor_model->delete_($id);
 		}
 		redirect('admin/sponsor','refresh');
-	}
-
-	
-	function image_upload($input_file_name,$file_name,$path)
-    {
-        $this->load->library('upload');
-        $config['file_name'] =$file_name; 
-        $config['upload_path'] =$path;
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        $config['overwrite'] = false;
-        $config['remove_spaces'] = true;
-        $config['file_ext_tolower'] = true;
-        $this->upload->initialize($config); 
-        if ($this->upload->do_upload($input_file_name))
-        {
-			$this->data['file_upload_error'] = '';
-			return true;
-        }
-		else {
-			$this->data['file_upload_error'] = $this->upload->display_errors();
-			return false;
-		}
-    }
-	
-
+	}		
 }
