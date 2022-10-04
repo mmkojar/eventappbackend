@@ -2,7 +2,7 @@
 <?php $this->load->view('public/themes/default/slider');?>
 <div id="content">
 	<div class="container-fluid">
-	<a href="<?php echo site_url('admin/faq/create');?>" class="btn btn-info btn-fill btn-wd" style='margin:10px 0px'>Add</a>
+	<a href="<?php echo site_url('admin/FAQ/create');?>" class="btn btn-info btn-fill btn-wd" style='margin:10px 0px'>Add</a>
 
 		<div class="row">
 			<div class="col-md-12">

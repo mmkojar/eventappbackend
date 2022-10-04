@@ -47,7 +47,7 @@
 					<li class = "<?php echo ($current_tab == 'Polling' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/polling'); ?>"><i class="pe-7s-add-user"></i><p>Polling</p></a></li>
 					<li class = "<?php echo ($current_tab == 'about_event' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/about_event'); ?>"><i class="pe-7s-mail"></i><p>About Event</p></a></li>
 					<li class = "<?php echo ($current_tab == 'gallery' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/gallery'); ?>"><i class="pe-7s-mail"></i><p>Gallery</p></a></li>
-					<li class = "<?php echo ($current_tab == 'faqs' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/faq'); ?>"><i class="pe-7s-mail"></i><p>FAQ's</p></a></li>
+					<li class = "<?php echo ($current_tab == 'faqs' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/FAQ'); ?>"><i class="pe-7s-mail"></i><p>FAQ's</p></a></li>
 					<li class = "<?php echo ($current_tab == 'agenda' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/agenda'); ?>"><i class="pe-7s-mail"></i><p>Event Agenda</p></a></li>
 					
 					<li class = "<?php echo ($current_tab == 'exhibitors' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/exhibitors'); ?>"><i class="pe-7s-mail"></i><p>Exhibitors</p></a></li>
