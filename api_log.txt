@@ -1,0 +1,58 @@
+/* $todayd = date("M-Y");
+		$today = date("Y-m-d H:i:s");
+		$start_page = '<--------------------Start_Page  '.$today.'-------------------->';
+		$end_page = '<--------------------End_Page  '.$today.'-------------------->';
+		$file_today = "show_note_".date("d_m_Y").".txt";
+		$dir_fil = $_SERVER['DOCUMENT_ROOT'] ."/assets/api/".$todayd;
+		 if (!file_exists($dir_fil)) {
+			mkdir($dir_fil, 0777, true);
+		}  
+		$dir_file = $_SERVER['DOCUMENT_ROOT'] ."/assets/api/".$todayd.'/'.$file_today; 
+		 if(file_exists($dir_file)){
+			 $fh = fopen($dir_file, 'a');
+			 fwrite($fh, $start_page. "\r\n");
+		}else{
+			 $fh = fopen($dir_file, 'w');
+			 fwrite($fh, $start_page."\r\n");
+		} 
+		$headers = getallheaders();
+		$inputJSON = file_get_contents('php://input');
+		$input = json_decode($inputJSON, TRUE); //convert JSON into array
+		
+		if(array_key_exists('encryptedd',$headers)){
+		
+			$fh = fopen($dir_file, 'a');
+			$message = 'getting header.'.$headers['encryptedd'];
+			fwrite($fh,"\r\n".$message."\r\n");
+			fclose($fh);
+			
+			$fh = fopen($dir_file, 'a');
+			$message = 'getting input and converting it to Array from Json.';
+			fwrite($fh,"\r\n".$message."\r\n");
+			fclose($fh);
+			
+			if(isset($headers['encryptedd']) && !empty($headers['encryptedd'])){
+				$device_imei = cleanQueryParameter($headers['encryptedd']);
+			}else{
+				$errorCode = '3';
+				$errMsg = "Please Enter the details";
+				setError($errorCode,$errMsg);
+				$encrypted = cleanQueryParameter($headers['encryptedd']);
+				$fh = fopen($dir_file, 'a');
+				fwrite($fh,"\r\n".$errMsg."\r\n");
+				$message = $end_page;
+				fwrite($fh,"\r\n".$message."\r\n");
+				fclose($fh);
+				die();
+			}
+		}else{
+			$errorCode = '3';
+			$errMsg = "Please Enter the details";
+			setError($errorCode,$errMsg);
+			$fh = fopen($dir_file, 'a');
+			fwrite($fh,"\r\n".$errMsg."\r\n");
+			$message = $end_page;
+			fwrite($fh,"\r\n".$message."\r\n");
+			fclose($fh);
+			die();
+		} */

@@ -14,10 +14,14 @@ class Note_model extends CI_Model
 		$this->lang->load('ion_auth');
 	}
 
-	public function get_note_for_user($user_id){
+	public function get_note_for_user($user_id,$start = NULL){
 		$this->db->select("notes.*");
 		$this->db->from("notes");
 		$this->db->where("notes.user_id", $user_id);
+		if($start) {
+			$this->db->order_by('notes.notes_id', 'DESC');
+		    $this->db->limit("1");
+		}
 		$query=$this->db->get();
 		return $query->result_array();
 	}
@@ -70,18 +74,41 @@ class Note_model extends CI_Model
 	{
 
 		$note = $this->get_note_id($notes_id,$data["user_id"]);
-		
+		if($note) {
+			$this->db->trans_begin();
+
+			$this->db->update("notes", $data, array('notes_id' => $note["notes_id"],'user_id' => $data["user_id"]));
+
+			if ($this->db->trans_status() === FALSE)
+			{
+				$this->db->trans_rollback();
+				return FALSE;
+			}
+
+			$this->db->trans_commit();
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}		
+	}
+
+	public function delete_($id)
+	{
 		$this->db->trans_begin();
-
-		$this->db->update("notes", $data, array('notes_id' => $note["notes_id"],'user_id' => $data["user_id"]));
-
+		
+		$result = $this->db->delete("notes", array('notes_id' => $id));
+        
 		if ($this->db->trans_status() === FALSE)
 		{
 			$this->db->trans_rollback();
+			$this->session->set_flashdata('error','Delete Failed');
 			return FALSE;
 		}
 
 		$this->db->trans_commit();
+
+		$this->session->set_flashdata('success','Delete Successful');
 		return TRUE;
 	}
 }

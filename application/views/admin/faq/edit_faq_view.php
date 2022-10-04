@@ -10,8 +10,7 @@
 					<div class="content">
 						<?php $this->load->view('public/themes/default/error_msg');?>
 						<div class="row">
-							<?php echo form_open('',array('id'=>'addAttendee','class'=>'form_validation','enctype'=>'multipart/form-data'));?>
-					
+							<?php echo form_open('',array('class'=>'form_validation','enctype'=>'multipart/form-data'));?>					
 							<?php if(validation_errors()): ?>
 								<div class="alert alert-danger">
 									<?php print_r(validation_errors());?> 
@@ -22,15 +21,22 @@
 									$attributes = array(
 									'class' => 'control-label'
 									);
-								echo form_label('Heading','about_heading',$attributes);								
-								echo form_input('about_heading',set_value('about_heading',$about_event_data['about_heading']),'class="form-control" required = "true"');
+								echo form_label('Title','title',$attributes);
+								echo form_input('title',set_value('title',$faq['title']),'class="form-control" required = "true"');
 								?>
 							</div>	
 							<div class="form-group">
 									<?php
-										echo form_label('About Message','about_msg',$attributes);										
-										echo form_textarea('about_msg',set_value('about_msg',$about_event_data['about_msg']),'class="form-control" id="tiny" required = "true"');
+										echo form_label('Description','description',$attributes);
+										echo form_textarea('description',set_value('description',$faq['description']),'class="form-control" id="tiny" required = "true"');
 									?>
+							</div>
+							<div class="form-group">
+								<label>Status</label>
+								<select name="status" class="form-control">
+									<option value="1" <?php echo ($faq['status'] == '1') ? 'selected' : '' ?>>Active</option>
+									<option value="0" <?php echo ($faq['status'] == '0') ? 'selected' : '' ?>>Inactive</option>
+								</select>
 							</div>
 							<?php echo form_submit('submit', 'Update', 'class="btn btn-info btn-fill btn-wd"');?>
 							<?php echo form_close();?>

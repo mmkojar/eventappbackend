@@ -64,7 +64,7 @@ class Agenda extends Admin_Controller
 
 	public function create()
 	{
-		$this->data['page_title'] = 'Create Session';
+		$this->data['page_title'] = 'Add Session';
 	  
 		$this->load->library('form_validation');
 	  

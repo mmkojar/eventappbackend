@@ -71,6 +71,7 @@ class Speaker extends Admin_Controller
 		$this->form_validation->set_rules('name','speaker Name','trim|required');
 		$this->form_validation->set_rules('company_name','Company Name','trim|required');
 		$this->form_validation->set_rules('designation','Designation','trim|required');
+		$this->form_validation->set_rules('speaker_image','Image','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
@@ -119,7 +120,8 @@ class Speaker extends Admin_Controller
 		$this->form_validation->set_rules('name','speaker Name','trim|required');
 		$this->form_validation->set_rules('company_name','Company Name','trim|required');
 		$this->form_validation->set_rules('designation','Designation','trim|required');
-	 
+		$this->form_validation->set_rules('speaker_image','Image','trim|required');
+		
 		if($this->form_validation->run()===FALSE)
 		{
 			//print_r(validation_errors());

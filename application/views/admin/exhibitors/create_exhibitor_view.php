@@ -21,22 +21,19 @@
 									$attributes = array(
 									'class' => 'control-label'
 									);
-								echo form_label('Exhibitor Name','ex_name',$attributes);
-								echo form_error('ex_name');
+								echo form_label('Exhibitor Name','ex_name',$attributes);								
 								echo form_input('ex_name',set_value('ex_name'),'class="form-control" required = "true"',);
 								?>
 							</div>
 							<div class="form-group">
 								<?php
-									echo form_label('Website Url','web_url',$attributes);
-									echo form_error('web_url');
+									echo form_label('Website Url','web_url',$attributes);									
 									echo form_input('web_url',set_value('web_url'),'class="form-control" required = "true"');
 								?>
 							</div>
 							<div class="form-group">
 								<?php
-									echo form_label('Exhibitor Image (PNG, JPEG)','ex_image',$attributes);
-									echo form_error('ex_image');
+									echo form_label('Exhibitor Image (PNG, JPEG)','ex_image',$attributes);									
 									echo form_upload('ex_image',set_value('ex_image'),'class="form-control" id="images_up"  required = "true"');
 								?>
 							</div>

@@ -10,8 +10,7 @@
 					<div class="content">
 						<?php $this->load->view('public/themes/default/error_msg');?>
 						<div class="row">
-							<?php echo form_open('',array('id'=>'addAttendee','class'=>'form_validation','enctype'=>'multipart/form-data'));?>
-					
+							<?php echo form_open('admin/faq/create',array('class'=>'form_validation', 'enctype'=>'multipart/form-data'));?>					
 							<?php if(validation_errors()): ?>
 								<div class="alert alert-danger">
 									<?php print_r(validation_errors());?> 
@@ -22,17 +21,17 @@
 									$attributes = array(
 									'class' => 'control-label'
 									);
-								echo form_label('Heading','about_heading',$attributes);								
-								echo form_input('about_heading',set_value('about_heading',$about_event_data['about_heading']),'class="form-control" required = "true"');
+								echo form_label('title','title',$attributes);
+								echo form_input('title',set_value('title'),'class="form-control" required = "true"');
 								?>
 							</div>	
 							<div class="form-group">
 									<?php
-										echo form_label('About Message','about_msg',$attributes);										
-										echo form_textarea('about_msg',set_value('about_msg',$about_event_data['about_msg']),'class="form-control" id="tiny" required = "true"');
+										echo form_label('Description','description',$attributes);
+										echo form_textarea('description',set_value('description'),'class="form-control" id="tiny" required = "true"');
 									?>
 							</div>
-							<?php echo form_submit('submit', 'Update', 'class="btn btn-info btn-fill btn-wd"');?>
+							<?php echo form_submit('submit', 'Save', 'class="btn btn-info btn-fill btn-wd"');?>
 							<?php echo form_close();?>
 						</div>
 					</div>
@@ -41,7 +40,6 @@
 		</div>
 	</div>
 </div>
-
 <script src="https://cdn.tiny.cloud/1/1a5w4ka884d2keahn36xltwaif9zp4pckvbu3ht2utanno1i/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 tinymce.init({selector: 'textarea#tiny'});

@@ -64,12 +64,13 @@ class Exhibitors extends Admin_Controller
 
 	public function create()
 	{
-		$this->data['page_title'] = 'Create Exhibitors';
+		$this->data['page_title'] = 'Add Exhibitors';
 	  
 		$this->load->library('form_validation');
 	  
 		$this->form_validation->set_rules('ex_name','Exhibitors Name','trim|required');
 		$this->form_validation->set_rules('web_url','Website Url','trim|required');
+		$this->form_validation->set_rules('ex_image','Image','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
@@ -121,7 +122,8 @@ class Exhibitors extends Admin_Controller
 	  
 		$this->form_validation->set_rules('ex_name','Exhibitors Name','trim|required');
 		$this->form_validation->set_rules('web_url','Website Url','trim|required');
-	 
+		$this->form_validation->set_rules('ex_image','Image','trim|required');
+		
 		if($this->form_validation->run()===FALSE)
 		{
 			//print_r(validation_errors());

@@ -23,14 +23,12 @@
 									'class' => 'control-label'
 									);
 								echo form_label('Heading','about_heading',$attributes);
-								echo form_error('about_heading');
 								echo form_input('about_heading',set_value('about_heading'),'class="form-control" required = "true"');
 								?>
 							</div>	
 							<div class="form-group">
 									<?php
 										echo form_label('About Message','about_msg',$attributes);
-										echo form_error('about_msg');
 										echo form_textarea('about_msg',set_value('about_msg'),'class="form-control" id="tiny" required = "true"');
 									?>
 							</div>
@@ -50,7 +48,7 @@
 		</div>
 	</div>
 </div>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/1a5w4ka884d2keahn36xltwaif9zp4pckvbu3ht2utanno1i/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 tinymce.init({selector: 'textarea#tiny'});
 

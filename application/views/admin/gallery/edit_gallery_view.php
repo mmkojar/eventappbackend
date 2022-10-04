@@ -34,12 +34,12 @@
 								?>
 							</div>
 							<div class="form-group">
-									<label>Status</label>
-									<select name="status" class="form-control">
-										<option value="1" <?php echo ($result['status'] == '1') ? 'selected' : '' ?>>Active</option>
-										<option value="0" <?php echo ($result['status'] == '0') ? 'selected' : '' ?>>Inactive</option>
-									</select>
-								</div>	
+								<label>Status</label>
+								<select name="status" class="form-control">
+									<option value="1" <?php echo ($result['status'] == '1') ? 'selected' : '' ?>>Active</option>
+									<option value="0" <?php echo ($result['status'] == '0') ? 'selected' : '' ?>>Inactive</option>
+								</select>
+							</div>	
 							<?php echo form_submit('submit', 'Update', 'class="btn btn-info btn-fill btn-wd"');?>
 							<?php echo form_close();?>															
 						</div>

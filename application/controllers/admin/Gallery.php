@@ -63,11 +63,12 @@ class Gallery extends Admin_Controller
 
 	public function create()
 	{
-		$this->data['page_title'] = 'Add gallery';
+		$this->data['page_title'] = 'Add Images';
         
 		$this->load->library('form_validation');
 	  
 		$this->form_validation->set_rules('title','Title','trim|required');
+		$this->form_validation->set_rules('image','Image','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
@@ -133,11 +134,12 @@ class Gallery extends Admin_Controller
 
 	public function edit($id)
 	{
-		$this->data['page_title'] = 'Edit gallery';		
+		$this->data['page_title'] = 'Edit Image';		
 		
 		$this->load->library('form_validation');
 	  
-		$this->form_validation->set_rules('title','Title','trim|required');		
+		$this->form_validation->set_rules('title','Title','trim|required');
+		$this->form_validation->set_rules('image','Image','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
