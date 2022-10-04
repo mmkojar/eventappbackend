@@ -18,7 +18,7 @@ class FAQ extends Admin_Controller
     public function index($user_id = null)
 	{
 		$this->data['dttable_tab'] = 'dt_table';
-        $this->data['tbl_name'] = 'faq/faqs_list';
+        $this->data['tbl_name'] = 'FAQ/faqs_list';
         $this->data['page_title'] = 'FAQ';
         if(isset($user_id) && !empty($user_id)){
             $this->data['user_id'] = $user_id;
@@ -43,7 +43,7 @@ class FAQ extends Admin_Controller
 			$row[] = $requested->description;
 			$row[] = ($requested->status == '1' ? '<span class="badge badge-success text-white">Active</span>' : '<span class="badge badge-danger text-white">Inactive</span>');
 			$row[] = date('jS-M-Y',strtotime($requested->created_on));							
-			$row[] = anchor('admin/faq/edit/'.$requested->id,'<i class="fa fa-edit"></i>','class="btn btn-simple btn-warning btn-icon edit"').' '.anchor('admin/faq/delete/'.$requested->id,'<i class="fa fa-remove"></i>','class="btn btn-simple btn-danger btn-icon remove" onclick="return confirm(\'Are You Sure ?\')"');
+			$row[] = anchor('admin/FAQ/edit/'.$requested->id,'<i class="fa fa-edit"></i>','class="btn btn-simple btn-warning btn-icon edit"').' '.anchor('admin/FAQ/delete/'.$requested->id,'<i class="fa fa-remove"></i>','class="btn btn-simple btn-danger btn-icon remove" onclick="return confirm(\'Are You Sure ?\')"');
 			$i++;
 			$data[] = $row;
 		}
