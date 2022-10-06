@@ -12,6 +12,14 @@ Returns a randomized string of chars/sybols/numbers for specified length
 
 *****/
 
+function trimMsg($msg) {
+    $string = trim( $msg ); 
+    $paragraphBreak = array("\r\n\r\n", "\n\r\n\r", "\n\n", "\r\r");
+    $string = '<p>'.str_replace( $paragraphBreak, '</p><p>', $msg ).'</p>';
+    $string = nl2br($msg);
+    return $string;
+}
+
 function gen_string($length = 9, $add_dashes = false, $available_sets = 'luds')
 
 { 

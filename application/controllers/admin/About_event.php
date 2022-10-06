@@ -13,9 +13,9 @@ class About_event extends Admin_Controller
 		// $this->load->helper('email');
 		$this->load->helper('form');
 		$this->load->helper('url');
+		$this->load->helper('random_string');
 		$this->data['current_tab'] = 'about_event';
 	}
-
 
     public function index($user_id = null)
 	{
@@ -34,14 +34,6 @@ class About_event extends Admin_Controller
 	  	$this->render('admin/about_event/create_about_view');
 	  }
 	}
-
-	public function trimMsg($msg) {
-		$string = trim( $msg ); 
-        $paragraphBreak = array("\r\n\r\n", "\n\r\n\r", "\n\n", "\r\r");
-        $string = '<p>'.str_replace( $paragraphBreak, '</p><p>', $msg ).'</p>';
-        $string = nl2br($msg);
-        return $string;
-	}
 		
 	public function about_event_list()
 	{
@@ -56,7 +48,7 @@ class About_event extends Admin_Controller
 			$row = array();
 			$row[] = $requested->about_id;
 			$row[] = $requested->about_heading;			
-			$row[] = $this->trimMsg($requested->about_msg);
+			$row[] = str_replace(['<p>', '</p>'],'',htmlspecialchars_decode($requested->about_msg));
 			$row[] = date('jS-M-Y',strtotime($requested->created_on));							
 			$row[] = anchor('admin/about_event/edit/'.$requested->about_id,'<i class="fa fa-edit"></i>','class="btn btn-simple btn-warning btn-icon edit"').' '.anchor('admin/about_event/delete/'.$requested->about_id,'<i class="fa fa-remove"></i>','class="btn btn-simple btn-danger btn-icon remove" onclick="return confirm(\'Are You Sure ?\')"');
 			$i++;
@@ -91,22 +83,8 @@ class About_event extends Admin_Controller
 		}
 		else
 		{
-			/*$register_data["agenda_image_url"] ="";
-			$upload_dir = './assets/upload/images/agenda/';
-			
-			if(!empty($_FILES['agenda_image'])){
-				if($_FILES['agenda_image']['name'] != "" || $_FILES['agenda_image']['name'] != null){
-					$ext = pathinfo($_FILES['agenda_image']['name'], PATHINFO_EXTENSION);
-					$file_name=date("dmY").time().$_FILES['agenda_image']['name'];
-					$this->image_upload("agenda_image",$file_name,$upload_dir);
-					$register_data["agenda_image_url"] = $upload_dir."".$file_name;				
-				}else{
-					$register_data["agenda_image_url"] = "";
-				}
-			}*/
-
 			$register_data["about_heading"] = $this->input->post('about_heading');
-			$register_data["about_msg"] = $this->input->post('about_msg');
+			$register_data["about_msg"] = str_replace(['<p>', '</p>'],'',htmlspecialchars_decode($this->input->post('about_msg')));
 
 			$this->about_event_model->register_about_event($register_data);
 			$this->session->set_flashdata('success','Message Added Successfully');
@@ -132,22 +110,9 @@ class About_event extends Admin_Controller
 		}
 		else
 		{
-			// $register_data["agenda_image"] ="";
-			// $upload_dir = './assets/upload/images/agenda/';
 			
-			// if(!empty($_FILES['agenda_image'])) {
-			// 	if($_FILES['agenda_image']['name'] != "" || $_FILES['agenda_image']['name'] != null){
-			// 		$ext = pathinfo($_FILES['agenda_image']['name'], PATHINFO_EXTENSION);
-			// 		$file_name=date("dmY").time().$_FILES['agenda_image']['name'];
-			// 		$this->image_upload("agenda_image",$file_name,$upload_dir);
-			// 		$register_data["agenda_image"] = $upload_dir."".$file_name;				
-			// 	}else{
-			// 		$register_data["agenda_image"] = $this->input->post('hidden_image');
-			// 	}
-			// }		
-
 			$register_data["about_heading"] = $this->input->post('about_heading');
-			$register_data["about_msg"] = $this->input->post('about_msg');
+			$register_data["about_msg"] = str_replace(['<p>', '</p>'],'',htmlspecialchars_decode($this->input->post('about_msg')));
 
 
 			$this->about_event_model->update($id,$register_data);

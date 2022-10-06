@@ -40,7 +40,7 @@ class FAQ extends Admin_Controller
 			$row = array();
 			$row[] = $requested->id;
 			$row[] = $requested->title;			
-			$row[] = $requested->description;
+			$row[] = str_replace(['<p>', '</p>'],'',htmlspecialchars_decode($requested->description));
 			$row[] = ($requested->status == '1' ? '<span class="badge badge-success text-white">Active</span>' : '<span class="badge badge-danger text-white">Inactive</span>');
 			$row[] = date('jS-M-Y',strtotime($requested->created_on));							
 			$row[] = anchor('admin/FAQ/edit/'.$requested->id,'<i class="fa fa-edit"></i>','class="btn btn-simple btn-warning btn-icon edit"').' '.anchor('admin/FAQ/delete/'.$requested->id,'<i class="fa fa-remove"></i>','class="btn btn-simple btn-danger btn-icon remove" onclick="return confirm(\'Are You Sure ?\')"');
@@ -78,7 +78,7 @@ class FAQ extends Admin_Controller
 		{					
 			$register_data = [
 				'title'   => $this->input->post("title"),
-				'description'   => $this->input->post("description"),
+				'description'   => str_replace(['<p>', '</p>'],'',htmlspecialchars_decode($this->input->post("description"))),
 			];
 			
 			$this->faq_model->register_faqs($register_data);			
@@ -106,7 +106,7 @@ class FAQ extends Admin_Controller
 		{					
 			$register_data = [
 				'title'   => $this->input->post("title"),
-				'description'   => $this->input->post("description"),		
+				'description'   => str_replace(['<p>', '</p>'],'',htmlspecialchars_decode($this->input->post("description"))),	
 				'status'   => $this->input->post("status"),
 				'updated_on' => date("Y-m-d H:i:s")
 			];
