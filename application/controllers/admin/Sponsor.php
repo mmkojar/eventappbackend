@@ -70,7 +70,6 @@ class Sponsor extends Admin_Controller
 	  
 		$this->form_validation->set_rules('name','Sponsor Name','trim|required');
 		$this->form_validation->set_rules('link','Link','trim|required');
-		$this->form_validation->set_rules('sponsor_image','Image','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
@@ -119,7 +118,6 @@ class Sponsor extends Admin_Controller
 	  
 		$this->form_validation->set_rules('name','Sponsor Name','trim|required');
 		$this->form_validation->set_rules('link','Link','trim|required');
-		$this->form_validation->set_rules('sponsor_image','Image','trim|required');
 		
 		if($this->form_validation->run()===FALSE)
 		{
