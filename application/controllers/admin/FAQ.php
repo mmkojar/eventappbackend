@@ -83,7 +83,7 @@ class FAQ extends Admin_Controller
 			
 			$this->faq_model->register_faqs($register_data);			
 			$this->session->set_flashdata('success','faq Added Successfully');
-			redirect('admin/faq','refresh');
+			redirect('admin/FAQ','refresh');
 		}
 	}
 
@@ -113,7 +113,7 @@ class FAQ extends Admin_Controller
 
 			$this->faq_model->update($id,$register_data);
 			$this->session->set_flashdata('success','faq Updated Successfully');
-			redirect('admin/faq','refresh');
+			redirect('admin/FAQ','refresh');
 		}
 	}
 
@@ -127,6 +127,6 @@ class FAQ extends Admin_Controller
 		{
 			$this->faq_model->delete_($id);
 		}
-		redirect('admin/faq','refresh');
+		redirect('admin/FAQ','refresh');
 	}
 }
