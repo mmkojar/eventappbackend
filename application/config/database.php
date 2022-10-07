@@ -95,7 +95,7 @@ $query_builder = TRUE;
 	'stricton' => FALSE,
 	'failover' => array(),
 	'save_queries' => TRUE
-);  */
+); */ 
 
 $db['default'] = array(
 	'dsn'	=> '',
