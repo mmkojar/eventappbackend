@@ -126,37 +126,18 @@ class Chat extends MY_Controller
 // 		$device = $this->Api_login_model->get_device_token($user_id);
 // 		$device_notification_id = $device['device_notification_id'];
 		$get_all_chat_history = $this->chat_model->get_all_chat_history($receiver_id, $user_id, $start);
-		if(!empty($get_all_chat_history)){
-			$fh = fopen($dir_file, 'a');
-			$message = 'result in login array.';
-			fwrite($fh,"\r\n".$message."\r\n");
-			fwrite($fh,"\r\n  ErrCode \r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
+		if(!empty($get_all_chat_history)){			
 			$response['status'] = "true";
 			$response['message'] = 'Data Found';
 			$response['data'] = $get_all_chat_history;
 			print_r(json_encode($response));
-			/*$login["errCode"] = '-1';
-			$login["errMsg"] = $get_all_chat_history;
-			print(json_encode($login));*/
-		}else{
-			$fh = fopen($dir_file, 'a');
-			$message = 'result in login array.';
-			fwrite($fh,"\r\n".$message."\r\n");
-			fwrite($fh,"\r\n  ErrCode \r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
+			
+		}else{		
 			$response['status'] = "false";
 			$response['message'] = 'No Data Found';
 			$response['data'] = [];
 			print_r(json_encode($response));
 			die();
-			/*$login["errCode"] = '2';
-			$login["errMsg"]["msg"] = "No Data Found";
-			print(json_encode($login));*/
 		}
 	}
 	
@@ -196,10 +177,7 @@ class Chat extends MY_Controller
 			fclose($fh);
 			
 			if($headers['encryptedd'] !== 'api-token'){
-				/*$errorCode = '3';
-				$errMsg = "Please Enter encryptedd value";
-				setError($errorCode,$errMsg);
-				die();*/
+				
 				$response['status'] = "false";
     			$response['message'] = 'Please Enter encryptedd value';
     			print_r(json_encode($response));
@@ -210,15 +188,6 @@ class Chat extends MY_Controller
 			$response['message'] = 'Please Enter the details';
 			print_r(json_encode($response));
 			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the details";
-			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			die();*/
 		}
 
 		if(isset($input['user_id']) && !empty($input['user_id'])){
@@ -231,30 +200,12 @@ class Chat extends MY_Controller
     			$response['message'] = 'Invalid user';
     			print_r(json_encode($response));
     			die();
-				/*$errorCode = '9';
-				$errMsg = "Invalid user";
-				setError($errorCode,$errMsg);
-				$fh = fopen($dir_file, 'a');
-				fwrite($fh,"\r\n".$errMsg."\r\n");
-				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
-				die();	*/
 			}
 		}else{
 		    $response['status'] = "false";
 			$response['message'] = 'Please Enter the User Id';
 			print_r(json_encode($response));
 			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the User Id";
-			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			die();*/
 		}
 		
 		/*if(isset($input['device_notification_id']) && !empty($input['device_notification_id'])){
@@ -287,30 +238,12 @@ class Chat extends MY_Controller
     			$response['message'] = 'Invalid receiver';
     			print_r(json_encode($response));
     			die();
-				/*$errorCode = '9';
-				$errMsg = "Invalid receiver";
-				setError($errorCode,$errMsg);
-				$fh = fopen($dir_file, 'a');
-				fwrite($fh,"\r\n".$errMsg."\r\n");
-				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
-				die();*/
 			}
 		}else{
 		    $response['status'] = "false";
 			$response['message'] = 'Please Enter the receiver Id';
 			print_r(json_encode($response));
 			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the receiver id";
-			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			die();*/
 		}
 		
 		if(isset($input['message']) && !empty($input['message'])){
@@ -320,15 +253,6 @@ class Chat extends MY_Controller
 			$response['message'] = 'Please Enter the message';
 			print_r(json_encode($response));
 			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the message";
-			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			die();*/
 		}
         // $device = $this->Api_login_model->get_device_token($user_id);
         // $device_notification_id = $device['device_notification_id'];
@@ -344,31 +268,11 @@ class Chat extends MY_Controller
 					sendPushNotificationToFCMSever($device_notify,$user_id, $receiver_id,$message,$title,$sender_name);	
 				}
 			}
-			/*$fh = fopen($dir_file, 'a');
-			$message = 'result in login array.';
-			fwrite($fh,"\r\n".$message."\r\n");
-			fwrite($fh,"\r\n  ErrCode ".$login['errCode']."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			$errorCode = '-1';
-			$errMsg = "message send successfully";
-			setError($errorCode,$errMsg);*/
 			$response['status'] = "true";
 			$response['message'] = 'message send successfully';
 			$response['data'] = $this->chat_model->get_all_chat_history($receiver_id, $user_id, 'latest');
 			print_r(json_encode($response));
 		}else{
-			/*$fh = fopen($dir_file, 'a');
-			$message = 'result in login array.';
-			fwrite($fh,"\r\n".$message."\r\n");
-			fwrite($fh,"\r\n  ErrCode \r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			$errorCode = '9';
-			$errMsg = "message sending failed";
-			setError($errorCode,$errMsg);*/
 			$response['status'] = "false";
 			$response['message'] = 'message sending failed';
 			$response['data'] = [];
@@ -577,15 +481,6 @@ class Chat extends MY_Controller
 			$response['message'] = 'Please Enter the detail';
 			print_r(json_encode($response));
 			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the details";
-			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			die();*/
 		}
 
 		if(isset($input['user_id']) && !empty($input['user_id'])){
@@ -598,84 +493,29 @@ class Chat extends MY_Controller
     			$response['message'] = 'Invalid user';
     			print_r(json_encode($response));
     			die();
-				/*$errorCode = '9';
-				$errMsg = "Invalid user";
-				setError($errorCode,$errMsg);
-				$fh = fopen($dir_file, 'a');
-				fwrite($fh,"\r\n".$errMsg."\r\n");
-				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
-				die();*/
 			}
 		}else{
 		    $response['status'] = "false";
 			$response['message'] = 'Please Enter the user_id';
 			print_r(json_encode($response));
 			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the details";
-			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			die();*/
 		}
 		
-		$get_chat_history = $this->chat_model->get_chat_history($user_id);
-		if($get_chat_history){
-			if(!empty($get_chat_history)){
-				/*$fh = fopen($dir_file, 'a');
-				$message = 'result in login array.';
-				fwrite($fh,"\r\n".$message."\r\n");
-				fwrite($fh,"\r\n  ErrCode \r\n");
-				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
-				$login["errCode"] = '-1';
-				$login["errMsg"] = $get_chat_history;
-				print(json_encode($login));*/
-				$response['status'] = "true";
-    			$response['message'] = 'Data Found';
-    			$response['data'] = $get_chat_history;
-    			print_r(json_encode($response));
-			}else{
-				/*$fh = fopen($dir_file, 'a');
-				$message = 'result in login array.';
-				fwrite($fh,"\r\n".$message."\r\n");
-				fwrite($fh,"\r\n  ErrCode \r\n");
-				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
-				$login["errCode"] = '2';
-				$login["errMsg"]["msg"] = "No message Found";
-				print(json_encode($login));*/
-				$response['status'] = "false";
-    			$response['message'] = 'No Data Found';
-    			$response['data'] = [];
-    			print_r(json_encode($response));
-    			die();
-			}
+		$get_chat_history = $this->chat_model->get_chat_history($user_id);		
+		if(!empty($get_chat_history)){				
+			$response['status'] = "true";
+			$response['message'] = 'Data Found';
+			$response['data'] = $get_chat_history;
+			print_r(json_encode($response));
 		}else{
-			/*$fh = fopen($dir_file, 'a');
-			$message = 'result in login array.';
-			fwrite($fh,"\r\n".$message."\r\n");
-			fwrite($fh,"\r\n  ErrCode \r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
-			$login["errCode"] = '2';
-			$login["errMsg"]["msg"] = "please try again";
-			print(json_encode($login));*/
 			
 			$response['status'] = "false";
-			$response['message'] = 'please try again';
+			$response['message'] = 'No Data Found';
 			$response['data'] = [];
 			print_r(json_encode($response));
 			die();
 		}
+		
 	}
 	
 }
