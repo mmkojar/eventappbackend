@@ -45,7 +45,7 @@
 								echo form_hidden('hidden_image',set_value('speaker_image',$speaker_data['image']),'class="form-control"');
 								?>
 								<?php
-									echo form_label('Image (PNG, JPEG)','speaker_image',$attributes);
+									echo form_label('Image (PNG, JPG, JPEG) (min128 x max512)','speaker_image',$attributes);
 									echo form_upload('speaker_image',set_value('speaker_image'),'class="form-control" id="images_up"');
 								?>
 							</div>

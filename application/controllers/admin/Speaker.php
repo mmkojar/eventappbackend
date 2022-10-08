@@ -80,33 +80,34 @@ class Speaker extends Admin_Controller
 		}
 		else
 		{
-			$register_data["speaker_image_url"] ="";
 			$upload_dir = './assets/upload/images/speaker/';
-			
-			if(!empty($_FILES['speaker_image'])) {
-				if($_FILES['speaker_image']['name'] != "" || $_FILES['speaker_image']['name'] != null){
-					$ext = pathinfo($_FILES['speaker_image']['name'], PATHINFO_EXTENSION);
-					$file_name=date("dmY").time().'_'.$_FILES['speaker_image']['name'];
-										
-					$fileUpload = ImageUpload("speaker_image",$file_name,$upload_dir);
-					if($fileUpload['status'] == '0') {
-						$this->session->set_flashdata('error',$fileUpload['msg']);
-						$this->render('admin/speaker/create_speaker_view');
-					}
-					else {
-						$register_data["speaker_image_url"] = $upload_dir."".str_replace(' ','_',$file_name);	
-						$register_data["name"] = $this->input->post('name');
-						$register_data["company_name"] = $this->input->post('company_name');
-						$register_data["designation"] = $this->input->post('designation');
+			$fileUploadError = [];
+			if($_FILES['speaker_image']['name'] != "" || $_FILES['speaker_image']['name'] != null){
+				$ext = pathinfo($_FILES['speaker_image']['name'], PATHINFO_EXTENSION);
+				$file_name=date("dmY").time().'_'.$_FILES['speaker_image']['name'];
 
-						$this->speaker_model->register_speaker($register_data);
-						$this->session->set_flashdata('success','speaker Added Successfully');
-						redirect('admin/speaker','refresh');
-					}								
-				}else{
-					$register_data["speaker_image_url"] = "";
-				}
-			}			
+				$fileUpload = ImageUpload("speaker_image",$file_name,$upload_dir);          
+				array_push($fileUploadError,$fileUpload);
+			}
+			else{
+				$fileUploadError[0] = ['status'=>'1' ,'msg' => 'File Uploaded'];
+				$file_name = "default.png";
+			}
+
+			if($fileUploadError[0]['status'] == '0') {
+				$this->session->set_flashdata('error',$fileUploadError[0]['msg']);				
+				$this->render('admin/speaker/create_speaker_view');
+			}
+			else {
+				$register_data["name"] = $this->input->post('name');
+				$register_data["company_name"] = $this->input->post('company_name');
+				$register_data["designation"] = $this->input->post('designation');
+				$register_data["image"] = $upload_dir."".str_replace(' ','_',$file_name);
+
+				$this->speaker_model->register_speaker($register_data);
+				$this->session->set_flashdata('success','speaker Added Successfully');
+				redirect('admin/speaker','refresh');
+			}
 		}
 	}
 
@@ -129,37 +130,44 @@ class Speaker extends Admin_Controller
 		}
 		else
 		{
-			$register_data["image"] ="";
+			$hidden_image = $this->input->post('hidden_image');
 			$upload_dir = './assets/upload/images/speaker/';
-			
-			if(!empty($_FILES['speaker_image'])) {
-				if($_FILES['speaker_image']['name'] != "" || $_FILES['speaker_image']['name'] != null){
-					$ext = pathinfo($_FILES['speaker_image']['name'], PATHINFO_EXTENSION);
-					$file_name=date("dmY").time().'_'.$_FILES['speaker_image']['name'];
-										
-					$fileUpload = ImageUpload("speaker_image",$file_name,$upload_dir);
-					if($fileUpload['status'] == '0') {
-						$this->session->set_flashdata('error',$fileUpload['msg']);
-						redirect('admin/speaker/edit/'.$id,'refresh');
-					}
-					if(file_exists($this->input->post('hidden_image'))) {
-						unlink($this->input->post('hidden_image'));
-					}		
-					$register_data["image"] = $upload_dir."".str_replace(' ','_',$file_name);
-				}else{
-					$register_data["image"] = $this->input->post('hidden_image');
-				}
-			}
-			
-			$register_data["name"] = $this->input->post('name');
-			$register_data["company_name"] = $this->input->post('company_name');
-			$register_data["designation"] = $this->input->post('designation');		
-			$register_data["status"] = $this->input->post('status');
-			$register_data["updated_on"] = date("Y-m-d H:i:s");
+			$fileUploadError = [];
+			if($_FILES['speaker_image']['name'] != "" || $_FILES['speaker_image']['name'] != null){
+				$ext = pathinfo($_FILES['speaker_image']['name'], PATHINFO_EXTENSION);
+				$file_name=date("dmY").time().'_'.$_FILES['speaker_image']['name'];
 
-			$this->speaker_model->update($id, $register_data);
-			$this->session->set_flashdata('success','speaker Updated Successfully');
-			redirect('admin/speaker','refresh');
+				$fileUpload = ImageUpload("speaker_image",$file_name,$upload_dir);          
+				array_push($fileUploadError,$fileUpload);
+				if($fileUploadError[0]['status'] !== '0') {
+					if($hidden_image !== './assets/upload/images/speaker/default.png') {
+						if(file_exists($hidden_image)) {
+							unlink($hidden_image);
+						}
+					}
+				}
+				$filenametoupload = $upload_dir."".$file_name;
+			}else{
+				$fileUploadError[0] = ['status'=>'1' ,'msg' => 'File Uploaded'];
+				$filenametoupload = $hidden_image ? $hidden_image : $upload_dir."".'default.png';
+			}
+
+			if($fileUploadError[0]['status'] == '0') {
+				$this->session->set_flashdata('error',$fileUploadError[0]['msg']);
+				redirect('admin/speaker/edit/'.$user_id,'refresh');
+			}
+			else {
+				$register_data["name"] = $this->input->post('name');
+				$register_data["company_name"] = $this->input->post('company_name');
+				$register_data["designation"] = $this->input->post('designation');		
+				$register_data["image"] = str_replace(' ','_',$filenametoupload);
+				$register_data["status"] = $this->input->post('status');
+				$register_data["updated_on"] = date("Y-m-d H:i:s");
+
+				$this->speaker_model->update($id, $register_data);
+				$this->session->set_flashdata('success','speaker Updated Successfully');
+				redirect('admin/speaker','refresh');
+			}			
 		}
 	}
 
@@ -171,9 +179,12 @@ class Speaker extends Admin_Controller
 		}
 		else
 		{
-			$user = $this->speaker_model->get_speaker($id);			
-			if(file_exists($user['image'])) {
-				unlink($user['image']);
+			$speaker = $this->speaker_model->get_speaker($id);
+			
+			if($speaker['image'] !== './assets/upload/images/speaker/default.png') {
+				if(file_exists($speaker['image'])) {
+					unlink($speaker['image']);
+				}
 			}
 			$this->speaker_model->delete_($id);
 		}

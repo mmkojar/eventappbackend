@@ -41,8 +41,8 @@
 							</div>
 							<div class="form-group">
 								<?php
-									echo form_label('Image (PNG, JPEG)','speaker_image',$attributes);
-									echo form_upload('speaker_image',set_value('speaker_image'),'class="form-control" id="images_up"  required = "true"');
+									echo form_label('Image (PNG, JPG, JPEG) (min128 x max512)','speaker_image',$attributes);
+									echo form_upload('speaker_image',set_value('speaker_image'),'class="form-control" id="images_up"');
 								?>
 							</div>	
 							<?php echo form_submit('submit', 'Save', 'class="btn btn-info btn-fill btn-wd"');?>

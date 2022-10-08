@@ -98,7 +98,7 @@ class Sponsor_model extends CI_Model
 		$data = array(
 			'name'   => $register_data["name"],
 			'link'   => $register_data["link"],
-			'image'   => $register_data["sponsor_image_url"],
+			'image'   => $register_data["image"],
 			'status'   => 1
 		);	
 

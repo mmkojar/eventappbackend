@@ -36,7 +36,7 @@
 									echo form_hidden('hidden_image',set_value('sponsor_image',$sponsor_data['image']),'class="form-control"');
 								?>
 								<?php
-									echo form_label('Image (PNG, JPEG)','sponsor_image',$attributes);
+									echo form_label('Image (PNG, JPG, JPEG) (min128 x max512)','sponsor_image',$attributes);
 									echo form_upload('sponsor_image',set_value('sponsor_image'),'class="form-control" id="images_up"');
 								?>
 							</div>

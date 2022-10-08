@@ -154,7 +154,7 @@ class QR extends Admin_Controller
 		{
 			$user = $this->QR_model->qr_code('id',$id);
 			if(file_exists($user['filename'])) {
-				unlink($user['filename']);				
+				unlink($user['filename']);
 			}
 			$this->QR_model->delete_($id);
 		}

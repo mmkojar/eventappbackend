@@ -1855,7 +1855,11 @@ class Ion_auth_model extends CI_Model
 
 		// delete user from users table should be placed after remove from group
 		$this->db->delete($this->tables['users'], array('id' => $id));
+		$this->db->delete("devices", array('user_id' => $id));
 
+		$this->db->where('user_id', $id);
+		$this->db->or_where('receiver_id', $id);
+		$this->db->delete("chat_detail");
 
 		if ($this->db->trans_status() === FALSE)
 		{

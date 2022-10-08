@@ -37,7 +37,7 @@
 								echo form_hidden('hidden_image',set_value('ex_image',$exhibitors_data['ex_image']),'class="form-control"');
 								?>
 								<?php
-									echo form_label('Exhibitor Image (PNG, JPEG)','ex_image',$attributes);									
+									echo form_label('Exhibitor Image (PNG, JPG, JPEG) (min128 x max512)','ex_image',$attributes);									
 									echo form_upload('ex_image',set_value('ex_image'),'class="form-control" id="images_up"');
 								?>
 							</div>

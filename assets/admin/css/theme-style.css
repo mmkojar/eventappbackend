@@ -6344,8 +6344,9 @@ star {
 .checkbox label.error,
 .radio label.error {
   position: absolute;
-  top: 15px;
+  top: 36px;
   left: 5px;
+  text-transform: capitalize;
 }
 
 /* ============================================================

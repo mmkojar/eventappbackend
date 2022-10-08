@@ -33,8 +33,8 @@
 							</div>
 							<div class="form-group">
 								<?php
-									echo form_label('Exhibitor Image (PNG, JPEG)','ex_image',$attributes);									
-									echo form_upload('ex_image',set_value('ex_image'),'class="form-control" id="images_up"  required = "true"');
+									echo form_label('Exhibitor Image (PNG, JPG, JPEG) (min128 x max512)','ex_image',$attributes);
+									echo form_upload('ex_image',set_value('ex_image'),'class="form-control" id="images_up"');
 								?>
 							</div>
 							<?php echo form_submit('submit', 'Save', 'class="btn btn-info btn-fill btn-wd"');?>

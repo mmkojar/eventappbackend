@@ -100,7 +100,7 @@ class Speaker_model extends CI_Model
 			'name'   => $register_data["name"],
 			'company_name'   => $register_data["company_name"],
 			'designation'   => $register_data["designation"],
-			'image'   => $register_data["speaker_image_url"],
+			'image'   => $register_data["image"],
 			'status'   => 1,
 		);	
 

@@ -34,8 +34,8 @@
 							</div>
 							<div class="form-group">
 								<?php
-									echo form_label('Image (PNG, JPEG)','sponsor_image',$attributes);
-									echo form_upload('sponsor_image',set_value('sponsor_image'),'class="form-control" id="images_up"  required = "true"');
+									echo form_label('Image (PNG, JPG, JPEG) (min128 x max512)','sponsor_image',$attributes);
+									echo form_upload('sponsor_image',set_value('sponsor_image'),'class="form-control" id="images_up"');
 								?>
 							</div>	
 							<?php echo form_submit('submit', 'Save', 'class="btn btn-info btn-fill btn-wd"');?>

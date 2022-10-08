@@ -79,37 +79,36 @@ class Exhibitors extends Admin_Controller
 		}
 		else
 		{
-			$register_data["ex_image_url"] ="";
+
 			$upload_dir = './assets/upload/images/exhibitors/';
-			
-			if(!empty($_FILES['ex_image'])){
-				if($_FILES['ex_image']['name'] != "" || $_FILES['ex_image']['name'] != null){
-					$ext = pathinfo($_FILES['ex_image']['name'], PATHINFO_EXTENSION);
-					$file_name=date("dmY").time().'_'.$_FILES['ex_image']['name'];
-										
-					$fileUpload = ImageUpload("ex_image",$file_name,$upload_dir);
-					if($fileUpload['status'] == '0') {
-						$this->session->set_flashdata('error',$fileUpload['msg']);
-						$this->render('admin/exhibitors/create_exhibitor_view');
-					}
-					else {
-						$register_data = array(
-							'ex_name'   => $this->input->post("ex_name"),
-							'ex_image'   => $upload_dir."".str_replace(' ','_',$file_name),
-							'web_url'   => $this->input->post("web_url"),
-							'status'   => 1,
-						);	
-			
-						$this->exhibitors_model->register_exhibitor($register_data);
-						$this->session->set_flashdata('success','Exhibitors Added Successfully');
-						redirect('admin/exhibitors','refresh');
-					}							
-				}else{
-					$register_data["ex_image_url"] = "";
-				}
+			$fileUploadError = [];
+			if($_FILES['ex_image']['name'] != "" || $_FILES['ex_image']['name'] != null){
+				$ext = pathinfo($_FILES['ex_image']['name'], PATHINFO_EXTENSION);
+				$file_name=date("dmY").time().'_'.$_FILES['ex_image']['name'];
+
+				$fileUpload = ImageUpload("ex_image",$file_name,$upload_dir);          
+				array_push($fileUploadError,$fileUpload);
+			}
+			else{
+				$fileUploadError[0] = ['status'=>'1' ,'msg' => 'File Uploaded'];
+				$file_name = "default.png";
 			}
 
-			
+			if($fileUploadError[0]['status'] == '0') {
+				$this->session->set_flashdata('error',$fileUploadError[0]['msg']);				
+				$this->render('admin/exhibitors/create_exhibitor_view');
+			}
+			else {
+				$register_data = array(
+					'ex_name'   => $this->input->post("ex_name"),
+					'ex_image'   => $upload_dir."".str_replace(' ','_',$file_name),
+					'web_url'   => $this->input->post("web_url"),
+					'status'   => 1,
+				);
+				$this->exhibitors_model->register_exhibitor($register_data);
+				$this->session->set_flashdata('success','Exhibitors Added Successfully');
+				redirect('admin/exhibitors','refresh');
+			}
 		}
 	}
 
@@ -131,36 +130,43 @@ class Exhibitors extends Admin_Controller
 		}
 		else
 		{
-			$register_data["ex_image"] ="";
+			$hidden_image = $this->input->post('hidden_image');
 			$upload_dir = './assets/upload/images/exhibitors/';
-			
-			if(!empty($_FILES['ex_image'])) {
-				if($_FILES['ex_image']['name'] != "" || $_FILES['ex_image']['name'] != null){
-					$ext = pathinfo($_FILES['ex_image']['name'], PATHINFO_EXTENSION);
-					$file_name=date("dmY").time().'_'.$_FILES['ex_image']['name'];
-										
-					$fileUpload = ImageUpload("ex_image",$file_name,$upload_dir);
-					if($fileUpload['status'] == '0') {
-						$this->session->set_flashdata('error',$fileUpload['msg']);
-						redirect('admin/exhibitors/edit/'.$id,'refresh');
+			$fileUploadError = [];
+			if($_FILES['ex_image']['name'] != "" || $_FILES['ex_image']['name'] != null){
+				$ext = pathinfo($_FILES['ex_image']['name'], PATHINFO_EXTENSION);
+				$file_name=date("dmY").time().'_'.$_FILES['ex_image']['name'];
+
+				$fileUpload = ImageUpload("ex_image",$file_name,$upload_dir);          
+				array_push($fileUploadError,$fileUpload);
+				if($fileUploadError[0]['status'] !== '0') {
+					if($hidden_image !== './assets/upload/images/exhibitors/default.png') {
+						if(file_exists($hidden_image)) {
+							unlink($hidden_image);
+						}
 					}
-					if(file_exists($this->input->post('hidden_image'))) {
-						unlink($this->input->post('hidden_image'));
-					}
-					$register_data["ex_image"] = $upload_dir."".str_replace(' ','_',$file_name);				
-				}else{
-					$register_data["ex_image"] = $this->input->post('hidden_image');
 				}
-			}		
+				$filenametoupload = $upload_dir."".$file_name;
+			}else{
+				$fileUploadError[0] = ['status'=>'1' ,'msg' => 'File Uploaded'];
+				$filenametoupload = $hidden_image ? $hidden_image : $upload_dir."".'default.png';
+			}
 
-			$register_data["ex_name"] = $this->input->post('ex_name');
-			$register_data["web_url"] = $this->input->post('web_url');
-			$register_data["status"] = $this->input->post('status');
-			$register_data["updated_on"] = date("Y-m-d H:i:s");
+			if($fileUploadError[0]['status'] == '0') {
+				$this->session->set_flashdata('error',$fileUploadError[0]['msg']);
+				redirect('admin/exhibitors/edit/'.$user_id,'refresh');
+			}
+			else {	
+				$register_data["ex_name"] = $this->input->post('ex_name');
+				$register_data["web_url"] = $this->input->post('web_url');
+				$register_data["ex_image"] = str_replace(' ','_',$filenametoupload);
+				$register_data["status"] = $this->input->post('status');
+				$register_data["updated_on"] = date("Y-m-d H:i:s");
 
-			$this->exhibitors_model->update($id,$register_data);
-			$this->session->set_flashdata('success','Exhibitors Updated Successfully');
-			redirect('admin/exhibitors','refresh');
+				$this->exhibitors_model->update($id,$register_data);
+				$this->session->set_flashdata('success','Exhibitors Updated Successfully');
+				redirect('admin/exhibitors','refresh');
+			}
 		}
 	}
 
@@ -172,9 +178,11 @@ class Exhibitors extends Admin_Controller
 		}
 		else
 		{
-			$user = $this->exhibitors_model->get_exhibitors($id);			
-			if(file_exists($user['ex_image'])) {
-				unlink($user['ex_image']);
+			$exhi = $this->exhibitors_model->get_exhibitors($id);
+			if($exhi['ex_image'] !== './assets/upload/images/exhibitors/default.png') {
+				if(file_exists($exhi['ex_image'])) {
+					unlink($exhi['ex_image']);
+				}
 			}
 			$this->exhibitors_model->delete_($id);
 		}

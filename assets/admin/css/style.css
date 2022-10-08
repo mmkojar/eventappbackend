@@ -472,6 +472,9 @@
   opacity: 1;
 }
 /* My CSS */
+.btn.btn-info{
+    margin-top: 20px;
+}
 .card [class*="col-"] {
     padding: 0 6px;
 }
