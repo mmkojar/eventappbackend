@@ -169,7 +169,7 @@ class Agenda_model extends CI_Model
 			$result = [];
 		    if($rowcount > 0) {				
 				foreach($query->row_array() as $rawdata) {
-					$rawdata['agenda_date'] = date('jS-M-Y',strtotime($rawdata['agenda_date']));
+					$rawdata['agenda_date'] = date('jS M, Y',strtotime($rawdata['agenda_date']));
 					array_push($result,$rawdata);
 				}
 		        $response['status'] = "true";
@@ -189,7 +189,7 @@ class Agenda_model extends CI_Model
 			$result = [];
 		    if($rowcount > 0) {
 				foreach($query->result_array() as $rawdata) {
-					$rawdata['agenda_date'] = date('jS-M-Y',strtotime($rawdata['agenda_date']));
+					$rawdata['agenda_date'] = date('jS M, Y',strtotime($rawdata['agenda_date']));
 					array_push($result,$rawdata);
 				}
 		        $response['status'] = "true";
