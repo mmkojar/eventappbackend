@@ -100,7 +100,7 @@ class Exhibitors extends Admin_Controller
 			}
 			else {
 				$register_data = array(
-					'ex_name'   => $this->input->post("ex_name"),
+					'ex_name'   => ucwords($this->input->post("ex_name")),
 					'ex_image'   => $upload_dir."".str_replace(' ','_',$file_name),
 					'web_url'   => $this->input->post("web_url"),
 					'status'   => 1,
@@ -157,7 +157,7 @@ class Exhibitors extends Admin_Controller
 				redirect('admin/exhibitors/edit/'.$user_id,'refresh');
 			}
 			else {	
-				$register_data["ex_name"] = $this->input->post('ex_name');
+				$register_data["ex_name"] = ucwords($this->input->post("ex_name"));
 				$register_data["web_url"] = $this->input->post('web_url');
 				$register_data["ex_image"] = str_replace(' ','_',$filenametoupload);
 				$register_data["status"] = $this->input->post('status');

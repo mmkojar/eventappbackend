@@ -166,10 +166,15 @@ class Agenda_model extends CI_Model
 		    $this->db->where("agenda_id",$id);
 		    $query=$this->db->get();
 		    $rowcount =  $query->num_rows();
-		    if($rowcount > 0) {
+			$result = [];
+		    if($rowcount > 0) {				
+				foreach($query->row_array() as $rawdata) {
+					$rawdata['agenda_date'] = date('jS-M-Y',strtotime($rawdata['agenda_date']));
+					array_push($result,$rawdata);
+				}
 		        $response['status'] = "true";
 		        $response['message'] = 'Data Found';
-		        $response['data'] = $query->row_array();
+		        $response['data'] = $result;
 		        return $response;
 		    }
 		    else {
@@ -181,10 +186,15 @@ class Agenda_model extends CI_Model
 		else {
 		    $query=$this->db->get();
 		    $rowcount =  $query->num_rows();
+			$result = [];
 		    if($rowcount > 0) {
+				foreach($query->result_array() as $rawdata) {
+					$rawdata['agenda_date'] = date('jS-M-Y',strtotime($rawdata['agenda_date']));
+					array_push($result,$rawdata);
+				}
 		        $response['status'] = "true";
 		        $response['message'] = 'Data Found';
-		        $response['data'] = $query->result_array();
+		        $response['data'] = $result;
 		        return $response;
 		    }
 		    else {

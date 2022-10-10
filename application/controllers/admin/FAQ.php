@@ -77,7 +77,7 @@ class FAQ extends Admin_Controller
 		else
 		{					
 			$register_data = [
-				'title'   => $this->input->post("title"),
+				'title'   => ucfirst($this->input->post("title")),
 				'description'   => str_replace(['<p>', '</p>'],'',htmlspecialchars_decode($this->input->post("description"))),
 			];
 			
@@ -105,7 +105,7 @@ class FAQ extends Admin_Controller
 		else
 		{					
 			$register_data = [
-				'title'   => $this->input->post("title"),
+				'title'   => ucfirst($this->input->post("title")),
 				'description'   => str_replace(['<p>', '</p>'],'',htmlspecialchars_decode($this->input->post("description"))),	
 				'status'   => $this->input->post("status"),
 				'updated_on' => date("Y-m-d H:i:s")

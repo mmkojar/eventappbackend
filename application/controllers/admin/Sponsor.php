@@ -98,7 +98,7 @@ class Sponsor extends Admin_Controller
 				$this->render('admin/sponsor/create_sponsor_view');
 			}
 			else {
-				$register_data["name"] = $this->input->post('name');
+				$register_data["name"] = ucwords($this->input->post('name'));
 				$register_data["link"] = $this->input->post('link');
 				$register_data["image"] = $upload_dir."".str_replace(' ','_',$file_name);
 
@@ -154,7 +154,7 @@ class Sponsor extends Admin_Controller
 				redirect('admin/sponsor/edit/'.$user_id,'refresh');
 			}
 			else {
-				$register_data["name"] = $this->input->post('name');
+				$register_data["name"] = ucwords($this->input->post('name'));
 				$register_data["link"] = $this->input->post('link');
 				$register_data["image"] = str_replace(' ','_',$filenametoupload);
 				$register_data["status"] = $this->input->post('status');

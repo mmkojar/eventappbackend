@@ -85,8 +85,12 @@
               // after 1000 ms we add the class animated to the login/register card-
                $('.card').removeClass('card-hidden')
             }, 200)
-
-            $('#datepicker').datetimepicker({format: 'DD-MM-YYYY',minDate: new Date()});
+            if(window.location.pathname.split('/').at(-1) == 'create') {
+                $('#datepicker').datetimepicker({format: 'DD-MM-YYYY',minDate: new Date()});
+            }
+            else {
+                $('#datepicker').datetimepicker({format: 'DD-MM-YYYY'});
+            }
 	        $('#timepicker').datetimepicker({format: 'LT'});
             
             <?php if(isset($dttable_tab) && $dttable_tab == 'jqdatatable'): ?>

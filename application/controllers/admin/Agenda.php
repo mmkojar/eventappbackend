@@ -40,7 +40,7 @@ class Agenda extends Admin_Controller
 			$row = array();
 			$row[] = $requested->agenda_id;
 			$row[] = $requested->agenda_name;			
-			$row[] = $requested->agenda_date;					
+			$row[] = date('jS-M-Y',strtotime($requested->agenda_date));					
 			$row[] = $requested->agenda_time;
 			$row[] = $requested->speaker_name;
 			$row[] = $requested->agenda_venue;
@@ -97,11 +97,11 @@ class Agenda extends Admin_Controller
 				}
 			} */		
 			$register_data = [
-				'agenda_name'   => $this->input->post("agenda_name"),
+				'agenda_name'   => ucwords($this->input->post("agenda_name")),
 				'agenda_date'   => $this->input->post("agenda_date"),
 				'agenda_time'   => $this->input->post("agenda_time"),
-				'speaker_name'   => $this->input->post("speaker_name"),
-				'agenda_venue'   => $this->input->post("agenda_venue"),
+				'speaker_name'   => ucwords($this->input->post("speaker_name")),
+				'agenda_venue'   => ucfirst($this->input->post("agenda_venue")),
 				// 'agenda_image'   => $register_data["agenda_image_url"],			
 				'status'   => 1,
 			];
@@ -146,11 +146,11 @@ class Agenda extends Admin_Controller
 				}
 			} */		
 			$register_data = [
-				'agenda_name'   => $this->input->post("agenda_name"),
+				'agenda_name'   => ucwords($this->input->post("agenda_name")),
 				'agenda_date'   => $this->input->post("agenda_date"),
 				'agenda_time'   => $this->input->post("agenda_time"),
-				'speaker_name'   => $this->input->post("speaker_name"),
-				'agenda_venue'   => $this->input->post("agenda_venue"),
+				'speaker_name'   => ucwords($this->input->post("speaker_name")),
+				'agenda_venue'   => ucfirst($this->input->post("agenda_venue")),
 				// 'agenda_image'   => $register_data["agenda_image_url"],			
 				'status'   => $this->input->post("status"),
 				'updated_on' => date("Y-m-d H:i:s")

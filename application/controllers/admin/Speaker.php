@@ -99,9 +99,9 @@ class Speaker extends Admin_Controller
 				$this->render('admin/speaker/create_speaker_view');
 			}
 			else {
-				$register_data["name"] = $this->input->post('name');
-				$register_data["company_name"] = $this->input->post('company_name');
-				$register_data["designation"] = $this->input->post('designation');
+				$register_data["name"] = ucwords($this->input->post('name'));
+				$register_data["company_name"] = ucwords($this->input->post('company_name'));
+				$register_data["designation"] = ucwords($this->input->post('designation'));
 				$register_data["image"] = $upload_dir."".str_replace(' ','_',$file_name);
 
 				$this->speaker_model->register_speaker($register_data);
@@ -157,9 +157,9 @@ class Speaker extends Admin_Controller
 				redirect('admin/speaker/edit/'.$user_id,'refresh');
 			}
 			else {
-				$register_data["name"] = $this->input->post('name');
-				$register_data["company_name"] = $this->input->post('company_name');
-				$register_data["designation"] = $this->input->post('designation');		
+				$register_data["name"] = ucwords($this->input->post('name'));
+				$register_data["company_name"] = ucwords($this->input->post('company_name'));
+				$register_data["designation"] = ucwords($this->input->post('designation'));
 				$register_data["image"] = str_replace(' ','_',$filenametoupload);
 				$register_data["status"] = $this->input->post('status');
 				$register_data["updated_on"] = date("Y-m-d H:i:s");

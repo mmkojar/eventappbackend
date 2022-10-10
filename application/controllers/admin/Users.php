@@ -126,11 +126,11 @@ class Users extends Admin_Controller
           $group_ids = $this->input->post('groups');
         
           $additional_data = array(
-            'first_name' => $this->input->post('first_name'),
-            'last_name' => $this->input->post('last_name'),
-            'company' => $this->input->post('company'),
+            'first_name' => ucfirst($this->input->post('first_name')),
+            'last_name' => ucfirst($this->input->post('last_name')),
+            'company' => ucfirst($this->input->post('company')),
             'phone' => $this->input->post('phone'),
-            'city' => $this->input->post('city'),
+            'city' => ucfirst($this->input->post('city')),
             'user_image' => $upload_dir."".str_replace(' ','_',$file_name)
           );
 
@@ -217,10 +217,10 @@ public function edit($user_id = NULL)
         'username' => $this->input->post('username'),
         'email' => $this->input->post('email'),
         'phone' => $this->input->post('phone'),
-        'first_name' => $this->input->post('first_name'),
-        'last_name' => $this->input->post('last_name'),
-        'company' => $this->input->post('company'),
-        'city' => $this->input->post('city'),
+        'first_name' => ucfirst($this->input->post('first_name')),
+        'last_name' => ucfirst($this->input->post('last_name')),
+        'company' => ucfirst($this->input->post('company')),
+        'city' => ucfirst($this->input->post('city')),
         'active' => $this->input->post('status'),
         'user_image' => str_replace(' ','_',$filenametoupload)
       );
