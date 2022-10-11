@@ -521,7 +521,3 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
-$config['webbase_url'] = 'http://console.mrai.org.in/api/Attendee_Api/';
-$config['new_webbase_url'] = 'http://console.mrai.org.in/api/Attendee_Api_New/';
-$config['mrai_url'] = 'http://www.mrai.org.in';
-$config['new_mrai_url'] = 'http://www.mrai.org.in';

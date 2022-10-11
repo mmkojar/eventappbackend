@@ -381,7 +381,7 @@ class Chat extends MY_Controller
 				$message = $end_page;
 				fwrite($fh,"\r\n".$message."\r\n");
 				fclose($fh);
-				die();	
+				die();
 			}
 		}else{
 			$errorCode = '3';
