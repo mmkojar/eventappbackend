@@ -315,21 +315,16 @@ class Chat extends MY_Controller
 			fwrite($fh,"\r\n".$message."\r\n");
 			fclose($fh); */
 			
-			if($headers['encryptedd'] !== 'api-token'){
-				$errorCode = '3';
-				$errMsg = "Please Enter encryptedd value";
-				setError($errorCode,$errMsg);
+			if($headers['encryptedd'] !== 'api-token'){				
+				$response['status'] = "false";
+				$response['message'] = 'Please Enter encryptedd value';
+				print_r(json_encode($response));
 				die();
 			}
 		}else{
-			$errorCode = '3';
-			$errMsg = "Please Enter the details";
-			setError($errorCode,$errMsg);
-			/* $fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh); */
+			$response['status'] = "false";
+			$response['message'] = 'Please Enter the details';
+			print_r(json_encode($response));
 			die();
 		}
 
@@ -342,25 +337,15 @@ class Chat extends MY_Controller
 				$data["requested_by_company"] = $user->company;
 				$data["requested_by_email"] = $user->email;
 			}else{
-				$errorCode = '9';
-				$errMsg = "Invalid user";
-				setError($errorCode,$errMsg);
-				/* $fh = fopen($dir_file, 'a');
-				fwrite($fh,"\r\n".$errMsg."\r\n");
-				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh); */
-				die();	
+				$response['status'] = "false";
+				$response['message'] = 'Invalid user';
+				print_r(json_encode($response));
+				die();
 			}
 		}else{
-			$errorCode = '3';
-			$errMsg = "Please Enter the details";
-			setError($errorCode,$errMsg);
-			/* $fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh); */
+			$response['status'] = "false";
+			$response['message'] = 'Please Enter the User Id';
+			print_r(json_encode($response));
 			die();
 		}
 		
@@ -373,25 +358,15 @@ class Chat extends MY_Controller
 				$data["requested_to_email"] = $receiver->email;
 				$receiver_id = cleanQueryParameter($input['receiver_id']);				
 			}else{
-				$errorCode = '9';
-				$errMsg = "Invalid receiver";
-				setError($errorCode,$errMsg);
-				/* $fh = fopen($dir_file, 'a');
-				fwrite($fh,"\r\n".$errMsg."\r\n");
-				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh); */
+				$response['status'] = "false";
+				$response['message'] = 'Invalid receiver';
+				print_r(json_encode($response));
 				die();
 			}
 		}else{
-			$errorCode = '3';
-			$errMsg = "Please Enter the receiver id";
-			setError($errorCode,$errMsg);
-			/* $fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh); */
+			$response['status'] = "false";
+			$response['message'] = 'Please Enter the receiver id';
+			print_r(json_encode($response));
 			die();
 		}
 		
@@ -407,9 +382,9 @@ class Chat extends MY_Controller
 				$message = $end_page;
 				fwrite($fh,"\r\n".$message."\r\n");
 				fclose($fh); */
-				$errorCode = '-1';
-				$errMsg = "meeting request send Successfully";
-				setError($errorCode,$errMsg);
+				$response['status'] = "true";
+				$response['message'] = 'Meeting request send Successfully';
+				print_r(json_encode($response));
 				die();
 			}else{
 				/* $fh = fopen($dir_file, 'a');
@@ -419,22 +394,15 @@ class Chat extends MY_Controller
 				$message = $end_page;
 				fwrite($fh,"\r\n".$message."\r\n");
 				fclose($fh); */
-				$errorCode = '5';
-				$errMsg = "meeting request sending failed";
-				setError($errorCode,$errMsg);
+				$response['status'] = "false";
+				$response['message'] = 'Meeting request sending failed';
+				print_r(json_encode($response));
 				die();
 			}
 		}else{
-			/* $fh = fopen($dir_file, 'a');
-			$message = 'result in login array.';
-			fwrite($fh,"\r\n".$message."\r\n");
-			fwrite($fh,"\r\n  ErrCode \r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh); */
-			$errorCode = '2';
-			$errMsg = "not data found";
-			setError($errorCode,$errMsg);
+			$response['status'] = "false";
+			$response['message'] = 'No receiver found';
+			print_r(json_encode($response));
 			die();
 		}
 	}
