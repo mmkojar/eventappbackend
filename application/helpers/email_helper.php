@@ -1,6 +1,6 @@
 <?php
 
-function send_mail_to_admin($email = null,$body,$subject = null)
+/* function send_mail_to_admin($email = null,$body,$subject = null)
 {
 	$ci=&get_instance();
 
@@ -56,7 +56,7 @@ function send_mail($email,$body)
 	
 	return $mail;
 	
-}
+} */
 
 function send_otp($email,$body)
 {
