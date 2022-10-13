@@ -100,9 +100,9 @@ function send_request($email,$body,$replyto,$replytoname)
 	$mail->SMTPSecure = "tls";  // prefix for secure protocol to connect to the server
 	$mail->Host       = "smtp.hostinger.com";      // setting GMail as our SMTP server
 	$mail->Port       = 587;                   // SMTP port to connect to GMail
-	$mail->Username   = "test@careers4me.in";  // user email address
-	$mail->Password   = "Careers@123";            // password in GMail
-	$mail->SetFrom("test@careers4me.in", 'events .');  //Who is sending
+	$mail->Username   = "eventapp@info2ideas.com";  // user email address
+	$mail->Password   = "Zune@123";            // password in GMail
+	$mail->SetFrom("eventapp@info2ideas.com", 'events .');  //Who is sending
 	//$mail->addReplyTo( 'events@mrai.org.in', 'events .' );
 	$mail->addReplyTo($replyto, $replytoname);
 	$mail->Subject    = "A Request For Meeting";
