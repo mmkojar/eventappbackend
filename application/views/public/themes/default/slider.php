@@ -40,6 +40,7 @@
 		<ul class="nav">
 			<?php
 				if($this->ion_auth->is_admin()){?>
+					<!-- <li class = "<?php echo ($current_tab == 'settings' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/settings'); ?>"><i class="pe-7s-mail"></i><p>Theme Options</p></a></li> -->
 					<li class = "<?php echo ($current_tab == 'dashboard' ? "active" :  "") ?>"><a href="<?php echo site_url('admin'); ?>"><i class="pe-7s-mail"></i><p>Dashboard</p></a></li>
 					<li class = "<?php echo ($current_tab == 'users' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/users'); ?>"><i class="pe-7s-mail"></i><p>Users</p></a></li>
 					<li class = "<?php echo ($current_tab == 'qr_code' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/QR'); ?>"><i class="pe-7s-mail"></i><p>QR Codes</p></a></li>

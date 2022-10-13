@@ -33,13 +33,13 @@ span{
 <div class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<center><img src="<?php echo base_url(); ?>assets/admin/img/logo.png" width="69"></center>
+			<center><img src="<?php echo base_url(); ?>assets/admin/img/logo.png"></center>
 			<br>
 			<p align="center" style="text-align:center">
-				<span class = "title_main" style=""><b>M</b>aterial <b>R</b>ecycling <b>A</b>ssociation of <b>I</b>ndia</span><br>
-				<span class = "title_sub">Voice of the Indian Recycling Industry</span>
+				<span class = "title_main" style=""><a href="https://info2ideas.com/" target="_blank">Info2ideas</a></span><br>
+				<span class = "title_sub">Event App</span>
 			</p>
-			<br>
+			<br>	
 			<p>
 				<span>Hello <?php echo $requested_to_name; ?>,</span>
 				<br>
@@ -52,10 +52,10 @@ span{
 				<span>Event Department.</span><br>
 			</p>
 			<p>	
-			<img src='<?php echo base_url(); ?>assets/admin/img/mrai_logo.png' style="max-width:420px;height:67px">
+			<img src='<?php echo base_url(); ?>assets/admin/img/logo.png'>
 			</p>
 			
-			<p class="address">
+			<!-- <p class="address">
 				<span> 211-212, 2ND Floor, MIDAS’, Sahar Plaza,</span><br>
 				<span> Kondivita, Mathuradas Vassanji Road,</span><br>
 				<span> Andheri (East), Mumbai – 400 069</span><br>
@@ -65,9 +65,9 @@ span{
 				<span> Fax: + 91-22-67259555</span><br>
 				<span> Email: <a href="mailto:events@mrai.org.in" target="_blank">events@mrai.org.in</a></span><br>
 				<span> Website:<a href="http://www.mrai.org.in/" target="_blank"> http://www.mrai.org.in/ </a></span><br>
-			</p>
+			</p> -->
 			<p>	
-			<img src='<?php echo base_url(); ?>assets/admin/img/banner.png' style="max-width:624px;">
+			<!-- <img src='<s?php //echo base_url(); ?>assets/admin/img/banner.png' style="max-width:624px;"> -->
 			</p>
 			
 		</div>

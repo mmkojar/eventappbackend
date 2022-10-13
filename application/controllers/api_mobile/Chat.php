@@ -282,7 +282,7 @@ class Chat extends MY_Controller
 	}
 	
 	public function send_meeting_request(){
-		$todayd = date("M-Y");
+		/* $todayd = date("M-Y");
 		$today = date("Y-m-d H:i:s");
 		$start_page = '<--------------------Start_Page  '.$today.'-------------------->';
 		$end_page = '<--------------------End_Page  '.$today.'-------------------->';
@@ -298,14 +298,14 @@ class Chat extends MY_Controller
 		}else{
 			 $fh = fopen($dir_file, 'w');
 			 fwrite($fh, $start_page."\r\n");
-		} 
+		}  */
 		$headers = getallheaders();
 		$inputJSON = file_get_contents('php://input');
 		$input = json_decode($inputJSON, TRUE); //convert JSON into array
 		
 		if(array_key_exists('encryptedd',$headers)){
 		
-			$fh = fopen($dir_file, 'a');
+			/* $fh = fopen($dir_file, 'a');
 			$message = 'getting header.'.$headers['encryptedd'];
 			fwrite($fh,"\r\n".$message."\r\n");
 			fclose($fh);
@@ -313,7 +313,7 @@ class Chat extends MY_Controller
 			$fh = fopen($dir_file, 'a');
 			$message = 'getting input and converting it to Array from Json.';
 			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
+			fclose($fh); */
 			
 			if($headers['encryptedd'] !== 'api-token'){
 				$errorCode = '3';
@@ -325,11 +325,11 @@ class Chat extends MY_Controller
 			$errorCode = '3';
 			$errMsg = "Please Enter the details";
 			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
+			/* $fh = fopen($dir_file, 'a');
 			fwrite($fh,"\r\n".$errMsg."\r\n");
 			$message = $end_page;
 			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
+			fclose($fh); */
 			die();
 		}
 
@@ -339,28 +339,28 @@ class Chat extends MY_Controller
 			if(!empty($user)){
 				$user_id = cleanQueryParameter($input['user_id']);				
 				$data["requested_by_name"] = $user->first_name ." ".$user->last_name;
-				// $data["requested_by_company"] = $user->company;
+				$data["requested_by_company"] = $user->company;
 				$data["requested_by_email"] = $user->email;
 			}else{
 				$errorCode = '9';
 				$errMsg = "Invalid user";
 				setError($errorCode,$errMsg);
-				$fh = fopen($dir_file, 'a');
+				/* $fh = fopen($dir_file, 'a');
 				fwrite($fh,"\r\n".$errMsg."\r\n");
 				$message = $end_page;
 				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
+				fclose($fh); */
 				die();	
 			}
 		}else{
 			$errorCode = '3';
 			$errMsg = "Please Enter the details";
 			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
+			/* $fh = fopen($dir_file, 'a');
 			fwrite($fh,"\r\n".$errMsg."\r\n");
 			$message = $end_page;
 			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
+			fclose($fh); */
 			die();
 		}
 		
@@ -376,64 +376,67 @@ class Chat extends MY_Controller
 				$errorCode = '9';
 				$errMsg = "Invalid receiver";
 				setError($errorCode,$errMsg);
-				$fh = fopen($dir_file, 'a');
+				/* $fh = fopen($dir_file, 'a');
 				fwrite($fh,"\r\n".$errMsg."\r\n");
 				$message = $end_page;
 				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
+				fclose($fh); */
 				die();
 			}
 		}else{
 			$errorCode = '3';
 			$errMsg = "Please Enter the receiver id";
 			setError($errorCode,$errMsg);
-			$fh = fopen($dir_file, 'a');
+			/* $fh = fopen($dir_file, 'a');
 			fwrite($fh,"\r\n".$errMsg."\r\n");
 			$message = $end_page;
 			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
+			fclose($fh); */
 			die();
 		}
 		
-		/*if(!empty($receiver)){
+		if(!empty($receiver)){
 			$this->load->helper('email');
 			$html=$this->load->view("email/request_for_meeting_view",$data,true);
 			$send = send_request($data["requested_to_email"],$html,$data["requested_by_email"],$data["requested_by_name"]);
 			if($send){
-				$fh = fopen($dir_file, 'a');
+				/* $fh = fopen($dir_file, 'a');
 				$message = 'result in login array.';
 				fwrite($fh,"\r\n".$message."\r\n");
 				fwrite($fh,"\r\n  ErrCode\r\n");
 				$message = $end_page;
 				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
+				fclose($fh); */
 				$errorCode = '-1';
 				$errMsg = "meeting request send Successfully";
 				setError($errorCode,$errMsg);
+				die();
 			}else{
-				$fh = fopen($dir_file, 'a');
+				/* $fh = fopen($dir_file, 'a');
 				$message = 'result in login array.';
 				fwrite($fh,"\r\n".$message."\r\n");
 				fwrite($fh,"\r\n  ErrCode\r\n");
 				$message = $end_page;
 				fwrite($fh,"\r\n".$message."\r\n");
-				fclose($fh);
+				fclose($fh); */
 				$errorCode = '5';
 				$errMsg = "meeting request sending failed";
 				setError($errorCode,$errMsg);
+				die();
 			}
 		}else{
-			$fh = fopen($dir_file, 'a');
+			/* $fh = fopen($dir_file, 'a');
 			$message = 'result in login array.';
 			fwrite($fh,"\r\n".$message."\r\n");
 			fwrite($fh,"\r\n  ErrCode \r\n");
 			$message = $end_page;
 			fwrite($fh,"\r\n".$message."\r\n");
-			fclose($fh);
+			fclose($fh); */
 			$errorCode = '2';
 			$errMsg = "not data found";
 			setError($errorCode,$errMsg);
-		}*/
+			die();
+		}
 	}
 	
 	public function chat_history(){	

@@ -94,16 +94,18 @@ function send_request($email,$body,$replyto,$replytoname)
 	
 	$mail = new PHPMailer();
 	//$mail->IsSMTP(); // we are going to use SMTP
+	$mail->SMTPDebug = true;                                       
+    $mail->isSMTP();    
 	$mail->SMTPAuth   = true; // enabled SMTP authentication
-	$mail->SMTPSecure = "TLS";  // prefix for secure protocol to connect to the server
-	$mail->Host       = "smtp.gmail.com";      // setting GMail as our SMTP server
+	$mail->SMTPSecure = "tls";  // prefix for secure protocol to connect to the server
+	$mail->Host       = "smtp.hostinger.com";      // setting GMail as our SMTP server
 	$mail->Port       = 587;                   // SMTP port to connect to GMail
-	$mail->Username   = "events@mrai.org.in";  // user email address
-	$mail->Password   = "mrai_01112011";            // password in GMail
-	$mail->SetFrom("events@mrai.org.in", 'events .');  //Who is sending
+	$mail->Username   = "test@careers4me.in";  // user email address
+	$mail->Password   = "Careers@123";            // password in GMail
+	$mail->SetFrom("test@careers4me.in", 'events .');  //Who is sending
 	//$mail->addReplyTo( 'events@mrai.org.in', 'events .' );
 	$mail->addReplyTo($replyto, $replytoname);
-	$mail->Subject    = "A Request For Meeting";  
+	$mail->Subject    = "A Request For Meeting";
 	$mail->IsHTML(true);
 	$mail->Body      = $body; 
 	//$email ="events@mrai.org.in"; // Who is addressed the email to  
