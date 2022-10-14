@@ -94,8 +94,8 @@ function send_request($email,$body,$replyto,$replytoname)
 	
 	$mail = new PHPMailer();
 	//$mail->IsSMTP(); // we are going to use SMTP
-	$mail->SMTPDebug = true;                                       
-    $mail->isSMTP();    
+	// $mail->SMTPDebug = true;
+    $mail->isSMTP();
 	$mail->SMTPAuth   = true; // enabled SMTP authentication
 	$mail->SMTPSecure = "tls";  // prefix for secure protocol to connect to the server
 	$mail->Host       = "smtp.hostinger.com";      // setting GMail as our SMTP server

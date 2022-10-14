@@ -9,7 +9,7 @@ function __construct()
 {
 	parent::__construct();
 	$this->load->model('api_login_model');
-	$this->load->model('otp_verification_model');
+	// $this->load->model('otp_verification_model');
 	$this->load->helper('notification');
 	$this->load->helper('random_string');
 }
