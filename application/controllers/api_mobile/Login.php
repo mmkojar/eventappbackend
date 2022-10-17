@@ -21,11 +21,11 @@ public function index()
 		$start_page = '<--------------------Start_Page  '.$today.'-------------------->';
 		$end_page = '<--------------------End_Page  '.$today.'-------------------->';
 		$file_today = "login_".date("d_m_Y").".txt";
-		$dir_fil = $_SERVER['DOCUMENT_ROOT'] ."/office/event_app/assets/api/".$todayd;		
+		$dir_fil = $_SERVER['DOCUMENT_ROOT'] ."/event_app/assets/api/".$todayd;		
 		 if (!file_exists($dir_fil)) {
 			mkdir($dir_fil);
 		}  
-		$dir_file = $_SERVER['DOCUMENT_ROOT'] ."/office/event_app/assets/api/".$todayd.'/'.$file_today; 
+		$dir_file = $_SERVER['DOCUMENT_ROOT'] ."/event_app/assets/api/".$todayd.'/'.$file_today; 
 		 if(file_exists($dir_file)){
 			 $fh = fopen($dir_file, 'a');
 			 fwrite($fh, $start_page. "\r\n");
@@ -133,9 +133,10 @@ public function index()
 			   // $response['data'] = [$login];
 				$otp_device["user_id"] = $login['data']['user_id'];
 				$otp_device["status"] = 1;
-				$check_device = $this->api_login_model->check_for_user_register_device($otp_device["user_id"]);
+				$check_user = $this->api_login_model->get_device_token('user_id',$otp_device["user_id"]);
+				$check_device = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
 				
-				if(!$check_device){
+				if(!$check_user && !$check_device){
 				    $this->api_login_model->register_device($otp_device);
 				}
 				else {
