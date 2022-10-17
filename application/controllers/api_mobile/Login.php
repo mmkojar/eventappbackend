@@ -21,11 +21,11 @@ public function index()
 		$start_page = '<--------------------Start_Page  '.$today.'-------------------->';
 		$end_page = '<--------------------End_Page  '.$today.'-------------------->';
 		$file_today = "login_".date("d_m_Y").".txt";
-		$dir_fil = $_SERVER['DOCUMENT_ROOT'] ."/assets/api/".$todayd;
+		$dir_fil = $_SERVER['DOCUMENT_ROOT'] ."/office/event_app/assets/api/".$todayd;		
 		 if (!file_exists($dir_fil)) {
-			mkdir($dir_fil, 0777, true);
+			mkdir($dir_fil);
 		}  
-		$dir_file = $_SERVER['DOCUMENT_ROOT'] ."/assets/api/".$todayd.'/'.$file_today; 
+		$dir_file = $_SERVER['DOCUMENT_ROOT'] ."/office/event_app/assets/api/".$todayd.'/'.$file_today; 
 		 if(file_exists($dir_file)){
 			 $fh = fopen($dir_file, 'a');
 			 fwrite($fh, $start_page. "\r\n");
@@ -88,16 +88,10 @@ public function index()
 		    $response['status'] = "false";
 			$response['message'] = 'Please Enter the device_notification_id';
 			print_r(json_encode($response));
-			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the device_notification_id";
-			setError($errorCode,$errMsg);
 			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
+			fwrite($fh,"\r\n".$response['message']."\r\n");
 			fclose($fh);
-			die();*/
+			die();			
 		}
 		
 		if(isset($input['devicetype']) && !empty($input['devicetype'])){
@@ -106,34 +100,24 @@ public function index()
 		    $response['status'] = "false";
 			$response['message'] = 'Please Enter the devicetype';
 			print_r(json_encode($response));
-			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the devicetype";
-			setError($errorCode,$errMsg);
 			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
+			fwrite($fh,"\r\n".$response['message']."\r\n");
 			fclose($fh);
-			die();*/
+			die();			
 		}
 
 		if(isset($input['identity']) && !empty($input['identity'])){
 			$identity = cleanQueryParameter($input['identity']);
 		}else{
+			
 		    $response['status'] = "false";
 			$response['message'] = 'Please Enter the identity';
 			print_r(json_encode($response));
-			die();
-			/*$errorCode = '3';
-			$errMsg = "Please Enter the identity";
-			setError($errorCode,$errMsg);
 			$fh = fopen($dir_file, 'a');
-			fwrite($fh,"\r\n".$errMsg."\r\n");
-			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
+			fwrite($fh,"\r\n".$response['message']."\r\n");
 			fclose($fh);
-			die();*/
+			die();			
+			
 		}
 		
 		$fh = fopen($dir_file, 'a');
@@ -149,14 +133,24 @@ public function index()
 			   // $response['data'] = [$login];
 				$otp_device["user_id"] = $login['data']['user_id'];
 				$otp_device["status"] = 1;
-				$check_device = $this->api_login_model->check_for_user_register_device($otp_device["device_notification_id"],$otp_device["user_id"]);
+				$check_device = $this->api_login_model->check_for_user_register_device($otp_device["user_id"]);
 				
 				if(!$check_device){
-				    $register_device = $this->api_login_model->register_device($otp_device);
+				    $this->api_login_model->register_device($otp_device);
 				}
 				else {
-				    
-                    $getdevicetoken = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
+					$checktoken = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
+					
+					if(!$checktoken || ($checktoken['user_id'] == $otp_device["user_id"])) {
+						$this->api_login_model->update_device($otp_device);
+					}
+					else {
+						$login['status'] = "false";
+						$login['message'] = 'This device is already registered with another user';
+						$login['data'] = [];
+					}
+
+                    /* $getdevicetoken = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
                     
                     $upd_device['device_notification_id'] = $otp_device['device_notification_id'];
                     $upd_device['user_id'] = $otp_device['user_id'];
@@ -180,37 +174,29 @@ public function index()
                     }
                     else {
                       $this->api_login_model->update_device($upd_device);
-                    }
+                    } */
 				   
 				}
 				
-				// $result['success'] = $response;
-				// $login['errMsg']["msg"] = "User found";
 				print(json_encode($login));
-				$fh = fopen($dir_file, 'a');
-				$message = 'result in login array.';
-				fwrite($fh,"\r\n".$message."\r\n");
+				$fh = fopen($dir_file, 'a');				
 				fwrite($fh,"\r\n  ErrCode ".$login['status']."\r\n");
 				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
+				fwrite($fh,"\r\n".$login['message']."\r\n");
 				fclose($fh);
 			}else{
-				$fh = fopen($dir_file, 'a');
-				$message = 'result in login array.';
-				fwrite($fh,"\r\n".$message."\r\n");
+				$fh = fopen($dir_file, 'a');				
 				fwrite($fh,"\r\n  ErrCode ".$login['status']."\r\n");
 				$message = $end_page;
-				fwrite($fh,"\r\n".$message."\r\n");
+				fwrite($fh,"\r\n".$login['message']."\r\n");
 				fclose($fh);
 				print(json_encode($login));
 			}
 		}else{
-			$fh = fopen($dir_file, 'a');
-			$message = 'login falied.';
-			fwrite($fh,"\r\n".$message."\r\n");
+			$fh = fopen($dir_file, 'a');			
 			fwrite($fh,"\r\n  ErrCode ".$login['status']."\r\n");
 			$message = $end_page;
-			fwrite($fh,"\r\n".$message."\r\n");
+			fwrite($fh,"\r\n".$login['message']."\r\n");
 			fclose($fh);
 			print(json_encode($login));	
 		}

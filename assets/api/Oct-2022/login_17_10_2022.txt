@@ -1,0 +1,255 @@
+<--------------------Start_Page  2022-10-17 10:22:05-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+result in login array.
+
+  ErrCode false
+
+<--------------------End_Page  2022-10-17 10:22:05-------------------->
+<--------------------Start_Page  2022-10-17 11:01:40-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+No User Found
+<--------------------Start_Page  2022-10-17 11:02:03-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2022-10-17 11:02:12-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2022-10-17 11:19:18-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+No User Found
+<--------------------Start_Page  2022-10-17 11:19:41-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:20:01-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:22:07-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:22:16-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:22:51-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:23:16-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:23:25-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:25:30-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:25:34-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2022-10-17 11:25:44-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:25:47-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:26:12-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+No User Found
+<--------------------Start_Page  2022-10-17 11:26:15-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2022-10-17 11:26:19-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2022-10-17 11:27:00-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2022-10-17 11:27:27-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2022-10-17 11:27:45-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2022-10-17 12:13:27-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
