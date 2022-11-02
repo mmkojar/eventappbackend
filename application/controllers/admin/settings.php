@@ -28,7 +28,7 @@ class Settings extends Admin_Controller
 			array_push($pusha['key'], $val['key']);
 			array_push($pushb['value'], $val['value']);
 		}
-		$res = array_combine($pusha['key'], $pushb['value']);
+		$res = array_combine($pusha['key'], $pushb['value']);		
 		$this->data['res'] = $res;
 		$this->render('admin/settings_view');
 	}
@@ -42,9 +42,7 @@ class Settings extends Admin_Controller
 		// print_r($_FILES);
 		// die();
 		foreach ($_FILES as $key => $value) 
-		{			
-			// print_r($data);
-				// die();	
+		{
 			$upload_dir = './assets/upload/images/icons/';
 			$fileUploadError = [];
 			
@@ -60,14 +58,13 @@ class Settings extends Admin_Controller
 					$checkCount = $this->db->query("SELECT * FROM `system_settings` WHERE `key` = '$key' ");
 					$select_result = $checkCount->row_array();					
 					$table_data=[];
-					
 					if($select_result)
-					{						
+					{
 						$this->db->where('key',$key);
-						$this->db->update('system_settings',array('value'=>$val));
+						$this->db->update('system_settings',array('value'=>$val));						
 					}
 					else 
-					{						
+					{
 						$table_data['key']    = $key;
 						$table_data['value']  = $val;
 						$this->db->insert('system_settings', $table_data);
@@ -80,12 +77,14 @@ class Settings extends Admin_Controller
 			}else{
 				$this->db->where('key',$key);
 				$this->db->update('system_settings',array('value'=>$val));
-			}
+			}			
 		}
+		
 		if($data){
 			$table_data=[];
 			foreach ($data as $key => $val) {
-				if($key !== 'submit'){
+				if($key !== 'submit' && $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' && $key !== 'notify_file' && $key !== 'polls_file' 
+					&& $key !== 'qr_file' && $key !== 'speaker_file' && $key !== 'sponsors_file' && $key !== 'exhi_file' && $key !== 'faq_file' && $key !== 'support_file'){
 					$table_data['key']        = $key;
 					$table_data['value']      = $val;
 					$table_data['update_date']  = date('Y-m-d');
@@ -103,9 +102,10 @@ class Settings extends Admin_Controller
 				
 				}
 			}
-		}
+		}		
 		$this->session->set_flashdata('success','Settings Updated Successfully');
-		// redirect('admin/settings');
+				redirect('admin/settings');
+		// $this->render('admin/settings_view');		
 	}
 
 	public function get_setting_list() {
