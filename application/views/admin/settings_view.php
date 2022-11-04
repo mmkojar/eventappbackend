@@ -60,7 +60,7 @@
 											<input type="hidden" class="validate_himage" name="delg_file" value="<?php echo set_value('delg_file',isset($res['delg_file']) ? $res['delg_file'] : '')?>">
 										</div>
 									</div>
-									<!-- <div class="col-md-3">
+									<div class="col-md-3">
 										<div class="form-group">
 											<label for="chat">Chat</label>
 											<br>
@@ -158,7 +158,7 @@
 											<input type="file" name="support_file" class="validate_file form-control" value="<?php echo set_value('support_file',isset($res['support_file']) ? $res['support_file'] : '')?>">
 											<input type="hidden" class="validate_himage" name="support_file" value="<?php echo set_value('support_file',isset($res['support_file']) ? $res['support_file'] : '')?>">
 										</div>
-									</div> -->
+									</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<?php echo form_submit('submit', 'Save', 'class="btn btn-info btn-fill btn-wd" id="save_setting" ');?>								
@@ -177,30 +177,35 @@
 <script type="text/javascript">	
 	$(document).ready(function(){
 		
-		/* $("#save_setting").on('click', function(e) {
+		 // $("#save_setting").on('click', function(e) {
 			
 			// e.preventDefault();
 			$('.validate_file').each(function() {
-				if($(this).val() == '') {
-					$('.validate_image').each(function() {
-						if($('.validate_image').val() == '') {
-							console.log('error1');
-							return false;
-						}
-						else {
-							return true;
-						}
-					})
-					console.log('error2');
-					return false;
-				}
-				else {
-					return true;
-					// console.log('success');
-				}
+				$(this).on('change', function(e) {
+					
+					$(this).siblings('.display_image').attr('src',URL.createObjectURL(e.target.files[0]));
+					// $(".display_image").attr('src',URL.createObjectURL(e.target.files[0]));
+					// if($(this).val() == '') {
+					// 	$('.validate_image').each(function() {
+					// 		if($('.validate_image').val() == '') {
+					// 			console.log('error1');
+					// 			return false;
+					// 		}
+					// 		else {
+					// 			return true;
+					// 		}
+					// 	})
+					// 	console.log('error2');
+					// 	return false;
+					// }
+					// else {
+					// 	return true;
+					// 	// console.log('success');
+					// }
+				})
 			})
-			return true;
+			// return true;
 			
-		}) */
+		// }) 
 	})
 </script>

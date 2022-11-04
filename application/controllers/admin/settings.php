@@ -9,7 +9,6 @@ class Settings extends Admin_Controller
 	$this->data['current_tab'] = 'settings';
 	$this->load->helper('imageupload');
 	$this->load->helper('form');
-	// $this->load->model('dashboard_model');
 	$this->load->helper('form');
   }
  
@@ -28,7 +27,8 @@ class Settings extends Admin_Controller
 			array_push($pusha['key'], $val['key']);
 			array_push($pushb['value'], $val['value']);
 		}
-		$res = array_combine($pusha['key'], $pushb['value']);		
+		$res = array_combine($pusha['key'], $pushb['value']);
+
 		$this->data['res'] = $res;
 		$this->render('admin/settings_view');
 	}
@@ -37,10 +37,10 @@ class Settings extends Admin_Controller
 				
 		$data = $this->input->post();
 		$updated = [];
-		// echo '<pre>';
-		// print_r($data);
-		// print_r($_FILES);
-		// die();
+		/*echo '<pre>';
+		print_r($data);
+		print_r($_FILES);
+		die();*/
 		foreach ($_FILES as $key => $value) 
 		{
 			$upload_dir = './assets/upload/images/icons/';
@@ -48,20 +48,30 @@ class Settings extends Admin_Controller
 			
 			if($_FILES[$key]['name'] != "" || $_FILES[$key]['name'] != null){
 				$ext = pathinfo($_FILES[$key]['name'], PATHINFO_EXTENSION);
-				$file_name=date("dmY").time().'_'.$_FILES[$key]['name'];
+				$file_name=date("dmY").'_'.time().'_'.$_FILES[$key]['name'];
 				$fileUpload = ImageUpload($key,$file_name,$upload_dir);
 				
+
 				$val = $upload_dir."".str_replace(' ','_',$file_name);
 				array_push($fileUploadError,$fileUpload);
 				
 				if($fileUploadError[0]['status'] == '1') {
 					$checkCount = $this->db->query("SELECT * FROM `system_settings` WHERE `key` = '$key' ");
-					$select_result = $checkCount->row_array();					
+					$select_result = $checkCount->row_array();
 					$table_data=[];
+
 					if($select_result)
 					{
+						foreach ($data as $dkey => $dval) {							
+							if(($key == $dkey) && ($_FILES[$key]['error'] == '0')) {
+								if(file_exists($dval)) {
+									unlink($dval);
+								}
+							}
+						}
 						$this->db->where('key',$key);
-						$this->db->update('system_settings',array('value'=>$val));						
+						$this->db->update('system_settings',array('value'=>$val,'update_date'=>date('Y-m-d')));
+
 					}
 					else 
 					{
@@ -74,17 +84,19 @@ class Settings extends Admin_Controller
 					$this->session->set_flashdata('error',$fileUploadError[0]['msg']);
 					$this->render('admin/settings_view');
 				}
-			}else{
-				$this->db->where('key',$key);
-				$this->db->update('system_settings',array('value'=>$val));
-			}			
+			}
+			// else{
+			// 	foreach ($data as $key => $val) {
+			// 		$this->db->where('key',$key);
+			// 		$this->db->update('system_settings',array('value'=>$val));
+			// 	}
+			// }			
 		}
 		
 		if($data){
 			$table_data=[];
 			foreach ($data as $key => $val) {
-				if($key !== 'submit' && $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' && $key !== 'notify_file' && $key !== 'polls_file' 
-					&& $key !== 'qr_file' && $key !== 'speaker_file' && $key !== 'sponsors_file' && $key !== 'exhi_file' && $key !== 'faq_file' && $key !== 'support_file'){
+				if($key !== 'submit' && $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' && $key !== 'notify_file' && $key !== 'polls_file' && $key !== 'qr_file' && $key !== 'speaker_file' && $key !== 'sponsors_file' && $key !== 'exhi_file' && $key !== 'faq_file' && $key !== 'support_file'){
 					$table_data['key']        = $key;
 					$table_data['value']      = $val;
 					$table_data['update_date']  = date('Y-m-d');
@@ -108,17 +120,4 @@ class Settings extends Admin_Controller
 		// $this->render('admin/settings_view');		
 	}
 
-	public function get_setting_list() {
-        $data = array();
-        $stmt = "SELECT a.*"
-                . " FROM system_settings AS a"
-                . " ORDER BY a.`id` ASC";
-        $query = $this->db->query($stmt);
-        if ($query->num_rows()) {
-            $data = $query->result_array();
-        }
-		echo '<pre>';
-		print_r($data);
-        // return $data;
-    }
 }
