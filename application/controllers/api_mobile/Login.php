@@ -82,7 +82,7 @@ public function index()
 			die();*/
 		}
 
-		if(isset($input['device_notification_id']) && !empty($input['device_notification_id'])){
+		/* if(isset($input['device_notification_id']) && !empty($input['device_notification_id'])){
 			$otp_device["device_notification_id"] = cleanQueryParameter($input['device_notification_id']);
 		}else{
 		    $response['status'] = "false";
@@ -92,7 +92,8 @@ public function index()
 			fwrite($fh,"\r\n".$response['message']."\r\n");
 			fclose($fh);
 			die();			
-		}
+		} */
+		$otp_device["device_notification_id"] = cleanQueryParameter($input['device_notification_id']);
 		
 		if(isset($input['devicetype']) && !empty($input['devicetype'])){
 			$otp_device["devicetype"] = cleanQueryParameter($input['devicetype']);
