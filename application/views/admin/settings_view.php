@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
-					<div class="header">Theme Options</div>
+					<div class="header">Image Size should be 512x512</div>
 					<div class="content">
 						<div class="card-body">
 							<?php echo form_open('admin/settings/store',array('id'=>'userFormValidation','class'=>'form_validation','enctype'=>'multipart/form-data'));?>
@@ -22,6 +22,39 @@
 										<div class="form-group">
 											<label for="color">Color</label>
 											<input type="color" name="color" class="form-control"  value="<?php echo set_value('about',isset($res['color']) ? $res['color'] : '')?>">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<h3>Logos</h3>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="about">Default User Image</label>
+											<br>
+											<img class="display_image" src="<?php echo base_url()."".str_replace("./", "", isset($res['du_image']) ? $res['du_image'] : ''); ?>" alt="..." />
+											<br>
+											<input type="file" name="du_image" class="validate_file form-control" value="<?php echo set_value('du_image',isset($res['du_image']) ? $res['du_image'] : '')?>">
+											<input type="hidden" class="validate_himage" name="du_image" value="<?php echo set_value('du_image',isset($res['du_image']) ? $res['du_image'] : '')?>">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="about">Login Screen Logo</label>
+											<br>
+											<img class="display_image" src="<?php echo base_url()."".str_replace("./", "", isset($res['lc_logo']) ? $res['lc_logo'] : ''); ?>" alt="..." />
+											<br>
+											<input type="file" name="lc_logo" class="validate_file form-control" value="<?php echo set_value('lc_logo',isset($res['lc_logo']) ? $res['lc_logo'] : '')?>">
+											<input type="hidden" class="validate_himage" name="lc_logo" value="<?php echo set_value('lc_logo',isset($res['lc_logo']) ? $res['lc_logo'] : '')?>">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="about">Home Page Logo</label>
+											<br>
+											<img class="display_image" src="<?php echo base_url()."".str_replace("./", "", isset($res['hp_logo']) ? $res['hp_logo'] : ''); ?>" alt="..." />
+											<br>
+											<input type="file" name="hp_logo" class="validate_file form-control" value="<?php echo set_value('hp_logo',isset($res['hp_logo']) ? $res['hp_logo'] : '')?>">
+											<input type="hidden" class="validate_himage" name="hp_logo" value="<?php echo set_value('hp_logo',isset($res['hp_logo']) ? $res['hp_logo'] : '')?>">
 										</div>
 									</div>
 								</div>

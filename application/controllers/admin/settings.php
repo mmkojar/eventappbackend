@@ -37,10 +37,10 @@ class Settings extends Admin_Controller
 				
 		$data = $this->input->post();
 		$updated = [];
-		/*echo '<pre>';
+		/* echo '<pre>';
 		print_r($data);
 		print_r($_FILES);
-		die();*/
+		die(); */
 		foreach ($_FILES as $key => $value) 
 		{
 			$upload_dir = './assets/upload/images/icons/';
@@ -54,12 +54,12 @@ class Settings extends Admin_Controller
 
 				$val = $upload_dir."".str_replace(' ','_',$file_name);
 				array_push($fileUploadError,$fileUpload);
+				array_push($updated, $fileUpload);
 				
 				if($fileUploadError[0]['status'] == '1') {
 					$checkCount = $this->db->query("SELECT * FROM `system_settings` WHERE `key` = '$key' ");
 					$select_result = $checkCount->row_array();
 					$table_data=[];
-
 					if($select_result)
 					{
 						foreach ($data as $dkey => $dval) {							
@@ -82,7 +82,7 @@ class Settings extends Admin_Controller
 				}
 				else{
 					$this->session->set_flashdata('error',$fileUploadError[0]['msg']);
-					$this->render('admin/settings_view');
+					redirect('admin/settings');
 				}
 			}
 			// else{
@@ -96,13 +96,16 @@ class Settings extends Admin_Controller
 		if($data){
 			$table_data=[];
 			foreach ($data as $key => $val) {
-				if($key !== 'submit' && $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' && $key !== 'notify_file' && $key !== 'polls_file' && $key !== 'qr_file' && $key !== 'speaker_file' && $key !== 'sponsors_file' && $key !== 'exhi_file' && $key !== 'faq_file' && $key !== 'support_file'){
+				if($key !== 'submit' && $key !== 'lc_logo' && $key !== 'hp_logo' &&  $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' 
+					&& $key !== 'notify_file' && $key !== 'polls_file' && $key !== 'qr_file' && $key !== 'speaker_file' && $key !== 'sponsors_file' && $key !== 'exhi_file' && $key !== 'faq_file' && $key !== 'support_file')
+				{
 					$table_data['key']        = $key;
 					$table_data['value']      = $val;
 					$table_data['update_date']  = date('Y-m-d');
 					$table_data['status']       = 1;
 					$checkCount = $this->db->query("SELECT * FROM `system_settings` WHERE `key` = '$key' ");
-					$select_result = $checkCount->row_array();
+					$select_result = $checkCount->row_array();		
+					array_push($updated,['status'=>'1' ,'msg' => 'Data Updated']);			
 					if($select_result)
 					{
 						$this->db->where('key',$key);
@@ -114,10 +117,11 @@ class Settings extends Admin_Controller
 				
 				}
 			}
+		}
+		if($updated[0]['status'] == '1') {
+			$this->session->set_flashdata('success','Settings Updated Successfully');
+			redirect('admin/settings');
 		}		
-		$this->session->set_flashdata('success','Settings Updated Successfully');
-				redirect('admin/settings');
-		// $this->render('admin/settings_view');		
 	}
 
 }
