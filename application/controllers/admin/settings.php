@@ -96,7 +96,7 @@ class Settings extends Admin_Controller
 		if($data){
 			$table_data=[];
 			foreach ($data as $key => $val) {
-				if($key !== 'submit' && $key !== 'lc_logo' && $key !== 'hp_logo' &&  $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' 
+				if($key !== 'submit' && $key !== 'lc_logo' && $key !== 'du_image' && $key !== 'hp_logo' &&  $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' 
 					&& $key !== 'notify_file' && $key !== 'polls_file' && $key !== 'qr_file' && $key !== 'speaker_file' && $key !== 'sponsors_file' && $key !== 'exhi_file' && $key !== 'faq_file' && $key !== 'support_file')
 				{
 					$table_data['key']        = $key;

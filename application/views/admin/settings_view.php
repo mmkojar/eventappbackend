@@ -26,6 +26,15 @@
 									</div>
 								</div>
 								<div class="row">
+									<h3>Title</h3>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="app_title">App Title</label>
+											<input type="app_title" name="app_title" class="form-control"  value="<?php echo set_value('about',isset($res['app_title']) ? $res['app_title'] : '')?>">
+										</div>
+									</div>
+								</div>
+								<div class="row">
 									<h3>Logos</h3>
 									<div class="col-md-4">
 										<div class="form-group">
