@@ -30,7 +30,13 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label for="app_title">App Title</label>
-											<input type="app_title" name="app_title" class="form-control"  value="<?php echo set_value('about',isset($res['app_title']) ? $res['app_title'] : '')?>">
+											<input type="text" name="app_title" class="form-control"  value="<?php echo set_value('about',isset($res['app_title']) ? $res['app_title'] : '')?>">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label for="title_color">Title Color</label>
+											<input type="color" name="title_color" class="form-control"  value="<?php echo set_value('about',isset($res['title_color']) ? $res['title_color'] : '')?>">
 										</div>
 									</div>
 								</div>

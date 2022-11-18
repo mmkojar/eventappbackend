@@ -40,20 +40,20 @@
 		<ul class="nav">
 			<?php
 				if($this->ion_auth->is_admin()){?>
-					<li class = "<?php echo ($current_tab == 'settings' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/settings'); ?>"><i class="pe-7s-mail"></i><p>Theme Options</p></a></li>
-					<li class = "<?php echo ($current_tab == 'dashboard' ? "active" :  "") ?>"><a href="<?php echo site_url('admin'); ?>"><i class="pe-7s-mail"></i><p>Dashboard</p></a></li>
-					<li class = "<?php echo ($current_tab == 'users' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/users'); ?>"><i class="pe-7s-mail"></i><p>Users</p></a></li>
-					<li class = "<?php echo ($current_tab == 'qr_code' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/QR'); ?>"><i class="pe-7s-mail"></i><p>QR Codes</p></a></li>
-					<li class = "<?php echo ($current_tab == 'message' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/message_notification'); ?>"><i class="pe-7s-add-user"></i><p>Message Notification</p></a></li>
-					<li class = "<?php echo ($current_tab == 'Polling' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/polling'); ?>"><i class="pe-7s-add-user"></i><p>Polling</p></a></li>
-					<li class = "<?php echo ($current_tab == 'about_event' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/about_event'); ?>"><i class="pe-7s-mail"></i><p>About Event</p></a></li>
-					<li class = "<?php echo ($current_tab == 'gallery' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/gallery'); ?>"><i class="pe-7s-mail"></i><p>Gallery</p></a></li>
-					<li class = "<?php echo ($current_tab == 'faqs' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/FAQ'); ?>"><i class="pe-7s-mail"></i><p>FAQ's</p></a></li>
-					<li class = "<?php echo ($current_tab == 'agenda' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/agenda'); ?>"><i class="pe-7s-mail"></i><p>Event Agenda</p></a></li>
+					<li class = "<?php echo ($current_tab == 'settings' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/settings'); ?>"><i class="fa fa-cog" aria-hidden="true"></i><p>App Theme Settings</p></a></li>
+					<li class = "<?php echo ($current_tab == 'dashboard' ? "active" :  "") ?>"><a href="<?php echo site_url('admin'); ?>"><i class="fa fa-tachometer" aria-hidden="true"></i><p>Dashboard</p></a></li>
+					<li class = "<?php echo ($current_tab == 'users' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/users'); ?>"><i class="fa fa-users" aria-hidden="true"></i><p>Users</p></a></li>
+					<li class = "<?php echo ($current_tab == 'qr_code' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/QR'); ?>"><i class="fa fa-qrcode" aria-hidden="true"></i><p>QR Codes</p></a></li>
+					<li class = "<?php echo ($current_tab == 'message' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/message_notification'); ?>"><i class="fa fa-bell" aria-hidden="true"></i><p>Message Notification</p></a></li>
+					<li class = "<?php echo ($current_tab == 'Polling' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/polling'); ?>"><i class="fa fa-tasks" aria-hidden="true"></i><p>Polling</p></a></li>
+					<li class = "<?php echo ($current_tab == 'about_event' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/about_event'); ?>"><i class="fa fa-info" aria-hidden="true"></i><p>About Event</p></a></li>
+					<!-- <li class = "<?php echo ($current_tab == 'gallery' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/gallery'); ?>"><i class="fa fa-cog" aria-hidden="true"></i><p>Gallery</p></a></li> -->
+					<li class = "<?php echo ($current_tab == 'faqs' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/FAQ'); ?>"><i class="fa fa-question" aria-hidden="true"></i><p>FAQ's</p></a></li>
+					<li class = "<?php echo ($current_tab == 'agenda' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/agenda'); ?>"><i class="fa fa-calendar" aria-hidden="true"></i><p>Event Agenda</p></a></li>
 					
-					<li class = "<?php echo ($current_tab == 'exhibitors' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/exhibitors'); ?>"><i class="pe-7s-mail"></i><p>Exhibitors</p></a></li>
-					<li class = "<?php echo ($current_tab == 'sponsor' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/sponsor'); ?>"><i class="pe-7s-mail"></i><p>Sponsors</p></a></li>
-					<li class = "<?php echo ($current_tab == 'speaker' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/speaker'); ?>"><i class="pe-7s-mail"></i><p>Speakers</p></a></li>
+					<li class = "<?php echo ($current_tab == 'exhibitors' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/exhibitors'); ?>"><i class="fa fa-cog" aria-hidden="true"></i><p>Exhibitors</p></a></li>
+					<li class = "<?php echo ($current_tab == 'sponsor' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/sponsor'); ?>"><i class="fa fa-address-card-o" aria-hidden="true"></i><p>Sponsors</p></a></li>
+					<li class = "<?php echo ($current_tab == 'speaker' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/speaker'); ?>"><i class="fa fa-male" aria-hidden="true"></i><p>Speakers</p></a></li>
 					
 					<!-- <li class = "<?php echo ($current_tab == 'requested' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/requested'); ?>"><i class="pe-7s-mail"></i><p>Request</p></a></li>
 					<li class = "<?php echo ($current_tab == 'attendee' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/attendee'); ?>"><i class="pe-7s-users"></i><p>Attendee</p></a></li>
