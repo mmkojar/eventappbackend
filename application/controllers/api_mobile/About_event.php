@@ -40,8 +40,11 @@ class About_event extends MY_Controller
 		    $get_about = $this->About_event_model->get_about_api($id);		   	
 			print(json_encode($get_about));
 		}
-		else {		    
-		    $get_about = $this->About_event_model->get_about_api();		    		    
+		else {
+		    $get_about = $this->About_event_model->get_about_api();		    		
+			foreach ($get_about['data'] as $data) {
+				$get_about['data'][0]['about_msg'] = str_replace(['<p>', '</p>','<strong>','</strong>','&nbsp'],'',htmlspecialchars_decode($data['about_msg']));
+			}    
     		print(json_encode($get_about));
 		}
 	    

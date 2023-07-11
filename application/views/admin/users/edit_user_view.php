@@ -122,12 +122,12 @@
 											echo form_label('Groups','groups[]',$attributes);
 											foreach($groups as $group)
 											{
-												// if($group->id != "1"){
+												if($group->description != "sp-admin"){
 													echo '<label class="radio">';
 													echo form_radio('groups[]', $group->id, set_radio('groups[]', $group->id, in_array($group->id,$usergroups)),'data-toggle="radio"');
 													echo ' '.$group->description;
 													echo '</label>';
-												// }
+												}
 											}
 										}
 										?>

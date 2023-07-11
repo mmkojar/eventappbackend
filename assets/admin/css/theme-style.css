@@ -6373,6 +6373,7 @@ star {
   /*   this code is for fixing safari bug with hidden overflow for border-radius   */
   -webkit-mask: url("../img/mask.png") 0 0 no-repeat;
   -webkit-mask-size: 60px 28px;
+  mask-size: 60px 28px;
   mask: url("../img/mask.png") 0 0 no-repeat;
 }
 
@@ -6561,7 +6562,7 @@ star {
   font-size: 16px;
 }
 .navbar.fixed {
-  width: calc(100% - $sidebar-width);
+  /* width: calc(100% - $sidebar-width); */
   right: 0;
   left: auto;
   border-radius: 0;
@@ -7454,8 +7455,13 @@ star {
   margin-bottom: 30px;
       background-size: cover;
       z-index: 1;
-
-      &:before{
+     
+}
+/*
+ .footer div{
+          display: inline-block;
+      } 
+&:before{
           position: absolute;
           width: 94%;
           left: 3%;
@@ -7467,12 +7473,7 @@ star {
           content: "";
           box-shadow: 0 3px 40px rgba(0, 0, 0, 0.2);
           top: 24px;
-      }
-      .footer div{
-          display: inline-block;
-      }
-  
-}
+      } */
 .card .image {
   width: 100%;
   overflow: hidden;
@@ -9070,6 +9071,7 @@ star {
 
   .navbar-fixed-top {
     -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   .close-layer {
