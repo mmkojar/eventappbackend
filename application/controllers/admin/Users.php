@@ -20,9 +20,9 @@ class Users extends Admin_Controller
 	{
 		$this->data['dttable_tab'] = 'dt_table';
 		$this->data['tbl_name'] = 'users/users_list';
-		if($this->ion_auth->in_group('sub admin')){
-			$group_id = "3";
-		}
+		// if($this->ion_auth->in_group('sub admin')){
+		// 	$group_id = "3";
+		// }
 		$this->data['page_title'] = 'Users';
 		
 		//$this->data['users'] = $this->ion_auth->users($group_id)->result();
@@ -31,23 +31,23 @@ class Users extends Admin_Controller
 	
 	public function users_list()
 	{
-		$groups = array("1","2");
-		$list = $this->ion_auth->get_datatables($groups);
+		$groups = array("1","2","3");
+    $loggedin_user = $this->ion_auth->in_group("sp-admin");
+    
+		$list = $this->ion_auth->get_datatables($groups,$loggedin_user);
 		
 		$i = 1;
-// 		print_r($list);
-// 		die();
 		
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $user) {
-		        if($user->gid !== '1' || $user->id == $this->ion_auth->user()->row()->id) {
-		            $actionBtns = anchor('admin/users/edit/'.$user->id,'<i class="fa fa-edit"></i>','class="btn btn-simple btn-warning btn-icon edit"').' '.
-				                anchor('admin/users/delete/'.$user->id,'<i class="fa fa-remove"></i>','class="btn btn-simple btn-danger btn-icon delete" onclick="return confirm(\'Are You Sure ?\')" ');
-		        }
-		        else {
-		            $actionBtns = "";
-		        }
+          // if($user->gid !== '1' || $user->id == $this->ion_auth->user()->row()->id) {
+              $actionBtns = anchor('admin/users/edit/'.$user->id,'<i class="fa fa-edit"></i>','class="btn btn-simple btn-warning btn-icon edit"').' '.
+                      anchor('admin/users/delete/'.$user->id,'<i class="fa fa-remove"></i>','class="btn btn-simple btn-danger btn-icon delete" onclick="return confirm(\'Are You Sure ?\')" ');
+          // }
+          // else {
+          //     $actionBtns = "";
+          // }
 				$no++;
 				$row = array();
 				$row[] = $i;
@@ -56,8 +56,9 @@ class Users extends Admin_Controller
 				$row[] = $user->email;
 				$row[] = $user->company;
 				$row[] = $user->phone;
-				$row[] = ($user->gid == '1' ? '<span class="text-info">Admin</span>' : '<span class="text-warning">User</span>');
-			    $row[] = ($user->active == '1' ? '<span class="badge badge-success text-white">Active</span>' : '<span class="badge badge-danger text-white">Inactive</span>');
+				// $row[] = ($user->gid == '1' ? '<span class="text-info">Admin</span>' : '<span class="text-warning">User</span>');
+        $row[] = '<span class="'.($user->gid == '1' ? 'text-info' : ($user->gid=='2' ? 'text-warning' : 'text-danger')).'">'.$user->group_name.'</span>';
+			  $row[] = ($user->active == '1' ? '<span class="badge badge-success text-white">Active</span>' : '<span class="badge badge-danger text-white">Inactive</span>');
 				$row[] = date('jS-M-Y',strtotime($user->created_on));
 				$row[] = $actionBtns;
 				$i++;
@@ -67,7 +68,7 @@ class Users extends Admin_Controller
 		$output = array(
 			"draw" => $_POST['draw'],
 			"recordsTotal" => $this->ion_auth->count_all($groups),
-			"recordsFiltered" => $this->ion_auth->count_filtered($groups),
+			"recordsFiltered" => $this->ion_auth->count_filtered($groups,$loggedin_user),
 			"data" => $data,
 		);			
 		
@@ -254,7 +255,7 @@ public function delete($user_id = NULL)
   }
   else
   {
-	if($this->ion_auth->in_group('admin'))
+	if($this->ion_auth->in_group('admin')||$this->ion_auth->in_group('sp-admin'))
 	{
     $hidden_image = $this->ion_auth->user($user_id)->row()->user_image;
     if($hidden_image !== './assets/upload/images/users/user.png') {

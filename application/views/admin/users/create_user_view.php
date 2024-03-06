@@ -107,7 +107,7 @@
 												echo form_label('Groups','groups[]',$attributes);
 												foreach($groups as $group){
 													// if($this->ion_auth->in_group('admin')){
-														if($group->description != "sp-admin"){
+														if($group->name !== "sp-admin"){
 															echo '<label class="radio">';
 															echo form_radio('groups[]', $group->id, set_radio('groups[]', $group->id),'data-toggle="radio" required ="true"');
 															echo ' '.$group->description;

@@ -119,10 +119,13 @@
 										<?php
 										if(isset($groups))
 										{
+											/* if($this->ion_auth->in_group("sp-admin")!=='1') {
+												unset($groups[2]);
+											} */
 											echo form_label('Groups','groups[]',$attributes);
 											foreach($groups as $group)
 											{
-												if($group->description != "sp-admin"){
+												if($group->name != "sp-admin"){
 													echo '<label class="radio">';
 													echo form_radio('groups[]', $group->id, set_radio('groups[]', $group->id, in_array($group->id,$usergroups)),'data-toggle="radio"');
 													echo ' '.$group->description;

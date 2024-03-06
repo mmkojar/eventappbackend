@@ -38,8 +38,9 @@ class Agenda_model extends CI_Model
 	
 	 public function _get_datatables_query()
 	{
-		$this->db->select("agenda.*");
+		$this->db->select("agenda.*,agenda_titles.name as title");
 		$this->db->from("agenda");
+		$this->db->join("agenda_titles","agenda_titles.id = agenda.title_id",'left');
 		
 		$i = 0;
 		$where = '';
@@ -162,19 +163,34 @@ class Agenda_model extends CI_Model
 		$this->db->select(" agenda.*");
 		$this->db->from("agenda");
 		$this->db->where('status',1);
-		if($id) {
-		    $this->db->where("agenda_id",$id);
+		// $this->db->where("title_id",$id);
+		$query=$this->db->get();
+		$rowcount =  $query->num_rows();
+		$result = [];
+		if($rowcount > 0) {				
+			$response['status'] = "true";
+			$response['message'] = 'Data Found';
+			$response['data'] = $query->result_array();
+			return $response;
+		}
+		else {
+			$response['status'] = "false";
+			$response['message'] = 'No Data Found';
+			return $response;
+		}
+		/* if($id) {
+		    $this->db->where("title_id",$id);
 		    $query=$this->db->get();
 		    $rowcount =  $query->num_rows();
 			$result = [];
 		    if($rowcount > 0) {				
-				foreach($query->row_array() as $rawdata) {
-					$rawdata['agenda_date'] = date('jS M, Y',strtotime($rawdata['agenda_date']));
-					array_push($result,$rawdata);
-				}
+				// foreach($query->row_array() as $rawdata) {
+				// 	// $rawdata['agenda_date'] = date('jS M, Y',strtotime($rawdata['agenda_date']));
+				// 	array_push($result,$rawdata);
+				// }
 		        $response['status'] = "true";
 		        $response['message'] = 'Data Found';
-		        $response['data'] = $result;
+		        $response['data'] = $query->row_array();
 		        return $response;
 		    }
 		    else {
@@ -188,13 +204,13 @@ class Agenda_model extends CI_Model
 		    $rowcount =  $query->num_rows();
 			$result = [];
 		    if($rowcount > 0) {
-				foreach($query->result_array() as $rawdata) {
-					$rawdata['agenda_date'] = date('jS M, Y',strtotime($rawdata['agenda_date']));
-					array_push($result,$rawdata);
-				}
+				// foreach($query->result_array() as $rawdata) {
+				// 	// // $rawdata['agenda_date'] = date('jS M, Y',strtotime($rawdata['agenda_date']));
+				// 	array_push($result,$rawdata);
+				// }
 		        $response['status'] = "true";
 		        $response['message'] = 'Data Found';
-		        $response['data'] = $result;
+		        $response['data'] = $query->result_array();
 		        return $response;
 		    }
 		    else {
@@ -202,7 +218,7 @@ class Agenda_model extends CI_Model
 		        $response['message'] = 'No Data Found';
 		        return $response;
 		    }
-		}
+		} */
 		
 	}
 

@@ -99,13 +99,63 @@ class Exhibitors extends Admin_Controller
 				$this->render('admin/exhibitors/create_exhibitor_view');
 			}
 			else {
+
+				// foreach ($_POST as $key => $value) {
+				// 	if($value == null ||$value == ""){
+				// 		$register_data[$key] = NULL;
+				// 	}else{
+				// 		$register_data[$key] = $value;
+				// 	}
+				// }
 				$register_data = array(
 					'ex_name'   => ucwords($this->input->post("ex_name")),
 					'ex_image'   => $upload_dir."".str_replace(' ','_',$file_name),
 					'web_url'   => $this->input->post("web_url"),
+					'city'   => $this->input->post("city"),
+					'state'   => $this->input->post("state"),
+					'country'   => $this->input->post("country"),
+					'pincode'   => $this->input->post("pincode"),
+					'comp_ownership'   => $this->input->post("comp_ownership"),
+					'comp_key'   => $this->input->post("comp_key"),
+					'comp_is_an'   => $this->input->post("comp_is_an"),
 					'status'   => 1,
 				);
-				$this->exhibitors_model->register_exhibitor($register_data);
+				$ex_id = $this->exhibitors_model->register_exhibitor($register_data,'exhibitors');
+				
+				if(!empty($_POST["emp_name"])) {
+					for($i = 0; $i < count($_POST["emp_name"]); $i++)
+					{    		    
+						if(!empty($_POST["emp_name"][$i])) {
+		
+							$additional_data = [
+								'ex_id' => $ex_id,
+								'name' => $_POST["emp_name"][$i],
+								'designation' => $_POST["emp_designation"][$i],
+								'city' => $_POST["emp_city"][$i],
+								'state' => $_POST["emp_state"][$i],
+								'country' => $_POST["emp_country"][$i],
+							];
+							$this->exhibitors_model->register_exhibitor($additional_data,'exhibitors_team');
+						}
+					}
+				}
+
+				if(!empty($_POST["title"])) {
+					for($i = 0; $i < count($_POST["title"]); $i++)
+					{    		    
+						if(!empty($_POST["title"][$i])) {
+		
+							$additional_data = [
+								'ex_id' => $ex_id,
+								'title' => $_POST["title"][$i],
+								'description' => $_POST["description"][$i],
+							];
+												
+							$this->exhibitors_model->register_exhibitor($additional_data,'exhibitors_offering');
+						}
+					}
+				}
+
 				$this->session->set_flashdata('success','Exhibitors Added Successfully');
 				redirect('admin/exhibitors','refresh');
 			}
@@ -156,11 +206,19 @@ class Exhibitors extends Admin_Controller
 				$this->session->set_flashdata('error',$fileUploadError[0]['msg']);
 				redirect('admin/exhibitors/edit/'.$user_id,'refresh');
 			}
-			else {	
-				$register_data["ex_name"] = ucwords($this->input->post("ex_name"));
-				$register_data["web_url"] = $this->input->post('web_url');
+			else {
+				foreach ($_POST as $key => $value) {
+					if($value == null ||$value == ""){
+						$register_data[$key] = NULL;
+					}else{
+						$register_data[$key] = $value;
+					}
+				}
+				// $register_data["ex_name"] = ucwords($this->input->post("ex_name"));
+				// $register_data["web_url"] = $this->input->post('web_url');
 				$register_data["ex_image"] = str_replace(' ','_',$filenametoupload);
-				$register_data["status"] = $this->input->post('status');
+				unset($register_data["hidden_image"],$register_data["submit"]);
+				// $register_data["status"] = $this->input->post('status');
 				$register_data["updated_on"] = date("Y-m-d H:i:s");
 
 				$this->exhibitors_model->update($id,$register_data);

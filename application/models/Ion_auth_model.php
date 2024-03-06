@@ -1009,7 +1009,7 @@ class Ion_auth_model extends CI_Model
 
 					return FALSE;
 				}
-				if($user->group_id !== '1') {
+				if($user->group_id !== '1' && $user->group_id !== '3') {
 				    
 				    $this->trigger_events('post_login_unsuccessful');
 					$this->set_error('login_unsuccessful_user_action');
@@ -1392,7 +1392,7 @@ class Ion_auth_model extends CI_Model
 	 *
 	 * @return object Users
 	 **/
-	public function users_all($groups = NULL)
+	public function users_all($groups = NULL,$lgid=NULL)
 	{
 		
 		$this->trigger_events('users');
@@ -1416,6 +1416,7 @@ class Ion_auth_model extends CI_Model
 			    $this->tables['users'].'.id as id',
 			    $this->tables['users'].'.id as user_id',
 			    $this->tables['users_groups'].'.group_id as gid',
+				'groups.description as group_name',
 			));
 			$this->db->from($this->tables['users']);
 		}
@@ -1434,6 +1435,7 @@ class Ion_auth_model extends CI_Model
 			{
 				$this->db->distinct();
 				$this->db->join($this->tables['users_groups'],$this->tables['users_groups'].'.'.$this->join['users'].'='.$this->tables['users'].'.id','inner');
+				$this->db->join('groups','groups.id = users_groups.group_id','left');
 			}
 
 			// verify if group name or group id was used and create and put elements in different arrays
@@ -1456,7 +1458,10 @@ class Ion_auth_model extends CI_Model
 				$this->db->{$or_where_in}($this->tables['users_groups'].'.'.$this->join['groups'], $group_ids);
 			}
 		}
-
+		if($lgid!='1') {
+			$this->db->where_in('groups.name',['user','admin']);
+		}
+		
 		$this->trigger_events('extra_where');
 
 		// run each where that was passed
@@ -1540,18 +1545,18 @@ class Ion_auth_model extends CI_Model
 	}
 	
 
-	function get_datatables($groups = NULL)
+	function get_datatables($groups = NULL,$lgid=NULL)
 	{
-		$this->users_all($groups);
+		$this->users_all($groups,$lgid);
 		if($_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	function count_filtered($groups = NULL)
+	function count_filtered($groups = NULL,$lgid=NULL)
 	{
-		$this->users_all($groups);
+		$this->users_all($groups,$lgid);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}

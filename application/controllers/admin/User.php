@@ -66,7 +66,7 @@ class User extends MY_Controller
 	  $user = $this->ion_auth->user()->row();
 	  $this->data['user'] = $user;
 	  $this->data['current_user_menu'] = '';
-	  if($this->ion_auth->in_group('admin'))
+	  if($this->ion_auth->in_group('admin')||$this->ion_auth->in_group('sp-admin'))
 	  {
 		$this->data['current_user_menu'] = $this->load->view('public/themes/default/slider', NULL, TRUE);
 	  }

@@ -17,10 +17,11 @@
 							<table id="datatable" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 								<thead>
 									<th>ID</th>
+									<th>Title</th>
 									<th>Agenda Name</th>
-									<th>Agenda Date</th>
 									<th>Agenda Time</th>
-									<th>Speaker Name</th>
+									<!-- <th>Agenda Date</th> -->
+									<!-- <th>Speaker Name</th> -->
 									<th>Session Venue</th>
 									<th>Status</th>
 									<th>Requested On</th>

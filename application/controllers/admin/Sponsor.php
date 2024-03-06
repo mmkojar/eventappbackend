@@ -43,7 +43,7 @@ class Sponsor extends Admin_Controller
 			$row[] = $requested->id;
 			$row[] = $requested->name;
 			$row[] = '<img src="'.$src.'" height="100" width="100">';		
-			$row[] = anchor($requested->link,$requested->link,'target="_blank"');		
+			// $row[] = anchor($requested->link,$requested->link,'target="_blank"');		
 			$row[] = $requested->status == '1' ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
 			$row[] = date('jS-M-Y',strtotime($requested->created_on));
 			$row[] = anchor('admin/sponsor/edit/'.$requested->id,'<i class="fa fa-edit"></i>','class="btn btn-simple btn-warning btn-icon edit"').' '.anchor('admin/sponsor/delete/'.$requested->id,'<i class="fa fa-remove"></i>','class="btn btn-simple btn-danger btn-icon remove" onclick="return confirm(\'Are You Sure ?\')"');
@@ -69,7 +69,7 @@ class Sponsor extends Admin_Controller
 		$this->load->library('form_validation');
 	  
 		$this->form_validation->set_rules('name','Sponsor Name','trim|required');
-		$this->form_validation->set_rules('link','Link','trim|required');
+		// $this->form_validation->set_rules('link','Link','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
@@ -99,7 +99,7 @@ class Sponsor extends Admin_Controller
 			}
 			else {
 				$register_data["name"] = ucwords($this->input->post('name'));
-				$register_data["link"] = $this->input->post('link');
+				// $register_data["link"] = $this->input->post('link');
 				$register_data["image"] = $upload_dir."".str_replace(' ','_',$file_name);
 
 				$this->sponsor_model->register_sponsor($register_data);
@@ -116,7 +116,7 @@ class Sponsor extends Admin_Controller
 		$this->load->library('form_validation');
 	  
 		$this->form_validation->set_rules('name','Sponsor Name','trim|required');
-		$this->form_validation->set_rules('link','Link','trim|required');
+		// $this->form_validation->set_rules('link','Link','trim|required');
 		
 		if($this->form_validation->run()===FALSE)
 		{
@@ -155,7 +155,7 @@ class Sponsor extends Admin_Controller
 			}
 			else {
 				$register_data["name"] = ucwords($this->input->post('name'));
-				$register_data["link"] = $this->input->post('link');
+				// $register_data["link"] = $this->input->post('link');
 				$register_data["image"] = str_replace(' ','_',$filenametoupload);
 				$register_data["status"] = $this->input->post('status');
 				$register_data["updated_on"] = date("Y-m-d H:i:s");

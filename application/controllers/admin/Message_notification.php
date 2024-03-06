@@ -143,7 +143,7 @@ class Message_notification extends Admin_Controller
 		else
 		{
 			$user = $this->ion_auth->user()->row();
-			if($user->id == "1" && $this->ion_auth->in_group('admin')){
+			if($this->ion_auth->in_group('sp-admin') || $this->ion_auth->in_group('admin')){
 				$message_notify = $this->message_notification_model->get_message_notification($msg_id);
 				$notification_id = $this->message_notification_model->get_all_user_to_notify();
 				//print_r($notification_id);

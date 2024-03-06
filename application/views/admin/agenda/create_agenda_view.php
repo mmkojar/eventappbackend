@@ -16,6 +16,14 @@
 									<?php print_r(validation_errors());?> 
 								</div>
 							<?php endif ?>
+							<div class="col-md-6">
+								<label>Select Title</label>
+								<select name="title_id" class="form-control">
+									<?php foreach($titles as $row): ?>
+										<option value="<?php echo $row->id ?>"><?php echo $row->name ?></option>
+									<?php endforeach ?>
+								</select>
+							</div>
 							<div class="col-md-6">								
 								<div class="form-group">
 									<?php 
@@ -31,7 +39,7 @@
 								<div class="form-group">
 										<?php
 											echo form_label('Agenda Time','agenda_time',$attributes);											
-											echo form_input('agenda_time',set_value('agenda_time'),'class="form-control"  id="timepicker" required = "true"');
+											echo form_input('agenda_time',set_value('agenda_time'),'class="form-control"  id="timepickers" required = "true"');
 										?>
 								</div>
 							</div>	
@@ -43,9 +51,9 @@
 									?>
 								</div>
 							</div>			
-							<div class="col-md-6">
+							<!-- <div class="col-md-6">
 									<div class="form-group">
-										<?php 
+										<s?php 
 											$attributes = array(
 											'class' => 'control-label'
 											);
@@ -56,12 +64,12 @@
 							</div>	
 							<div class="col-md-6">			
 									<div class="form-group">
-										<?php
+										<s?php
 											echo form_label('Speaker Name','speaker_name',$attributes);											
 											echo form_input('speaker_name',set_value('speaker_name'),'class="form-control" required = "true"');
 										?>
 									</div>
-							</div>	
+							</div> -->	
 							<div class="col-md-6">			
 									<!-- <div class="form-group">
 										<?php

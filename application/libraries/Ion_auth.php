@@ -478,6 +478,15 @@ class Ion_auth
 		return $this->in_group($admin_group, $id);
 	}
 
+	public function is_spadmin($id=false)
+	{
+		$this->ion_auth_model->trigger_events('is_spadmin');
+
+		$admin_group = $this->config->item('spadmin_group', 'ion_auth');
+
+		return $this->in_group($admin_group, $id);
+	}
+
 	/**
 	 * in_group
 	 *

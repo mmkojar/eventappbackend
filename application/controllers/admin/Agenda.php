@@ -39,10 +39,11 @@ class Agenda extends Admin_Controller
 			$no++;
 			$row = array();
 			$row[] = $requested->agenda_id;
-			$row[] = $requested->agenda_name;			
-			$row[] = date('jS-M-Y',strtotime($requested->agenda_date));					
+			$row[] = $requested->title;	
+			$row[] = $requested->agenda_name;
+			// $row[] = date('jS-M-Y',strtotime($requested->agenda_date));					
 			$row[] = $requested->agenda_time;
-			$row[] = $requested->speaker_name;
+			// $row[] = $requested->speaker_name;
 			$row[] = $requested->agenda_venue;
 			$row[] = ($requested->status == '1' ? '<span class="badge badge-success text-white">Active</span>' : '<span class="badge badge-danger text-white">Inactive</span>');
 			$row[] = date('jS-M-Y',strtotime($requested->created_on));							
@@ -64,19 +65,20 @@ class Agenda extends Admin_Controller
 
 	public function create()
 	{
-		$this->data['page_title'] = 'Add Session';
+		$this->data['page_title'] = 'Add Agenda';
 	  
 		$this->load->library('form_validation');
 	  
 		$this->form_validation->set_rules('agenda_name','Agenda Name','trim|required');
-		$this->form_validation->set_rules('agenda_date','Agenda Date','trim|required');
+		// $this->form_validation->set_rules('agenda_date','Agenda Date','trim|required');
 		$this->form_validation->set_rules('agenda_time','Agenda Time','trim|required');
-		$this->form_validation->set_rules('speaker_name','Sepaker Name','trim|required');
+		// $this->form_validation->set_rules('speaker_name','Sepaker Name','trim|required');
 		$this->form_validation->set_rules('agenda_venue','Venue','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
 			//print_r(validation_errors());
+			$this->data['titles'] = $this->db->query("SELECT * FROM agenda_titles")->result();
 			$this->load->helper('form');
 			$this->render('admin/agenda/create_agenda_view');
 		}
@@ -97,10 +99,11 @@ class Agenda extends Admin_Controller
 				}
 			} */		
 			$register_data = [
+				'title_id'   => $this->input->post("title_id"),
 				'agenda_name'   => ucwords($this->input->post("agenda_name")),
-				'agenda_date'   => $this->input->post("agenda_date"),
+				// 'agenda_date'   => $this->input->post("agenda_date"),
 				'agenda_time'   => $this->input->post("agenda_time"),
-				'speaker_name'   => ucwords($this->input->post("speaker_name")),
+				// 'speaker_name'   => ucwords($this->input->post("speaker_name")),
 				'agenda_venue'   => ucfirst($this->input->post("agenda_venue")),
 				// 'agenda_image'   => $register_data["agenda_image_url"],			
 				'status'   => 1,
@@ -119,15 +122,16 @@ class Agenda extends Admin_Controller
 		$this->load->library('form_validation');
 	  
 		$this->form_validation->set_rules('agenda_name','Agenda Name','trim|required');
-		$this->form_validation->set_rules('agenda_date','Agenda Date','trim|required');
+		// $this->form_validation->set_rules('agenda_date','Agenda Date','trim|required');
 		$this->form_validation->set_rules('agenda_time','Agenda Time','trim|required');
-		$this->form_validation->set_rules('speaker_name','Sepaker Name','trim|required');
+		// $this->form_validation->set_rules('speaker_name','Sepaker Name','trim|required');
 		$this->form_validation->set_rules('agenda_venue','Venue','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{			
 			$this->load->helper('form');
 			$this->data['agenda_data'] = $this->agenda_model->get_agenda($id);
+			$this->data['titles'] = $this->db->query("SELECT * FROM agenda_titles")->result();
 			$this->render('admin/agenda/edit_agenda_view');
 		}
 		else
@@ -146,10 +150,11 @@ class Agenda extends Admin_Controller
 				}
 			} */		
 			$register_data = [
-				'agenda_name'   => ucwords($this->input->post("agenda_name")),
+				'title_id'   => $this->input->post("title_id"),
+				// 'agenda_name'   => ucwords($this->input->post("agenda_name")),
 				'agenda_date'   => $this->input->post("agenda_date"),
 				'agenda_time'   => $this->input->post("agenda_time"),
-				'speaker_name'   => ucwords($this->input->post("speaker_name")),
+				// 'speaker_name'   => ucwords($this->input->post("speaker_name")),
 				'agenda_venue'   => ucfirst($this->input->post("agenda_venue")),
 				// 'agenda_image'   => $register_data["agenda_image_url"],			
 				'status'   => $this->input->post("status"),

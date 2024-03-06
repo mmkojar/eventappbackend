@@ -24,12 +24,12 @@
 									echo form_input('name',set_value('name',$sponsor_data['name']),'class="form-control" required = "true"');
 								?>
 							</div>	
-							<div class="form-group">
-									<?php
+							<!-- <div class="form-group">
+									<s?php
 										echo form_label('Link','link',$attributes);
 										echo form_input('link',set_value('link',$sponsor_data['link']),'class="form-control" required = "true"');
 									?>
-							</div>
+							</div> -->
 							<div class="form-group">
 								<img class="avatar border-gray" src="<?php echo base_url()."".str_replace("./", "", $sponsor_data['image']); ?>" alt="..." />
 								<?php 

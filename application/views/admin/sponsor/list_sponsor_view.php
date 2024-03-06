@@ -18,7 +18,7 @@
 									<th>ID</th>
 									<th>Name</th>
 									<th>Image</th>
-									<th>Link</th>
+									<!-- <th>Link</th> -->
 									<th>Status</th>									
 									<th>Requested On</th>
 									<th>Operations</th>

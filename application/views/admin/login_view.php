@@ -45,7 +45,7 @@
                                     <div class="form-group">
 										<?php echo form_label('Password');?>
 										<?php echo form_error('password');?>
-										<?php echo form_password('password','123','class="form-control" required = "true"');?>
+										<?php echo form_password('password','123456','class="form-control" required = "true"');?>
                                     </div> 
                                 </div>
                                 <div class="footer text-center">

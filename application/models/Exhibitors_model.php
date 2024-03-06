@@ -11,7 +11,6 @@ class Exhibitors_model extends CI_Model
 	 var $table = 'exhibitors';
 	 
 	 
-	 
 	 var $column = array(
 	 	
 			'0' => 'ex_id',
@@ -94,9 +93,9 @@ class Exhibitors_model extends CI_Model
 		return $this->db->count_all_results();
 	}
 
-	public function register_exhibitor(array $data)
+	public function register_exhibitor(array $data,$table)
 	{
-		$this->db->insert('exhibitors', $data);
+		$this->db->insert($table, $data);
 
 		$id = $this->db->insert_id();
 

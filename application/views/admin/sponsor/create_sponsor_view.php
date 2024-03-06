@@ -26,12 +26,12 @@
 								echo form_input('name',set_value('name'),'class="form-control" required = "true"');
 								?>
 							</div>	
-							<div class="form-group">
-									<?php
+							<!-- <div class="form-group">
+									<s?php
 										echo form_label('Link','link',$attributes);
 										echo form_input('link',set_value('link'),'class="form-control" required = "true"');
 									?>
-							</div>
+							</div> -->
 							<div class="form-group">
 								<?php
 									echo form_label('Image (PNG, JPG, JPEG) (min128 x max512)','sponsor_image',$attributes);

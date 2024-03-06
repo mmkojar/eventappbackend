@@ -9,14 +9,12 @@ class Settings extends Admin_Controller
 	$this->data['current_tab'] = 'settings';
 	$this->load->helper('imageupload');
 	$this->load->helper('form');
-	$this->load->helper('form');
   }
  
 	public function index()
 	{
 		$data = array();
-        $stmt = "SELECT a.key,a.value"
-                . " FROM system_settings AS a";
+        $stmt = "SELECT a.key,a.value,a.status FROM system_settings AS a";
         $query = $this->db->query($stmt);
         if ($query->num_rows()) {
             $data = $query->result_array();
@@ -25,7 +23,7 @@ class Settings extends Admin_Controller
 		$pushb['value'] = [];
 		foreach ($data as $key => $val) {
 			array_push($pusha['key'], $val['key']);
-			array_push($pushb['value'], $val['value']);
+			array_push($pushb['value'], ['name'=>$val['value'],'status'=>$val['status']]);
 		}
 		$res = array_combine($pusha['key'], $pushb['value']);
 
@@ -37,10 +35,10 @@ class Settings extends Admin_Controller
 				
 		$data = $this->input->post();
 		$updated = [];
-		/* echo '<pre>';
-		print_r($data);
-		print_r($_FILES);
-		die(); */
+		// echo '<pre>';
+		// print_r($data);
+		// print_r($_FILES);
+		// die();
 		foreach ($_FILES as $key => $value) 
 		{
 			$upload_dir = './assets/upload/images/icons/';
@@ -96,8 +94,10 @@ class Settings extends Admin_Controller
 		if($data){
 			$table_data=[];
 			foreach ($data as $key => $val) {
-				if($key !== 'submit' && $key !== 'lc_logo' && $key !== 'du_image' && $key !== 'hp_logo' &&  $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' 
-					&& $key !== 'notify_file' && $key !== 'polls_file' && $key !== 'qr_file' && $key !== 'speaker_file' && $key !== 'sponsors_file' && $key !== 'exhi_file' && $key !== 'faq_file' && $key !== 'support_file')
+				
+				// if($key !== 'submit' && $key !== 'lc_logo' && $key !== 'du_image' && $key !== 'hp_logo' &&  $key !== 'about_file' && $key !== 'agenda_file' && $key !== 'delg_file' && $key !== 'chat_file' 
+				// 	&& $key !== 'notify_file' && $key !== 'polls_file' && $key !== 'qr_file' && $key !== 'speaker_file' && $key !== 'sponsors_file' && $key !== 'exhi_file' && $key !== 'faq_file' && $key !== 'support_file')
+				if($key !== 'submit' && !strpos($key,'logo') && !strpos($key,'file') && !strpos($key,'image'))
 				{
 					$table_data['key']        = $key;
 					$table_data['value']      = $val;
@@ -122,6 +122,15 @@ class Settings extends Admin_Controller
 			$this->session->set_flashdata('success','Settings Updated Successfully');
 			redirect('admin/settings');
 		}		
+	}
+
+	public function updateStatus($key,$val) {
+
+		$this->db->where('key',$key);
+        $this->db->update('system_settings',array('status'=>$val));
+
+		$this->session->set_flashdata('success','Status Updated Successfully');
+		redirect('admin/settings');
 	}
 
 }

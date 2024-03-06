@@ -87,7 +87,7 @@ class Groups extends Admin_Controller
 	  }
 	  else
 	  {
-		if($this->ion_auth->in_group('admin'))
+		if($this->ion_auth->in_group('admin')||$this->ion_auth->in_group('sp-admin'))
 		{
 			$this->ion_auth->delete_group($group_id);
 			$this->session->set_flashdata('message',$this->ion_auth->messages());
