@@ -43,14 +43,17 @@ class Settings extends MY_Controller
         }
 		$pusha['key'] = [];
 		$pushb['value'] = [];
+		$pushc['value'] = [];
 		foreach ($data as $key => $val) {
 			// $val['value']['status'] = $val['status'];
 			array_push($pusha['key'], $val['key']);
-			array_push($pushb['value'], ['name'=>$val['value'],'status'=>$val['status']]);
+			array_push($pushb['value'], $val['value']);
+			array_push($pushc['value'], $val['status']);
 		}
 		$settings = array_combine($pusha['key'], $pushb['value']);
+		$settings1 = array_combine($pusha['key'], $pushc['value']);
 		
-        $json = ['status'=>'true', 'message'=>'Data found','data'=> $settings];
+        $json = ['status'=>'true', 'message'=>'Data found','data'=> $settings,'visible'=>$settings1];
 		print_r(json_encode($json));
 	    
 	}

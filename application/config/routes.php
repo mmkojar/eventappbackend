@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['api_mobile/about'] = 'api_mobile/About_event';
+$route['api_mobile/settings'] = 'api_mobile/Settings/index';
 $route['admin/artist'] = 'admin/sponsor';
 $route['api_mobile/agenda/(:any)'] = 'api_mobile/agenda/index/$1';
 

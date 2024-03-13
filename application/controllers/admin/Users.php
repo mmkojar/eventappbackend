@@ -51,13 +51,15 @@ class Users extends Admin_Controller
 				$no++;
 				$row = array();
 				$row[] = $i;
+				$row[] = $user->emp_code;
 				$row[] = $user->username;
 				$row[] = $user->first_name.' '.$user->last_name;
 				$row[] = $user->email;
 				$row[] = $user->company;
 				$row[] = $user->phone;
 				// $row[] = ($user->gid == '1' ? '<span class="text-info">Admin</span>' : '<span class="text-warning">User</span>');
-        $row[] = '<span class="'.($user->gid == '1' ? 'text-info' : ($user->gid=='2' ? 'text-warning' : 'text-danger')).'">'.$user->group_name.'</span>';
+        $row[] = '<span class="'.($user->gname == 'admin' ? 'text-info' : ($user->gname=='user' ? 'text-warning' : 'text-danger')).'">'.$user->group_name.'</span>';
+        // $row[] = '<span class="'.($user->gid == '1' ? 'text-info' : ($user->gid=='2' ? 'text-warning' : 'text-danger')).'">'.$user->group_name.'</span>';
 			  $row[] = ($user->active == '1' ? '<span class="badge badge-success text-white">Active</span>' : '<span class="badge badge-danger text-white">Inactive</span>');
 				$row[] = date('jS-M-Y',strtotime($user->created_on));
 				$row[] = $actionBtns;
@@ -81,12 +83,13 @@ class Users extends Admin_Controller
 	{
 	  $this->data['page_title'] = 'Create user';
 	  $this->load->library('form_validation');
+	  $this->form_validation->set_rules('emp_code','Employee ID','trim|required');
 	  $this->form_validation->set_rules('first_name','First name','trim|required');
 	  $this->form_validation->set_rules('last_name','Last name','trim|required');
 	  $this->form_validation->set_rules('company','Company','trim');
 	  $this->form_validation->set_rules('phone','Phone','trim|required|regex_match[/^[0-9]{10}$/]|is_unique[users.phone]');
 	  $this->form_validation->set_rules('username','Username','trim|required|is_unique[users.username]');
-	  $this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[users.email]');
+	  // $this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[users.email]');
 	  $this->form_validation->set_rules('password','Password','required');
 	  $this->form_validation->set_rules('password_confirm','Password confirmation','required|matches[password]');
 	  $this->form_validation->set_rules('groups[]','Groups','required|integer');
@@ -127,6 +130,7 @@ class Users extends Admin_Controller
           $group_ids = $this->input->post('groups');
         
           $additional_data = array(
+            'emp_code' => ucfirst($this->input->post('emp_code')),
             'first_name' => ucfirst($this->input->post('first_name')),
             'last_name' => ucfirst($this->input->post('last_name')),
             'company' => ucfirst($this->input->post('company')),
@@ -148,12 +152,13 @@ public function edit($user_id = NULL)
   $this->data['page_title'] = 'Edit user';
   $this->load->library('form_validation');
   
+  $this->form_validation->set_rules('emp_code','Employee ID','trim|required');
   $this->form_validation->set_rules('first_name','First name','trim');
   $this->form_validation->set_rules('last_name','Last name','trim');
   $this->form_validation->set_rules('company','Company','trim');
   $this->form_validation->set_rules('phone','Phone','trim');
   $this->form_validation->set_rules('username','Username','trim|required');
-  $this->form_validation->set_rules('email','Email','trim|required|valid_email');
+  // $this->form_validation->set_rules('email','Email','trim|required|valid_email');
   $this->form_validation->set_rules('password','Password','min_length[6]');
   $this->form_validation->set_rules('password_confirm','Password confirmation','matches[password]');
   $this->form_validation->set_rules('groups[]','Groups','required|integer');
@@ -215,6 +220,7 @@ public function edit($user_id = NULL)
     }
     else {      
       $new_data = array(
+        'emp_code' => ucfirst($this->input->post('emp_code')),
         'username' => $this->input->post('username'),
         'email' => $this->input->post('email'),
         'phone' => $this->input->post('phone'),

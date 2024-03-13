@@ -170,7 +170,7 @@ class Ion_auth_model extends CI_Model
 		'3' => 'email',
 		'4' => 'company',
 		'5' => 'phone',
-		'6' => 'users_groups.gid',
+		'6' => 'groups.name',
 		'7' => 'active',
 		'8' => 'users.created_on',
 		'9' => 'last_login'
@@ -1415,8 +1415,9 @@ class Ion_auth_model extends CI_Model
 			    $this->tables['users'].'.*',
 			    $this->tables['users'].'.id as id',
 			    $this->tables['users'].'.id as user_id',
-			    $this->tables['users_groups'].'.group_id as gid',
+			    // $this->tables['users_groups'].'.group_id as gid',
 				'groups.description as group_name',
+				'groups.name as gname'
 			));
 			$this->db->from($this->tables['users']);
 		}

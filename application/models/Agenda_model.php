@@ -160,8 +160,9 @@ class Agenda_model extends CI_Model
 	}
 
 	public function get_agenda_api($id=FALSE){
-		$this->db->select(" agenda.*");
+		$this->db->select(" agenda.*,agenda_titles.name");
 		$this->db->from("agenda");
+		$this->db->join("agenda_titles", "agenda_titles.id = agenda.title_id");
 		$this->db->where('status',1);
 		// $this->db->where("title_id",$id);
 		$query=$this->db->get();

@@ -16,6 +16,7 @@
 							<table id="datatable" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 								<thead>
 									  <td>ID</td>
+									  <td>Employee ID</td>
 									  <td>Username</td>
 									  <td>Name</td>
 									  <td>Email</td>

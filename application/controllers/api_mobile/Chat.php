@@ -473,15 +473,23 @@ class Chat extends MY_Controller
 		}
 		
 		$get_chat_history = $this->chat_model->get_chat_history($user_id);		
+		$this->db->select("users.id as user2_id,users.id as chat_detail_id,CONCAT(users.first_name,' ',users.last_name) AS 'user_name',users.user_image,users.email,users.phone,users.company");
+		$this->db->from("users");
+		$this->db->join("users_groups", "users_groups.user_id = users.id" ,"left");
+		$this->db->join("groups", "groups.id = users_groups.group_id" ,"left");
+		$this->db->where("groups.name",'admin');
+		$query=$this->db->get();
+
 		if(!empty($get_chat_history)){				
 			$response['status'] = "true";
 			$response['message'] = 'Data Found';
+			$response['admin'] = $query->result_array();
 			$response['data'] = $get_chat_history;
 			print_r(json_encode($response));
 		}else{
-			
 			$response['status'] = "false";
 			$response['message'] = 'No Data Found';
+			$response['admin'] = $query->result_array();
 			$response['data'] = [];
 			print_r(json_encode($response));
 			die();

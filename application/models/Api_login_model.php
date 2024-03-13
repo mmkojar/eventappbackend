@@ -71,15 +71,11 @@ class Api_login_model extends CI_Model
 					return $returnArr;
 				}else{
 					$groups  = $this->ion_auth_model->get_user_groups($user->id);
-					if($groups["name"] != 'admin'){
+					// if($groups["name"] != 'admin'){
 							$this->ion_auth_model->update_last_login($user->id);
-							/*$this->load->helper('random_string');
-							if($user->id == 707 || $user->id == "707"){
-								$otp = "111111";
-							}else{
-								$otp = gen_string(6,'','d');
-							}
-							$details["otp"] = $otp;*/
+							$this->load->helper('random_string');
+							$otp = gen_string(6,'','d');
+							$returnArr["otp"] = $otp;
 							$returnArr["user_id"] = $user->id;
 							$returnArr["identity"] = $identity;
 							$returnArr["first_name"] = $user->first_name;
@@ -88,18 +84,19 @@ class Api_login_model extends CI_Model
 							$returnArr["phone"] = $user->phone;
 							$returnArr["city"] = $user->city;
 							$returnArr["image"] = $user->user_image;
+							$returnArr['group'] = $groups["name"];
 							$response["status"] = 'true';
 			                $response['message'] = 'User Found';
 			                $response['data'] = $returnArr;
 							//$returnArr['errCode'] = '-1';
 							//$returnArr['success'] = $details;
 							return $response;	
-					}else{
+					/* }else{
 						$returnArr['status'] = "false";
 						$returnArr['message'] = 'Admin is not allowed';
 						$returnArr['data'] = [];
 						return $returnArr;
-					}
+					} */
 					
 				}
 			/* }else{

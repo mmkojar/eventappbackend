@@ -138,12 +138,45 @@ public function index()
 				$check_device = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
 				
 				if(!$check_user && !$check_device){
+					/* $oldotp = $this->otp_verification_model->get_old_otp($login["data"]["user_id"],$otp_device["device_imei"]);
+					if(!empty($oldotp)){
+						$otp_device["email"] = $login["data"]["email"];
+						$otp_device["phone"] = $login["data"]["phone"];
+						$otp_device["otp"] = $oldotp["otp_code"];
+						$otp_device["user_id"] = $login["data"]["user_id"];
+						$login["data"]["otp"] = $oldotp["otp_code"];
+						$otp_device["status"] = 1;
+					}else{
+						$otp_device["phone"] = $login["data"]["phone"];
+						$otp_device["email"] = $login["data"]["email"];
+						$otp_device["otp"] = $login["data"]["otp"];
+						$otp_device["user_id"] = $login["data"]["user_id"];
+						$otp_device["status"] = 1;
+						$register = $this->api_login_model->register_otp_device($otp_device);
+						// $register_device = $this->api_login_model->register_device($otp_device);
+					} */
 				    $this->api_login_model->register_device($otp_device);
 				}
 				else {
 					$checktoken = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
 					
 					if(!$checktoken || ($checktoken['user_id'] == $otp_device["user_id"])) {
+						/* if(!empty($oldotp)){
+							$otp_device["email"] = $login["data"]["email"];
+							$otp_device["phone"] = $login["data"]["phone"];
+							$otp_device["otp"] = $oldotp["otp_code"];
+							$otp_device["user_id"] = $login["data"]["user_id"];
+							$login["data"]["otp"] = $oldotp["otp_code"];
+							$otp_device["status"] = 1;
+						}else{
+							$otp_device["phone"] = $login["data"]["phone"];
+							$otp_device["email"] = $login["data"]["email"];
+							$otp_device["otp"] = $login["data"]["otp"];
+							$otp_device["user_id"] = $login["data"]["user_id"];
+							$otp_device["status"] = 1;
+							$register = $this->api_login_model->register_otp_device($otp_device);
+							// $register_device = $this->api_login_model->register_device($otp_device);
+						} */
 						$this->api_login_model->update_device($otp_device);
 					}
 					else {

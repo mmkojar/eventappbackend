@@ -1,0 +1,156 @@
+<--------------------Start_Page  2024-03-09 10:25:24-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 10:44:07-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 12:16:18-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+Please Enter the devicetype
+<--------------------Start_Page  2024-03-09 12:16:44-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+Please Enter the devicetype
+<--------------------Start_Page  2024-03-09 12:16:52-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+Please Enter the devicetype
+<--------------------Start_Page  2024-03-09 12:17:29-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+Please Enter the devicetype
+<--------------------Start_Page  2024-03-09 12:17:43-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+Please Enter the identity
+<--------------------Start_Page  2024-03-09 12:18:04-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 12:35:16-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 12:42:05-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode false
+
+This device is already registered with another user
+<--------------------Start_Page  2024-03-09 12:43:11-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 15:40:46-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 15:43:15-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 15:48:00-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 16:12:15-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found
+<--------------------Start_Page  2024-03-09 17:59:59-------------------->
+
+getting header.api-token
+
+getting input and converting it to Array from Json.
+
+checking the login using Ion auth.
+
+  ErrCode true
+
+User Found

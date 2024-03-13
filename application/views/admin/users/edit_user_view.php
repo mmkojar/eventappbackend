@@ -22,6 +22,17 @@
 										$attributes = array(
 											'class' => 'control-label'
 										);
+											echo form_label('First name','emp_code',$attributes);											
+											echo form_input('emp_code',set_value('emp_code',$user->emp_code),'class="form-control"  required ="true"');
+										?>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<?php 
+										$attributes = array(
+											'class' => 'control-label'
+										);
 											echo form_label('First name','first_name',$attributes);											
 											echo form_input('first_name',set_value('first_name',$user->first_name),'class="form-control"  required ="true"');
 										?>

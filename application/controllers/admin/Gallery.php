@@ -68,7 +68,7 @@ class Gallery extends Admin_Controller
 		$this->load->library('form_validation');
 	  
 		$this->form_validation->set_rules('title','Title','trim|required');
-		$this->form_validation->set_rules('image','Image','trim|required');
+		// $this->form_validation->set_rules('image','Image','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
@@ -139,7 +139,7 @@ class Gallery extends Admin_Controller
 		$this->load->library('form_validation');
 	  
 		$this->form_validation->set_rules('title','Title','trim|required');
-		$this->form_validation->set_rules('image','Image','trim|required');
+		// $this->form_validation->set_rules('image','Image','trim|required');
 	 
 		if($this->form_validation->run()===FALSE)
 		{
