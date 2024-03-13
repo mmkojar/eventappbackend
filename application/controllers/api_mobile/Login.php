@@ -107,8 +107,8 @@ public function index()
 			die();			
 		}
 
-		if(isset($input['emp_code']) && !empty($input['emp_code'])){
-			$emp_code = cleanQueryParameter($input['emp_code']);
+		if(isset($input['identity']) && !empty($input['identity'])){
+			$identity = cleanQueryParameter($input['identity']);
 		}else{
 			
 		    $response['status'] = "false";
@@ -126,7 +126,7 @@ public function index()
 		fwrite($fh,"\r\n".$message."\r\n");
 		fclose($fh);
 		
-		$login = $this->api_login_model->login_mobile($emp_code);
+		$login = $this->api_login_model->login_mobile($identity);
 		if(!empty($login)){
 			if($login["status"] == "true"){
 			    // $response['status'] = true;

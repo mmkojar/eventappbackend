@@ -23,7 +23,7 @@ class Api_login_model extends CI_Model
 		
 		
 		//initialize data
-		$this->identity_column = $this->config->item('identity', 'ion_auth');
+		$this->identity_column = $this->config->item('identity_app', 'ion_auth');
 	}
 
     public function login_mobile($identity, $remember=FALSE)
@@ -38,9 +38,9 @@ class Api_login_model extends CI_Model
 			return $returnArr;
 		}
 
-		$query = $this->db->select($this->identity_column . ',emp_code, first_name, last_name ,email, id, phone, city, user_image, active, last_login')
-				  ->where('emp_code', $emp_code)
-				//   ->or_where('phone', $identity)
+		$query = $this->db->select($this->identity_column . ', first_name, last_name ,email, id, phone, city, user_image, active, last_login')
+				  ->where($this->identity_column, $identity)
+				  ->or_where('phone', $identity)
 				  ->limit(1)
 				  ->order_by('id', 'desc')
 				  ->get('users');
