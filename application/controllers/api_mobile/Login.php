@@ -107,12 +107,12 @@ public function index()
 			die();			
 		}
 
-		if(isset($input['identity']) && !empty($input['identity'])){
-			$identity = cleanQueryParameter($input['identity']);
+		if(isset($input['emp_code']) && !empty($input['emp_code'])){
+			$emp_code = cleanQueryParameter($input['emp_code']);
 		}else{
 			
 		    $response['status'] = "false";
-			$response['message'] = 'Please Enter the identity';
+			$response['message'] = 'Please Enter the Employee ID';
 			print_r(json_encode($response));
 			$fh = fopen($dir_file, 'a');
 			fwrite($fh,"\r\n".$response['message']."\r\n");
@@ -126,7 +126,7 @@ public function index()
 		fwrite($fh,"\r\n".$message."\r\n");
 		fclose($fh);
 		
-		$login = $this->api_login_model->login_mobile($identity);
+		$login = $this->api_login_model->login_mobile($emp_code);
 		if(!empty($login)){
 			if($login["status"] == "true"){
 			    // $response['status'] = true;
