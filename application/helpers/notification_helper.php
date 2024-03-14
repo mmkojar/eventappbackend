@@ -152,7 +152,7 @@ function sendMessage($message, $title, array $id, $type , $sender_id, $receiver_
 	//return $result; 
 }
 
-function sendPushNotificationToFCMSever($token,$sender_id, $receiver_id, $message, $title,$sender_name) {
+function sendPushNotificationToFCMSever($token,$sender_id, $receiver_id,$type, $message, $title,$sender_name) {
     
     $path_to_firebase_cm = 'https://fcm.googleapis.com/fcm/send';
         
@@ -163,7 +163,7 @@ function sendPushNotificationToFCMSever($token,$sender_id, $receiver_id, $messag
         'registration_ids' => $token,
         // 'to' => $id[0],
         'priority' => 10,
-        'notification' => array('title' => $title, 'body' =>  $message ,'sound'=>'Default','image'=>'Notification Image','sender_id' => $sender_id, 'receiver_id' => $receiver_id,'sender_name' => $sender_name,"content_available" => true, "mutable_content" => true),
+        'notification' => array('title' => $title, 'body' =>  $message ,'type'=>$type, 'sound'=>'Default','image'=>'Notification Image','sender_id' => $sender_id, 'receiver_id' => $receiver_id,'sender_name' => $sender_name,"content_available" => true, "mutable_content" => true),
     );
     //print_r($fields);	
     $headers = array(

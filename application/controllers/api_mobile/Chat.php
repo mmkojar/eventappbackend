@@ -265,7 +265,7 @@ class Chat extends MY_Controller
 				if(($device_noti["devicetype"]) == 'android'){
 					sendMessage($message,$title, $device_notify,$type,$user_id, $receiver_id, $sender_name);				
 				}else{
-					sendPushNotificationToFCMSever($device_notify,$user_id, $receiver_id,$message,$title,$sender_name);	
+					sendPushNotificationToFCMSever($device_notify,$user_id, $receiver_id,$type,$message,$title,$sender_name);	
 				}
 			}
 			$response['status'] = "true";
