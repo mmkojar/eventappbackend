@@ -40,12 +40,12 @@
                                     <div class="form-group">
 										<?php echo form_label('Email address');?>
 										<?php echo form_error('identity');?>
-										<?php echo form_input('identity','admin@eventapp.com','class="form-control" required = "true"');?>
+										<?php echo form_input('identity','','class="form-control" required = "true"');?>
                                     </div>
                                     <div class="form-group">
 										<?php echo form_label('Password');?>
 										<?php echo form_error('password');?>
-										<?php echo form_password('password','123456','class="form-control" required = "true"');?>
+										<?php echo form_password('password','','class="form-control" required = "true"');?>
                                     </div> 
                                 </div>
                                 <div class="footer text-center">

@@ -22,7 +22,7 @@
 										$attributes = array(
 											'class' => 'control-label'
 										);
-											echo form_label('First name','emp_code',$attributes);											
+											echo form_label('Employee ID','emp_code',$attributes);											
 											echo form_input('emp_code',set_value('emp_code',$user->emp_code),'class="form-control"  required ="true"');
 										?>
 									</div>
