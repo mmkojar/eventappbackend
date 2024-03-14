@@ -23,8 +23,9 @@
 											'class' => 'control-label'
 										);
 											echo form_label('Employee ID','emp_code',$attributes);											
-											echo form_input('emp_code',set_value('emp_code',$user->emp_code),'class="form-control"  required ="true"');
+											echo form_input('emp_code',set_value('emp_code',$user->emp_code),'class="form-control" maxlength="6" required ="true"');
 										?>
+										<input type="hidden" name="hidden_emp_code" value="<?php echo $user->emp_code ?>"> 
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -42,7 +43,7 @@
 									<div class="form-group">
 										<?php
 											echo form_label('Last name','last_name',$attributes);											
-											echo form_input('last_name',set_value('last_name',$user->last_name),'class="form-control"  required ="true"');
+											echo form_input('last_name',set_value('last_name',$user->last_name),'class="form-control"');
 										?>
 									</div>
 								</div>
@@ -50,7 +51,7 @@
 									<div class="form-group">
 										<?php
 											echo form_label('Company','company',$attributes);											
-											echo form_input('company',set_value('company',$user->company),'class="form-control"  required ="true"');
+											echo form_input('company',set_value('company',$user->company),'class="form-control"');
 										?>
 									</div>
 								</div>
@@ -58,7 +59,7 @@
 									<div class="form-group">
 										<?php
 											echo form_label('Phone','phone',$attributes);											
-											echo form_input('phone',set_value('phone',$user->phone),'class="form-control"  required ="true"');
+											echo form_input('phone',set_value('phone',$user->phone),'class="form-control"');
 										?>
 									</div>
 								</div>

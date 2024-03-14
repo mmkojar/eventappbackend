@@ -83,11 +83,11 @@ class Users extends Admin_Controller
 	{
 	  $this->data['page_title'] = 'Create user';
 	  $this->load->library('form_validation');
-	  $this->form_validation->set_rules('emp_code','Employee ID','trim|required');
+	  $this->form_validation->set_rules('emp_code','Employee ID','trim|required|is_unique[users.emp_code]');
 	  $this->form_validation->set_rules('first_name','First name','trim|required');
-	  $this->form_validation->set_rules('last_name','Last name','trim|required');
-	  $this->form_validation->set_rules('company','Company','trim');
-	  $this->form_validation->set_rules('phone','Phone','trim|required|regex_match[/^[0-9]{10}$/]|is_unique[users.phone]');
+	  // $this->form_validation->set_rules('last_name','Last name','trim|required');
+	  // $this->form_validation->set_rules('company','Company','trim');
+	  // $this->form_validation->set_rules('phone','Phone','trim|required|regex_match[/^[0-9]{10}$/]|is_unique[users.phone]');
 	  $this->form_validation->set_rules('username','Username','trim|required|is_unique[users.username]');
 	  // $this->form_validation->set_rules('email','Email','trim|required|valid_email|is_unique[users.email]');
 	  $this->form_validation->set_rules('password','Password','required');
@@ -152,11 +152,11 @@ public function edit($user_id = NULL)
   $this->data['page_title'] = 'Edit user';
   $this->load->library('form_validation');
   
-  $this->form_validation->set_rules('emp_code','Employee ID','trim|required');
+  $this->form_validation->set_rules('emp_code','Employee ID','trim|required|callback_unique_empid');
   $this->form_validation->set_rules('first_name','First name','trim');
-  $this->form_validation->set_rules('last_name','Last name','trim');
-  $this->form_validation->set_rules('company','Company','trim');
-  $this->form_validation->set_rules('phone','Phone','trim');
+  // $this->form_validation->set_rules('last_name','Last name','trim');
+  // $this->form_validation->set_rules('company','Company','trim');
+  // $this->form_validation->set_rules('phone','Phone','trim');
   $this->form_validation->set_rules('username','Username','trim|required');
   // $this->form_validation->set_rules('email','Email','trim|required|valid_email');
   $this->form_validation->set_rules('password','Password','min_length[6]');
@@ -252,7 +252,17 @@ public function edit($user_id = NULL)
     }
   }
 }
- 
+
+public function unique_empid() {
+  $result = $this->db->query("SELECT * FROM users where emp_code='".$_POST["emp_code"]."' && emp_code!='".$_POST['hidden_emp_code']."'")->row();
+  if($result) {
+    $this->form_validation->set_message('unique_empid', 'Employee ID should be unique');
+    return false;
+  } else {
+    return true;
+  }
+}
+
 public function delete($user_id = NULL)
 {
   if(is_null($user_id))
