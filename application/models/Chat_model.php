@@ -49,7 +49,7 @@ class Chat_model extends CI_Model
 	}
 	
 	public function get_chat_history($user_id){
-		$query = $this->db->query("select T1.user2_id, T1.chat_detail_id, CONCAT(users.first_name,' ',users.last_name) AS 'user_name',users.user_image,users.email,users.phone,users.company,cdate as updated_on from
+		$query = $this->db->query("select T1.user2_id, T1.chat_detail_id, if(users.last_name is null,CONCAT(users.first_name),CONCAT(users.first_name,' ',users.last_name)) AS 'user_name',users.user_image,users.email,users.phone,users.company,cdate as updated_on from
 				(select chat_detail.receiver_id user2_id, chat_detail.chat_detail_id, max(created_on) cdate
 				from chat_detail 
 				where chat_detail.user_id = ".$user_id."

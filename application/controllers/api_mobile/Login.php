@@ -137,31 +137,13 @@ public function index()
 				$check_user = $this->api_login_model->get_device_token('user_id',$otp_device["user_id"]);
 				$check_device = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
 				
-				if(!$check_user && !$check_device){
-					/* $oldotp = $this->otp_verification_model->get_old_otp($login["data"]["user_id"],$otp_device["device_imei"]);
-					if(!empty($oldotp)){
-						$otp_device["email"] = $login["data"]["email"];
-						$otp_device["phone"] = $login["data"]["phone"];
-						$otp_device["otp"] = $oldotp["otp_code"];
-						$otp_device["user_id"] = $login["data"]["user_id"];
-						$login["data"]["otp"] = $oldotp["otp_code"];
-						$otp_device["status"] = 1;
-					}else{
-						$otp_device["phone"] = $login["data"]["phone"];
-						$otp_device["email"] = $login["data"]["email"];
-						$otp_device["otp"] = $login["data"]["otp"];
-						$otp_device["user_id"] = $login["data"]["user_id"];
-						$otp_device["status"] = 1;
-						$register = $this->api_login_model->register_otp_device($otp_device);
-						// $register_device = $this->api_login_model->register_device($otp_device);
-					} */
-				    $this->api_login_model->register_device($otp_device);
-				}
-				else {
-					$checktoken = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
-					
-					if(!$checktoken || ($checktoken['user_id'] == $otp_device["user_id"])) {
-						/* if(!empty($oldotp)){
+				if($check_user['device_notification_id']) {
+					if($check_user['device_notification_id'] !== $otp_device["device_notification_id"]){
+						$login['status'] = "false";
+						$login['message'] = 'This device is already registered with another user';
+						$login['data'] = [];
+						/* $oldotp = $this->otp_verification_model->get_old_otp($login["data"]["user_id"],$otp_device["device_imei"]);
+						if(!empty($oldotp)){
 							$otp_device["email"] = $login["data"]["email"];
 							$otp_device["phone"] = $login["data"]["phone"];
 							$otp_device["otp"] = $oldotp["otp_code"];
@@ -177,41 +159,53 @@ public function index()
 							$register = $this->api_login_model->register_otp_device($otp_device);
 							// $register_device = $this->api_login_model->register_device($otp_device);
 						} */
-						$this->api_login_model->update_device($otp_device);
+						
+					} else {
+						$this->api_login_model->register_device($otp_device);
 					}
-					else {
-						$login['status'] = "false";
-						$login['message'] = 'This device is already registered with another user';
-						$login['data'] = [];
-					}
-
-                    /* $getdevicetoken = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
-                    
-                    $upd_device['device_notification_id'] = $otp_device['device_notification_id'];
-                    $upd_device['user_id'] = $otp_device['user_id'];
-                    $upd_device['devicetype'] = $otp_device['devicetype'];
-                    if($getdevicetoken) {
-                      if($getdevicetoken['user_id'] !== $otp_device["user_id"]) {
-                          $query = $this->db->query('DELETE FROM devices where user_id='.$getdevicetoken['user_id']);
-                          if($query) {
-                             $checkUserID = $this->api_login_model->get_device_token('user_id',$otp_device["user_id"]);
-                             if($checkUserID){
-                                $this->api_login_model->update_device($upd_device);
-                             }
-                             else {
-                               $this->api_login_model->register_device($otp_device);
-                             }
-                          }
-                      }
-                      else {
-                         $this->api_login_model->update_device($upd_device);
-                      }
-                    }
-                    else {
-                      $this->api_login_model->update_device($upd_device);
-                    } */
-				   
+				} else {
+					$this->api_login_model->register_device($otp_device);
 				}
+				
+				// else {
+				// 	$checktoken = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
+					
+				// 	if(!$checktoken || ($checktoken['user_id'] == $otp_device["user_id"])) {
+				// 		$this->api_login_model->update_device($otp_device);
+				// 	}
+				// 	else {
+				// 		$login['status'] = "false";
+				// 		$login['message'] = 'This device is already registered with another user';
+				// 		$login['data'] = [];
+				// 	}
+
+                //     /* $getdevicetoken = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
+                    
+                //     $upd_device['device_notification_id'] = $otp_device['device_notification_id'];
+                //     $upd_device['user_id'] = $otp_device['user_id'];
+                //     $upd_device['devicetype'] = $otp_device['devicetype'];
+                //     if($getdevicetoken) {
+                //       if($getdevicetoken['user_id'] !== $otp_device["user_id"]) {
+                //           $query = $this->db->query('DELETE FROM devices where user_id='.$getdevicetoken['user_id']);
+                //           if($query) {
+                //              $checkUserID = $this->api_login_model->get_device_token('user_id',$otp_device["user_id"]);
+                //              if($checkUserID){
+                //                 $this->api_login_model->update_device($upd_device);
+                //              }
+                //              else {
+                //                $this->api_login_model->register_device($otp_device);
+                //              }
+                //           }
+                //       }
+                //       else {
+                //          $this->api_login_model->update_device($upd_device);
+                //       }
+                //     }
+                //     else {
+                //       $this->api_login_model->update_device($upd_device);
+                //     } */
+				   
+				// }
 				
 				print(json_encode($login));
 				$fh = fopen($dir_file, 'a');				
