@@ -137,7 +137,7 @@ public function index()
 				$check_user = $this->api_login_model->get_device_token('user_id',$otp_device["user_id"]);
 				$check_device = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
 				
-				if($check_user['device_notification_id']) {
+				if(isset($check_user['device_notification_id']) && $check_user['device_notification_id']!=='') {
 					if($check_user['device_notification_id'] !== $otp_device["device_notification_id"]){
 						$login['status'] = "false";
 						$login['message'] = 'This device is already registered with another user';
