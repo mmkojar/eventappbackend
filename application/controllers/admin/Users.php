@@ -93,7 +93,7 @@ class Users extends Admin_Controller
 	  $this->form_validation->set_rules('password','Password','required');
 	  $this->form_validation->set_rules('password_confirm','Password confirmation','required|matches[password]');
 	  $this->form_validation->set_rules('groups[]','Groups','required|integer');
-	  $this->form_validation->set_rules('city','City','trim|required');
+	  // $this->form_validation->set_rules('city','City','trim|required');
 	 
 	  if($this->form_validation->run()===FALSE)
 	  {
@@ -163,7 +163,7 @@ public function edit($user_id = NULL)
   $this->form_validation->set_rules('password_confirm','Password confirmation','matches[password]');
   $this->form_validation->set_rules('groups[]','Groups','required|integer');
   $this->form_validation->set_rules('user_id','User ID','trim|integer|required');
-  $this->form_validation->set_rules('city','City','trim|required');
+  // $this->form_validation->set_rules('city','City','trim|required');
   $this->form_validation->set_rules('status','Status','required');
  
   if($this->form_validation->run() === FALSE)
