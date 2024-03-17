@@ -75,7 +75,7 @@
 									<div class="form-group">
 										<?php
 											echo form_label('Email','email',$attributes);											
-											echo form_input('email',set_value('email',$user->email),'class="form-control" required ="true"');
+											echo form_input('email',set_value('email',$user->email),'class="form-control"');
 										?>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 									<div class="form-group">
 										<?php
 											echo form_label('City','city',$attributes);											
-											echo form_input('city',set_value('city',$user->city),'class="form-control"  required ="true"');
+											echo form_input('city',set_value('city',$user->city),'class="form-control"');
 										?>
 									</div>
 								</div>
