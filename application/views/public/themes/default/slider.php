@@ -43,6 +43,9 @@
 					<li class = "<?php echo ($current_tab == 'settings' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/settings'); ?>"><i class="fa fa-cog" aria-hidden="true"></i><p>App Theme Settings</p></a></li>
 					<li class = "<?php echo ($current_tab == 'dashboard' ? "active" :  "") ?>"><a href="<?php echo site_url('admin'); ?>"><i class="fa fa-tachometer" aria-hidden="true"></i><p>Dashboard</p></a></li>
 					<li class = "<?php echo ($current_tab == 'users' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/users'); ?>"><i class="fa fa-users" aria-hidden="true"></i><p>Users</p></a></li>
+					<?php if($this->ion_auth->is_spadmin()): ?>
+						<li class = "<?php echo ($current_tab == 'devices' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/users/devices'); ?>"><i class="fa fa-users" aria-hidden="true"></i><p>Devices</p></a></li>
+					<?php endif ?>
 					<li class = "<?php echo ($current_tab == 'qr_code' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/QR'); ?>"><i class="fa fa-qrcode" aria-hidden="true"></i><p>QR Codes</p></a></li>
 					<li class = "<?php echo ($current_tab == 'message' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/message_notification'); ?>"><i class="fa fa-bell" aria-hidden="true"></i><p>Message Notification</p></a></li>
 					<li class = "<?php echo ($current_tab == 'Polling' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/polling'); ?>"><i class="fa fa-tasks" aria-hidden="true"></i><p>Polling</p></a></li>

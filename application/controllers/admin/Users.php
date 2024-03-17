@@ -318,4 +318,33 @@ public function deactivate($user_id = NULL)
   redirect('admin/users','refresh');
 }
 
+public function devices() {
+  
+    $this->data['current_tab'] = 'devices';	
+    $this->data['dttable_tab'] = 'jqdatatable';
+
+    $this->db->select("devices.*,users.id,if(users.last_name is null,CONCAT(users.first_name),CONCAT(users.first_name,' ',users.last_name)) AS 'user_name',users.emp_code");
+    $this->db->from("devices");
+    $this->db->join("users", "devices.user_id = users.id" ,"left");
+    $query=$this->db->get();
+
+    $this->data['devices'] = $query->result();
+
+    $this->render('admin/devices_view');
+
+}
+
+public function delete_device($id = NULL)
+{
+  if(is_null($id))
+  {
+    $this->session->set_flashdata('message','There\'s no user to delete');
+  }
+  else
+  {
+		$this->db->delete("devices", array('device_id' => $id));
+		$this->session->set_flashdata('success', 'Device Deleted');
+  }
+  redirect('admin/users/devices','refresh');
+}
 }

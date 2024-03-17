@@ -473,7 +473,7 @@ class Chat extends MY_Controller
 		}
 		
 		$get_chat_history = $this->chat_model->get_chat_history($user_id);		
-		$this->db->select("users.id as user2_id,users.id as chat_detail_id,CONCAT(users.first_name,' ',users.last_name) AS 'user_name',users.user_image,users.email,users.phone,users.company");
+		$this->db->select("users.id as user2_id,users.id as chat_detail_id,if(users.last_name is null,CONCAT(users.first_name),CONCAT(users.first_name,' ',users.last_name)) AS 'user_name',users.user_image,users.email,users.phone,users.company");
 		$this->db->from("users");
 		$this->db->join("users_groups", "users_groups.user_id = users.id" ,"left");
 		$this->db->join("groups", "groups.id = users_groups.group_id" ,"left");
