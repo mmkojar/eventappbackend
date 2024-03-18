@@ -165,15 +165,16 @@ class Ion_auth_model extends CI_Model
 	 
 	public $column = array(
 		'0' => 'users.id',
-		'1' => 'username',
-		'2' => 'first_name',
-		'3' => 'email',
-		'4' => 'company',
-		'5' => 'phone',
-		'6' => 'groups.name',
-		'7' => 'active',
-		'8' => 'users.created_on',
-		'9' => 'last_login'
+		'1' => 'emp_code',
+		'2' => 'username',
+		'3' => 'first_name',
+		'4' => 'email',
+		'5' => 'company',
+		'6' => 'phone',
+		'7' => 'groups.name',
+		'8' => 'active',
+		'9' => 'users.created_on',
+		'10' => 'last_login',
 	);
 
 	public function __construct()
