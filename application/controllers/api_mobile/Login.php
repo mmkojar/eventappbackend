@@ -161,7 +161,7 @@ public function index()
 						} */
 						
 					} else {
-						$this->api_login_model->register_device($otp_device);
+						$this->api_login_model->update_device($otp_device);
 					}
 				} else {
 					$this->api_login_model->register_device($otp_device);

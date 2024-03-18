@@ -66,6 +66,7 @@ function sendFCM($message, $title, array $id, $type) {
 	
 	$data= $messageData= array(
 		'notification' => $messageData,
+		'data' => $messageData,
 		'priority' => $priority,
 		'registration_ids' => $id
 	);
@@ -163,7 +164,8 @@ function sendPushNotificationToFCMSever($token,$sender_id, $receiver_id,$type, $
         'registration_ids' => $token,
         // 'to' => $id[0],
         'priority' => 10,
-        'notification' => array('title' => $title, 'body' =>  $message ,'type'=>$type, 'sound'=>'Default','image'=>'Notification Image','sender_id' => $sender_id, 'receiver_id' => $receiver_id,'sender_name' => $sender_name,"content_available" => true, "mutable_content" => true),
+		'notification' => array('title' => $title, 'body' =>  $message ,'type'=>$type, 'sound'=>'Default','image'=>'Notification Image','sender_id' => $sender_id, 'receiver_id' => $receiver_id,'sender_name' => $sender_name,"content_available" => true, "mutable_content" => true),
+        'data' => array('title' => $title, 'body' =>  $message ,'type'=>$type, 'sound'=>'Default','image'=>'Notification Image','sender_id' => $sender_id, 'receiver_id' => $receiver_id,'sender_name' => $sender_name,"content_available" => true, "mutable_content" => true),
     );
     //print_r($fields);	
     $headers = array(
