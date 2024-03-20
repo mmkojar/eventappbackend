@@ -25,7 +25,7 @@ class Event_selection extends Public_Controller
 		];
 		$this->data['uid'] = $id;
 		$this->data['qr_id'] = $qr_id;
-		$this->load->view('Event_selection_view',$this->data);
+		$this->load->view('event_selection_view',$this->data);
 	}
 	
 	

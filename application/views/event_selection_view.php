@@ -114,5 +114,9 @@
     </div>
 
 </body>
-
+<script>
+    setTimeout(() => {
+        $(".alert")hide();
+    }, 3000);
+</script>
 </html>
