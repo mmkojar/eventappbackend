@@ -49,6 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+$route['select_event'] = 'Event_selection/index/';
+$route['select_event/(:any)/(:any)'] = 'Event_selection/index/$1/$2';
 $route['api_mobile/about'] = 'api_mobile/About_event';
 $route['api_mobile/settings'] = 'api_mobile/Settings/index';
 $route['admin/artist'] = 'admin/sponsor';
