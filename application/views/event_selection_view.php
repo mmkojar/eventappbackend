@@ -87,10 +87,10 @@
         <div class="row" style="margin-top:20vh">
             <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
                 <?php if(isset($_SESSION['event_sc'])): ?>
-                    <div class="alert alert-success"><?php echo $_SESSION['event_sc']; ?></div>
+                    <div id="bs-alert" class="alert alert-success"><?php echo $_SESSION['event_sc']; ?></div>
                 <?php endif ?>
                 <?php if(isset($_SESSION['event_er'])): ?>
-                    <div class="alert alert-danger"><?php echo $_SESSION['event_er']; ?></div>
+                    <div id="bs-alert" class="alert alert-danger"><?php echo $_SESSION['event_er']; ?></div>
                 <?php endif ?>
                 
                 <form action="<?php echo base_url('event_selection/add') ?>" method="POST">
@@ -113,10 +113,10 @@
         </div>
     </div>
 
+    <script>
+        setTimeout(() => {
+            document.getElementById("bs-alert").style.display='none';
+        }, 3000);
+    </script>
 </body>
-<script>
-    setTimeout(() => {
-        $(".alert")hide();
-    }, 3000);
-</script>
 </html>
