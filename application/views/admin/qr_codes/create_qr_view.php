@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <?php $this->load->view('public/themes/default/slider');?>
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <div id="content">
 	<div class="container-fluid">
 		<div class="row">
@@ -17,17 +17,17 @@
 												'class' => 'control-label'
 											);
 
-											$options = ['' => "Select"];
+											$options = [];
 											foreach ($users as $data) {
 												$options[$data['id']] = $data['first_name'].' '.$data['last_name'];
 											}
-											echo form_label('Select User','usr_id',$attributes);
+											echo form_label('Select User','uid',$attributes);
 											echo form_error('user_id');
-											echo form_dropdown('user_id',$options,'','class="form-control" required ="true"');
+											echo form_dropdown('user_id[]',$options,'','class="form-control select21" id="uid" multiple required ="true"');
 										?>
 								</div>
-								<div class="form-group">
-									<?php
+								<!-- <div class="form-group">
+									<s?php
 										$options = array(
 												''=> 'Select the Status',
 												'1'=> 'Active',
@@ -38,7 +38,7 @@
 										
 										echo form_dropdown('status',$options,'','class="form-control" required ="true"');
 									?>
-								</div>
+								</div> -->
 								<!-- <div class="form-group">
 										<s?php
 											// echo form_label('Link','link',$attributes);
@@ -92,3 +92,8 @@
 		</div>
 	</div>
 </div>
+<script src="<?php echo base_url(); ?>assets/admin/js/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+	$('.select2').select2();
+</script>

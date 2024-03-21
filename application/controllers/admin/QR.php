@@ -9,7 +9,6 @@ class QR extends Admin_Controller
 	{
 		parent::__construct();
 		$this->load->model('QR_model');
-		$this->data['current_tab'] = 'qr_code';
 		if($this->ion_auth->in_group('members') || $this->ion_auth->in_group('security'))
 		{
 		  $this->session->set_flashdata('error','You are not allowed to visit the Message Notification page');
@@ -20,6 +19,7 @@ class QR extends Admin_Controller
 	public function index()
 	{
 		$this->data['dttable_tab'] = 'dt_table';
+		$this->data['current_tab'] = 'qr_code';
 		$this->data['tbl_name'] = 'QR/qr_list';
 		$this->load->helper('form');
 		$this->data['page_title'] = 'All QR Codes';
@@ -28,10 +28,55 @@ class QR extends Admin_Controller
 		$this->render('admin/qr_codes/list_qr_code_view');
 	}
 	
+	public function qr_entries() {
+		
+		$this->data['dttable_tab'] = 'dt_table';
+		$this->data['current_tab'] = 'qr_code_entries';
+		$this->data['tbl_name'] = 'QR/qr_entries_list';
+		$this->load->helper('form');
+		$this->data['page_title'] = 'QR Codes Entries';
+		// $this->data['qr_codes'] = $this->QR_model->qr_codes();
+		
+		$this->render('admin/qr_codes/qr_event_entries_view');
+	}
 	
+	public function qr_entries_list()
+	{
+		$list = $this->QR_model->get_datatables('2');
+		$i = 1;
+		//print_r($list);
+		$data = array();
+		$no = $_POST['start'];
+		foreach ($list as $qr) {
+			$no++;
+			$row = array();
+			$row[] = $i;
+			$row[] = $qr->first_name.' '.$qr->last_name;
+			$row[] = $qr->is_hotel_check_in=='1'?'Yes':'No';
+			$row[] = $qr->is_welcome_gift=='1'?'Yes':'No';
+			$row[] = $qr->is_return_gift=='1'?'Yes':'No';
+			$row[] = $qr->is_sada_pind=='1'?'Yes':'No';
+			$row[] = $qr->is_golden_temple=='1'?'Yes':'No';
+			$row[] = $qr->is_wagah_border=='1'?'Yes':'No';
+			$row[] = date('jS-M-Y',strtotime($qr->created_at));
+			$i++;
+			$data[] = $row;
+		}
+		
+			$output = array(
+				"draw" => $_POST['draw'],
+				"recordsTotal" => $this->QR_model->count_all('qr_scan_entries','2'),
+				"recordsFiltered" => $this->QR_model->count_filtered('2'),
+				"data" => $data,
+			);
+		
+		//output to json format
+		echo json_encode($output);
+	}
+
 	public function qr_list()
 	{
-		$list = $this->QR_model->get_datatables();
+		$list = $this->QR_model->get_datatables('1');
 		$i = 1;
 		//print_r($list);
 		$data = array();
@@ -53,8 +98,8 @@ class QR extends Admin_Controller
 		
 			$output = array(
 				"draw" => $_POST['draw'],
-				"recordsTotal" => $this->QR_model->count_all(),
-				"recordsFiltered" => $this->QR_model->count_filtered(),
+				"recordsTotal" => $this->QR_model->count_all('qr_code','1'),
+				"recordsFiltered" => $this->QR_model->count_filtered('1'),
 				"data" => $data,
 			);
 		
@@ -64,10 +109,12 @@ class QR extends Admin_Controller
 	
 	public function create()
 	{
+		$this->data['current_tab'] = 'qr_code';
 		$this->data['page_title'] = 'Add QR';
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('user_id','Name','trim|required|is_unique[qr_code.user_id]');
-		$this->form_validation->set_rules('status','Status','trim|required');
+		$this->form_validation->set_rules('user_id[]','Name','required');
+		// $this->form_validation->set_rules('user_id','Name','trim|required|is_unique[qr_code.user_id]');
+		// $this->form_validation->set_rules('status','Status','trim|required');
 
 		if($this->form_validation->run()===FALSE)
 		{
@@ -77,28 +124,33 @@ class QR extends Admin_Controller
 		}
 		else
 		{
+			unset($_POST['submit'],$_POST['status']);
 			$upload_dir = './assets/upload/QR/';
-			$user_id = $this->input->post('user_id');
-			$user = $this->QR_model->get_users($user_id); //Get User Name
-						
-   			$uniqid = substr($user['username'],0,5).''.substr(uniqid('', false),8);
-   			$status = 1;
-   			$filename = $upload_dir.''.$uniqid.'.png';
-   			$contents = $uniqid.','.$user_id.','.$user['username'];
+			// $user_id = $this->input->post('user_id');
 
-   			$this->load->helper('qr');
-   			generate_qr($contents, $filename);
+			for($i=0; $i<count($_POST['user_id']); $i++) {
+				
+				$user = $this->QR_model->get_users($_POST['user_id'][$i]);
+							
+				$uniqid = substr($user['username'],0,5).''.substr(uniqid('', false),8);
+				$status = 1;
+				$filename = $upload_dir.''.$uniqid.'.png';
+				$contents = $uniqid.','.$_POST['user_id'][$i].','.$user['username'];
+				
+				$this->load->helper('qr');
+				generate_qr($contents, $filename);
 
-			$data = array(
-				'uniq_id' => $uniqid,
-				'user_id' => $user_id,
-				'filename' => $filename,
-				// 'size' => $size,
-				'status' => $status,
-				'created_on' => date("Y-m-d H:i:s")
-			);
+				$data = array(
+					'uniq_id' => $uniqid,
+					'user_id' => $_POST['user_id'][$i],
+					'filename' => $filename,
+					// 'size' => $size,
+					'status' => $status,
+					'created_on' => date("Y-m-d H:i:s")
+				);
 
-			$this->QR_model->register($data);			
+				$this->QR_model->register($data);	
+			}		
 			$this->session->set_flashdata('success','QR Added Successfully');
 			redirect('admin/QR','refresh');
 		}

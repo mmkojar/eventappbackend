@@ -8,16 +8,9 @@ class QR_model extends CI_Model
 	 * @var array
 	 **/
 	 
-	 var $table = 'qr_code';	
+	var $table = 'qr_code';	
 	 
-	 var $column = array(
-			'0' => 'qr_code.id',
-			'1' => 'user_id',
-			'2' => 'filename',
-			// '3' => 'size',
-			'3' => 'status',
-			'4' => 'qr_code.created_on'
-		);
+	
 	 
 	public function __construct()
 	{
@@ -32,17 +25,47 @@ class QR_model extends CI_Model
 		$this->lang->load('ion_auth');
 	}
 	
-	 public function _get_datatables_query()
+	 public function _get_datatables_query($no)
 	{
-		$this->db->select("qr_code.*,users.first_name,users.last_name");
-		$this->db->from('qr_code');
-		$this->db->join("users", "users.id = qr_code.user_id" ,"left");
+		if($no == '1') {
+			$column = array(
+				'0' => 'qr_code.id',
+				'1' => 'user_id',
+				'2' => 'filename',
+				// '3' => 'size',
+				'3' => 'status',
+				'4' => 'qr_code.created_on'
+			);
+
+			$this->db->select("qr_code.*,users.first_name,users.last_name");
+			$this->db->from('qr_code');
+			$this->db->join("users", "users.id = qr_code.user_id" ,"left");
+
+		} else {
+			$column = array(
+				'0' => 'qr_scan_entries.id',
+				'1' => 'users.first_name',
+				'2' => 'users.last_name',
+				'3' => 'qr_code.is_hotel_check_in',
+				'4' => 'qr_code.is_welcome_gift',
+				'5' => 'qr_code.is_return_gift',
+				'6' => 'qr_code.is_sada_pind',
+				'7' => 'qr_code.is_golden_temple',
+				'8' => 'qr_code.is_wagah_border',
+				'9' => 'qr_code.created_on'
+			);
+
+			$this->db->select("qr_scan_entries.*,users.first_name,users.last_name");
+			$this->db->from('qr_scan_entries');
+			$this->db->join("users", "users.id = qr_scan_entries.user_id" ,"left");
+		}
+
 		$i = 0;
 		$where = '';
 		if($_POST['search']['value']){
 			$where .= '(';
 		}
-		foreach ($this->column as $item) 
+		foreach ($column as $item) 
 		{
 			if($_POST['search']['value']){
 				
@@ -57,6 +80,7 @@ class QR_model extends CI_Model
 			$where .= ')';
 			$this->db->where($where);
 		}
+		
 		if(isset($_POST['order']))
 		{
 			$this->db->order_by($column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
@@ -66,29 +90,27 @@ class QR_model extends CI_Model
 			$order = $this->order;
 			$this->db->order_by(key($order), $order[key($order)]);
 		}
-		
-		//print_r($this->db->queries);
 	}
 
-	function get_datatables()
+	function get_datatables($no)
 	{
-		$this->_get_datatables_query();
+		$this->_get_datatables_query($no);
 		if($_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	function count_filtered()
+	function count_filtered($no)
 	{
-		$this->_get_datatables_query();
+		$this->_get_datatables_query($no);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
 
-	public function count_all()
+	public function count_all($tb)
 	{
-		$this->db->from('qr_code');
+		$this->db->from($tb);
 		return $this->db->count_all_results();
 	}
 	

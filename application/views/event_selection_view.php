@@ -90,7 +90,7 @@
                     <div id="bs-alert" class="alert alert-success"><?php echo $_SESSION['event_sc']; ?></div>
                 <?php endif ?>
                 <?php if(isset($_SESSION['event_er'])): ?>
-                    <div id="bs-alert" class="alert alert-danger"><?php echo $_SESSION['event_er']; ?></div>
+                    <div id="bs-alert1" class="alert alert-danger"><?php echo $_SESSION['event_er']; ?></div>
                 <?php endif ?>
                 
                 <form action="<?php echo base_url('event_selection/add') ?>" method="POST">
@@ -107,6 +107,7 @@
                     <br>
                     <input type="hidden" name="user_id" value="<?php echo $uid ?>">
                     <input type="hidden" name="qr_id" value="<?php echo $qr_id ?>">
+                    <input type="hidden" name="scan_by" value="<?php echo $scan_by ?>">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                 </form>
             </div>
@@ -116,6 +117,7 @@
     <script>
         setTimeout(() => {
             document.getElementById("bs-alert").style.display='none';
+            document.getElementById("bs-alert1").style.display='none';
         }, 3000);
     </script>
 </body>

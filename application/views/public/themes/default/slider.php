@@ -47,6 +47,7 @@
 						<li class = "<?php echo ($current_tab == 'devices' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/users/devices'); ?>"><i class="fa fa-users" aria-hidden="true"></i><p>Devices</p></a></li>
 					<?php endif ?>
 					<li class = "<?php echo ($current_tab == 'qr_code' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/QR'); ?>"><i class="fa fa-qrcode" aria-hidden="true"></i><p>QR Codes</p></a></li>
+					<li class = "<?php echo ($current_tab == 'qr_code_entries' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/QR/qr_entries'); ?>"><i class="fa fa-qrcode" aria-hidden="true"></i><p>QR Code Entries</p></a></li>
 					<li class = "<?php echo ($current_tab == 'message' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/message_notification'); ?>"><i class="fa fa-bell" aria-hidden="true"></i><p>Message Notification</p></a></li>
 					<li class = "<?php echo ($current_tab == 'Polling' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/polling'); ?>"><i class="fa fa-tasks" aria-hidden="true"></i><p>Polling</p></a></li>
 					<li class = "<?php echo ($current_tab == 'about_event' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/about_event'); ?>"><i class="fa fa-info" aria-hidden="true"></i><p>About Event</p></a></li>

@@ -9,9 +9,9 @@ class Event_selection extends Public_Controller
 		$this->load->library('session');
 	}
 
-	public function index($id=null,$qr_id=null)
+	public function index($id=null,$qr_id=null,$scan_by=null)
 	{
-		if($id==null||$qr_id==null){
+		if($id==null||$qr_id==null||$scan_by==null){
 			exit('Invalid URL');
 		}
 
@@ -25,6 +25,7 @@ class Event_selection extends Public_Controller
 		];
 		$this->data['uid'] = $id;
 		$this->data['qr_id'] = $qr_id;
+		$this->data['scan_by'] = $scan_by;
 		$this->load->view('event_selection_view',$this->data);
 	}
 	
@@ -33,10 +34,10 @@ class Event_selection extends Public_Controller
 		
 		if(count($_POST)!==8) {
 			$this->session->set_flashdata('event_er','Please select all checkbox');
-			redirect('select_event/'.$_POST['user_id'].'/'.$_POST['qr_id']);
+			redirect('select_event/'.$_POST['user_id'].'/'.$_POST['qr_id'].'/'.$_POST['scan_by']);
 		}
 		$data = array(
-			'userd_id' => $_POST['user_id'],
+			'user_id' => $_POST['user_id'],
 			'qr_id' => $_POST['qr_id'],
 			'is_hotel_check_in' => isset($_POST['is_hotel_check_in'])&&$_POST['is_hotel_check_in']=='on'?1:0,
 			'is_welcome_gift' => isset($_POST['is_welcome_gift'])&&$_POST['is_welcome_gift']=='on'?1:0,
@@ -44,6 +45,7 @@ class Event_selection extends Public_Controller
 			'is_sada_pind' => isset($_POST['is_sada_pind'])&&$_POST['is_sada_pind']=='on'?1:0,
 			'is_golden_temple' => isset($_POST['is_golden_temple'])&&$_POST['is_golden_temple']=='on'?1:0,
 			'is_wagah_border' => isset($_POST['is_wagah_border'])&&$_POST['is_wagah_border']=='on'?1:0,
+			'scan_by' => $_POST['scan_by'],
 		);
 
 		$this->db->insert('qr_scan_entries', $data);
