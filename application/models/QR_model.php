@@ -46,13 +46,13 @@ class QR_model extends CI_Model
 				'0' => 'qr_scan_entries.id',
 				'1' => 'users.first_name',
 				'2' => 'users.last_name',
-				'3' => 'qr_code.is_hotel_check_in',
-				'4' => 'qr_code.is_welcome_gift',
-				'5' => 'qr_code.is_return_gift',
-				'6' => 'qr_code.is_sada_pind',
-				'7' => 'qr_code.is_golden_temple',
-				'8' => 'qr_code.is_wagah_border',
-				'9' => 'qr_code.created_on'
+				'3' => 'qr_scan_entries.is_hotel_check_in',
+				'4' => 'qr_scan_entries.is_welcome_gift',
+				'5' => 'qr_scan_entries.is_return_gift',
+				'6' => 'qr_scan_entries.is_sada_pind',
+				'7' => 'qr_scan_entries.is_golden_temple',
+				'8' => 'qr_scan_entries.is_wagah_border',
+				'9' => 'qr_scan_entries.created_on'
 			);
 
 			$this->db->select("qr_scan_entries.*,users.first_name,users.last_name");
