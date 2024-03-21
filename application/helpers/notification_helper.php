@@ -163,6 +163,7 @@ function sendPushNotificationToFCMSever($token,$sender_id, $receiver_id,$type, $
         'registration_ids' => $token,
         // 'to' => $id[0],
         'priority' => 10,
+        'data' => array('title' => $title, 'body' =>  $message ,'type'=>$type, 'sound'=>'Default','image'=>'Notification Image','sender_id' => $sender_id, 'receiver_id' => $receiver_id,'sender_name' => $sender_name,"content_available" => true, "mutable_content" => true),
         'notification' => array('title' => $title, 'body' =>  $message ,'type'=>$type, 'sound'=>'Default','image'=>'Notification Image','sender_id' => $sender_id, 'receiver_id' => $receiver_id,'sender_name' => $sender_name,"content_available" => true, "mutable_content" => true),
     );
     //print_r($fields);	

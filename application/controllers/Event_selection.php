@@ -52,7 +52,7 @@ class Event_selection extends Public_Controller
 
 		$id = $this->db->insert_id();
 		$this->session->set_flashdata('event_sc','Data Submitted');
-		redirect('select_event/'.$_POST['user_id'].'/'.$_POST['qr_id']);
+		redirect('select_event/'.$_POST['user_id'].'/'.$_POST['qr_id'].'/'.$_POST['scan_by']);
 
 	}
 
