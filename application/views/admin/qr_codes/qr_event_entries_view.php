@@ -22,6 +22,7 @@
 									<th>Sada pind </th>
 									<th>Golden Temple </th>
 									<th>Wagah Border</th>
+									<th>Scan By</th>
 									<th>Create On</th>
 								</thead>
 							</table>

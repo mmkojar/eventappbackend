@@ -58,6 +58,7 @@ class QR extends Admin_Controller
 			$row[] = $qr->is_sada_pind=='1'?'Yes':'No';
 			$row[] = $qr->is_golden_temple=='1'?'Yes':'No';
 			$row[] = $qr->is_wagah_border=='1'?'Yes':'No';
+			$row[] = $qr->scan_by;
 			$row[] = date('jS-M-Y',strtotime($qr->created_at));
 			$i++;
 			$data[] = $row;
