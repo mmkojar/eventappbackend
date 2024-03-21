@@ -32,7 +32,7 @@ class Event_selection extends Public_Controller
 	
 	public function add () {
 		
-		if(count($_POST)!==8) {
+		if(count($_POST)!==9) {
 			$this->session->set_flashdata('event_er','Please select all checkbox');
 			redirect('select_event/'.$_POST['user_id'].'/'.$_POST['qr_id'].'/'.$_POST['scan_by']);
 		}
