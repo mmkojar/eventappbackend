@@ -51,21 +51,38 @@ class User extends MY_Controller
 	    
 	}
 	
-	public function checktoken($token) {
+	public function checktoken() {
 	    
 	    $this->headers();
 	    
-	    if(!$token) {
+		$inputJSON = file_get_contents('php://input');
+		$input = json_decode($inputJSON, TRUE); //convert JSON into array
+	    if(!$input['token']) {
 	        print_r(json_encode(['status'=>'false','message'=>'enter token']));
 	        die();
 	    }
-	    $token = $this->api_login_model->get_device_token('device_notification_id',$token);
-	    if($token) {
-	        print_r(json_encode(['status'=>'true','data'=>$token]));
-	    }
-	    else {
-	        print_r(json_encode(['status'=>'false','data'=>[]]));
-	    }
+		$check_user = $this->api_login_model->get_device_token('user_id',$input["user_id"]);
+	    $token = $this->api_login_model->get_device_token('device_notification_id',$input['token']);
+		if($check_user) {
+			if($token) {
+				print_r(json_encode(['status'=>'true','data'=>$input['token']]));
+			}
+			else {
+				// print_r(json_encode(['status'=>'false','data'=>[]]));
+				$data = array(
+					'device_notification_id'   => $input["token"],
+					// 'devicetype' => $device["devicetype"]
+				);
+		
+				$this->db->where('user_id',$device['user_id']);
+				$this->db->update('devices', $data);
+
+				print_r(json_encode(['status'=>'true']));
+			}
+		} else {
+			print_r(json_encode(['status'=>'false','data'=>[]]));
+		}
+	    
 	}
 	
 	public function edit($id=FALSE)
