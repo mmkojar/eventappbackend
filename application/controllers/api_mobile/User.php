@@ -68,16 +68,12 @@ class User extends MY_Controller
 				print_r(json_encode(['status'=>'true','data'=>$input['token']]));
 			}
 			else {
-				// print_r(json_encode(['status'=>'false','data'=>[]]));
-				$data = array(
-					'device_notification_id'   => $input["token"],
-					// 'devicetype' => $device["devicetype"]
-				);
+				$data = array('device_notification_id' => $input["token"]);
 		
-				$this->db->where('user_id',$device['user_id']);
+				$this->db->where('user_id',$input['user_id']);
 				$this->db->update('devices', $data);
 
-				print_r(json_encode(['status'=>'true']));
+				print_r(json_encode(['status'=>'true','data'=>$input['token']]));
 			}
 		} else {
 			print_r(json_encode(['status'=>'false','data'=>[]]));
