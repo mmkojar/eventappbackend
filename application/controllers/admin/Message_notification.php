@@ -166,6 +166,13 @@ class Message_notification extends Admin_Controller
 					sendFCM( $message_notify["message"], $message_notify["title"],$iosIds,$message_notify["type"]);
 					sendFCMAndroid( $message_notify["message"], $message_notify["title"],$androidIds,$message_notify["type"]);
 					
+					$notify['title'] = $message_notify['title'];
+					$notify['msg'] = $message_notify['message'];
+					$notify['type'] = $message_notify['type'];
+					$notify['status'] = '1';
+
+					$this->db->insert('notifications', $notify);
+
 					$this->session->set_flashdata('success', 'send notification to all the users.');
 				}else{
 					$this->session->set_flashdata('error', 'no user available to send notification.');
