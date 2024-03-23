@@ -86,12 +86,11 @@
     <div class="container">
         <div class="row" style="margin-top:20vh">
             <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                <?php if(isset($_SESSION['event_sc'])): ?>
-                    <div id="bs-alert" class="alert alert-success"><?php echo $_SESSION['event_sc']; ?></div>
-                <?php endif ?>
-                <?php if(isset($_SESSION['event_er'])): ?>
-                    <div id="bs-alert1" class="alert alert-danger"><?php echo $_SESSION['event_er']; ?></div>
-                <?php endif ?>
+                <?php if(isset($this->session->flashdata('event_sc'))) { ?>
+                    <div id="bs-alert" class="alert alert-success"><?php echo $this->session->flashdata('event_sc'); ?></div>
+                <?php } else if(isset($this->session->flashdata('event_er'))) { ?>
+                    <div id="bs-alert1" class="alert alert-danger"><?php echo $this->session->flashdata('event_er'); ?></div>
+                <?php } ?>
                 
                 <form action="<?php echo base_url('event_selection/add') ?>" method="POST">
                     <h1>Select Event</h1>

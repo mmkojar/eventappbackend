@@ -269,10 +269,11 @@ class Api_login_model extends CI_Model
 		return (isset($id)) ? $id : FALSE;
 	}
 	
-	public function check_for_user_register_device($user_id) {
+	public function check_register_device($user_id,$did) {
 	    $this->db->select("devices.*");
 		$this->db->from("devices");
-	    $this->db->or_where('user_id',$user_id);
+	    $this->db->where('user_id',$user_id);
+	    $this->db->where('device_notification_id',$did);
 	    $query=$this->db->get();
 	    return $query->row_array();
 	}

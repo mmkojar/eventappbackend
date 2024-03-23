@@ -136,12 +136,15 @@ public function index()
 				$otp_device["status"] = 1;
 				$check_user = $this->api_login_model->get_device_token('user_id',$otp_device["user_id"]);
 				$check_device = $this->api_login_model->get_device_token('device_notification_id',$otp_device["device_notification_id"]);
-				
-				if(isset($check_user['device_notification_id']) && $check_user['device_notification_id']!=='') {
-					if($check_user['device_notification_id'] !== $otp_device["device_notification_id"]){
+				$check_register_device = $this->api_login_model->check_register_device($otp_device["user_id"],$otp_device["device_notification_id"]);
+
+				if($check_user || $check_device) {
+					if(!$check_register_device){
 						$login['status'] = "false";
 						$login['message'] = 'This device is already registered with another user';
 						$login['data'] = [];
+						print(json_encode($login));
+						die();
 						/* $oldotp = $this->otp_verification_model->get_old_otp($login["data"]["user_id"],$otp_device["device_imei"]);
 						if(!empty($oldotp)){
 							$otp_device["email"] = $login["data"]["email"];
