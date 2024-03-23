@@ -15,11 +15,8 @@ class QR extends MY_Controller
 		$this->load->model('ion_auth_model');
 	}
 
-	public function scanned()
-	{	
-		$headers = getallheaders();
-		$inputJSON = file_get_contents('php://input');
-		$input = json_decode($inputJSON, TRUE);
+	public function headers() {
+		$headers = getallheaders();		
 		
 		if(array_key_exists('encryptedd',$headers)){
 		
@@ -35,6 +32,11 @@ class QR extends MY_Controller
 			print_r(json_encode($response));
 			die();
 		}
+	}
+	
+	public function scanned()
+	{	
+		$this->headers();
 
 		if(isset($input['user_id']) && !empty($input['user_id'])){
 			$user_id = cleanQueryParameter($input['user_id']);
@@ -108,6 +110,27 @@ class QR extends MY_Controller
 			die();
 
 		}
-	    
+	}
+
+	public function getUserQr($id) {
+
+		$this->headers();
+		
+		$this->db->select("qr_code.*");
+		$this->db->from("qr_code");
+		$this->db->where('user_id',$id);
+        $query=$this->db->get();
+        $rowcount =  $query->num_rows();
+        if($rowcount > 0) {
+            $response['status'] = "true";
+            $response['message'] = 'Data Found';
+            $response['data'] = $query->result_array();
+            print_r(json_encode($response));
+        }
+        else {
+            $response['status'] = "false";
+            $response['message'] = 'No Data Found';
+            print_r(json_encode($response));
+        }
 	}
 }

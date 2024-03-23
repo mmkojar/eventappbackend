@@ -84,11 +84,11 @@
 <body style="background-image:url('<?php echo base_url(); ?>assets/admin/img/full-screen-image-1.jpg')">
 
     <div class="container">
-        <div class="row" style="margin-top:20vh">
+        <div class="row" style="margin-top:14vh">
             <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                <?php if(isset($this->session->flashdata('event_sc'))) { ?>
+                <?php if($this->session->flashdata('event_sc')) { ?>
                     <div id="bs-alert" class="alert alert-success"><?php echo $this->session->flashdata('event_sc'); ?></div>
-                <?php } else if(isset($this->session->flashdata('event_er'))) { ?>
+                <?php } if($this->session->flashdata('event_er')) { ?>
                     <div id="bs-alert1" class="alert alert-danger"><?php echo $this->session->flashdata('event_er'); ?></div>
                 <?php } ?>
                 
