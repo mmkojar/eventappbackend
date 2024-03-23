@@ -71,6 +71,7 @@ class Api_login_model extends CI_Model
 					return $returnArr;
 				}else{
 					$groups  = $this->ion_auth_model->get_user_groups($user->id);
+					$getQr = $this->QR_model->qr_code('user_id', $user->id);
 					// if($groups["name"] != 'admin'){
 							$this->ion_auth_model->update_last_login($user->id);
 							$this->load->helper('random_string');
@@ -85,6 +86,7 @@ class Api_login_model extends CI_Model
 							$returnArr["city"] = $user->city;
 							$returnArr["image"] = $user->user_image;
 							$returnArr['group'] = $groups["name"];
+							$returnArr['qr_code'] = $getQr["filename"];
 							$response["status"] = 'true';
 			                $response['message'] = 'User Found';
 			                $response['data'] = $returnArr;
