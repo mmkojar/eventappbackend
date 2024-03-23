@@ -86,7 +86,7 @@ class Api_login_model extends CI_Model
 							$returnArr["city"] = $user->city;
 							$returnArr["image"] = $user->user_image;
 							$returnArr['group'] = $groups["name"];
-							$returnArr['qr_code'] = $getQr["filename"];
+							$returnArr['qr_code'] = $getQr?$getQr["filename"]:'';
 							$response["status"] = 'true';
 			                $response['message'] = 'User Found';
 			                $response['data'] = $returnArr;
