@@ -75,6 +75,10 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label for="about">Home Page Front Logo</label>
+											<?php if($this->ion_auth->is_spadmin()): ?>
+												<?php $status = $res['hp_main_logo']['status']=='1'?'0':'1' ?>
+												<a href="<?php echo base_url('admin/settings/updateStatus/hp_main_logo/'.$status) ?>"><span class="badge badge-<?= $res['hp_main_logo']['status']=='1'?'success':'danger' ?>" style="float:right;margin-right:10px"><?= $res['hp_main_logo']['status']=='1'?'Ac':'In' ?></span></a>
+												<?php endif ?>
 											<br>
 											<img class="display_image" src="<?php echo base_url()."".str_replace("./", "", isset($res['hp_main_logo']) ? $res['hp_main_logo']['name'] : ''); ?>" alt="..." />
 											<br>
