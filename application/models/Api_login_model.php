@@ -12,7 +12,7 @@ class Api_login_model extends CI_Model
 		$this->load->config('ion_auth', TRUE);
 		$this->load->helper('cookie');
 		$this->load->helper('date');
-		$this->load->model('ion_auth_model');
+		$this->load->model(['ion_auth_model','QR_model']);
 		$this->lang->load('ion_auth');
 		
 		/**
