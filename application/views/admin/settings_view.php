@@ -64,12 +64,22 @@
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
-											<label for="about">Home Page Logo</label>
+											<label for="about">Home Page Top Bar Logo</label>
 											<br>
 											<img class="display_image" src="<?php echo base_url()."".str_replace("./", "", isset($res['hp_logo']) ? $res['hp_logo']['name'] : ''); ?>" alt="..." />
 											<br>
 											<input type="file" name="hp_logo" class="validate_file form-control" value="<?php echo set_value('hp_logo',isset($res['hp_logo']) ? $res['hp_logo']['name'] : '')?>">
 											<input type="hidden" class="validate_himage" name="hp_logo" value="<?php echo set_value('hp_logo',isset($res['hp_logo']) ? $res['hp_logo']['name'] : '')?>">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label for="about">Home Page Front Logo</label>
+											<br>
+											<img class="display_image" src="<?php echo base_url()."".str_replace("./", "", isset($res['hp_front_logo']) ? $res['hp_main_logo']['name'] : ''); ?>" alt="..." />
+											<br>
+											<input type="file" name="hp_main_logo" class="validate_file form-control" value="<?php echo set_value('hp_main_logo',isset($res['hp_main_logo']) ? $res['hp_main_logo']['name'] : '')?>">
+											<input type="hidden" class="validate_himage" name="hp_main_logo" value="<?php echo set_value('hp_main_logo',isset($res['hp_main_logo']) ? $res['hp_main_logo']['name'] : '')?>">
 										</div>
 									</div>
 								</div>
