@@ -63,7 +63,7 @@ class User extends MY_Controller
 	    }
 		$check_user = $this->api_login_model->get_device_token('user_id',$input["user_id"]);
 	    $token = $this->api_login_model->get_device_token('device_notification_id',$input['token']);
-		$check_register_device = $this->api_login_model->check_register_device($input["user_id"],$input["device_notification_id"]);
+		$check_register_device = $this->api_login_model->check_register_device($input["user_id"],$input["token"]);
 		if($check_user) {
 			if($token) {
 				if(!$check_register_device){
