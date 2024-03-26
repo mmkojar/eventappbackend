@@ -141,7 +141,7 @@ public function index()
 				if($check_user || $check_device) {
 					if(!$check_register_device){
 						$login['status'] = "false";
-						$login['message'] = 'This device is already registered with another user OR Employee Code '+$input['identity']+' is used in another device';
+						$login['message'] = "This device is already registered with another user OR Employee Code ".$input['identity']." is used in another device";
 						$login['data'] = [];
 						print(json_encode($login));
 						die();

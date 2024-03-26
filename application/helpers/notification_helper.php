@@ -65,6 +65,7 @@ function sendFCM($message, $title, array $id, $type) {
 	$priority="high";
 	
 	$data= $messageData= array(
+		'data' => $messageData,
 		'notification' => $messageData,
 		'priority' => $priority,
 		'registration_ids' => $id
