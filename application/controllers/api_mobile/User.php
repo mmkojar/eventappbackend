@@ -65,7 +65,7 @@ class User extends MY_Controller
 	    $token = $this->api_login_model->get_device_token('device_notification_id',$input['token']);
 		$check_register_device = $this->api_login_model->check_register_device($input["user_id"],$input["token"]);
 		if($check_user) {
-			if($token) {
+			if($check_user['device_notification_id']) {
 				if(!$check_register_device){
 					print_r(json_encode(['status'=>'false','data'=>[]]));	
 				} else {
