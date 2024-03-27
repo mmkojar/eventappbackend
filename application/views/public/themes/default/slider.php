@@ -58,6 +58,7 @@
 					<!-- <li class = "<s?php echo ($current_tab == 'exhibitors' ? "active" :  "") ?>"><a href="<s?php echo site_url('admin/exhibitors'); ?>"><i class="fa fa-cog" aria-hidden="true"></i><p>Exhibitors</p></a></li> -->
 					<li class = "<?php echo ($current_tab == 'sponsor' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/artist'); ?>"><i class="fa fa-address-card-o" aria-hidden="true"></i><p>Artist</p></a></li>
 					<li class = "<?php echo ($current_tab == 'speaker' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/speaker'); ?>"><i class="fa fa-male" aria-hidden="true"></i><p>Speakers</p></a></li>
+					<li class = "<?php echo ($current_tab == 'speaker' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/support'); ?>"><i class="fa fa-phone" aria-hidden="true"></i><p>Support</p></a></li>
 					
 					<!-- <li class = "<?php echo ($current_tab == 'requested' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/requested'); ?>"><i class="pe-7s-mail"></i><p>Request</p></a></li>
 					<li class = "<?php echo ($current_tab == 'attendee' ? "active" :  "") ?>"><a href="<?php echo site_url('admin/attendee'); ?>"><i class="pe-7s-users"></i><p>Attendee</p></a></li>
