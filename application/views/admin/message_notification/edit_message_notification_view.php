@@ -39,12 +39,10 @@
 								<?php
 								echo form_label('Type','type',$attributes);
 								?>
-								<div class="controls">
-									<?php
-										echo form_error('type');
-										echo form_input('type',set_value('type',$message_notification["type"]),'class="form-control" required ="true"');
-									?>
-								</div>
+								<select name="type" class="form-control">
+									<option value="sendall" <?php echo ($message_notification['type'] == 'sendall') ? 'selected' : '' ?>>Sendall</option>
+									<option value="polling" <?php echo ($message_notification['type'] == 'polling') ? 'selected' : '' ?>>Polling</option>
+								</select>
 							</div>
 							<div class="form-group">
 								<label>Status</label>

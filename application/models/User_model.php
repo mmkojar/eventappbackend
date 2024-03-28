@@ -26,7 +26,7 @@ class User_model extends CI_Model
 		$this->db->join("users_groups", "users_groups.user_id = users.id" ,"left");
 		$this->db->join("groups", "groups.id = users_groups.group_id" ,"left");
  		$this->db->join("devices", "devices.user_id = users.id" ,"inner");
-		$this->db->where('groups.name !=','admin');
+		// $this->db->where('groups.name !=','admin');
 		if($id) {
 		    $this->db->where("users.id",$id);
 		    $query=$this->db->get();

@@ -41,9 +41,15 @@
 									echo form_label('Type','type',$attributes);
 								?>
                                 <div class="controls">
+                                    
                                     <?php
+                                        $options = array(
+                                                ''  => 'Select Type',
+                                                '1' => 'sendall',
+                                                '0' => 'polling',
+                                        );
 										echo form_error('type');
-										echo form_input('type',set_value('type'),'class="form-control" required ="true"');
+                                        echo  form_dropdown('type',$options,'','class="form-control" required ="true"');
 									?>
                                 </div>
                             </div>

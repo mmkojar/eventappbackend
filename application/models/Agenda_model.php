@@ -164,7 +164,7 @@ class Agenda_model extends CI_Model
 		$this->db->from("agenda");
 		$this->db->join("agenda_titles", "agenda_titles.id = agenda.title_id");
 		$this->db->where('status',1);
-		// $this->db->where("title_id",$id);
+		$this->db->order_by('agenda_time','ASC');
 		$query=$this->db->get();
 		$rowcount =  $query->num_rows();
 		$result = [];

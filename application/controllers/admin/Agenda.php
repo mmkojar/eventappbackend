@@ -151,8 +151,8 @@ class Agenda extends Admin_Controller
 			} */		
 			$register_data = [
 				'title_id'   => $this->input->post("title_id"),
-				// 'agenda_name'   => ucwords($this->input->post("agenda_name")),
-				'agenda_date'   => $this->input->post("agenda_date"),
+				'agenda_name'   => ucwords($this->input->post("agenda_name")),
+				// 'agenda_date'   => $this->input->post("agenda_date"),
 				'agenda_time'   => $this->input->post("agenda_time"),
 				// 'speaker_name'   => ucwords($this->input->post("speaker_name")),
 				'agenda_venue'   => ucfirst($this->input->post("agenda_venue")),
