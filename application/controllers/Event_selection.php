@@ -18,11 +18,16 @@ class Event_selection extends Public_Controller
 		$this->data['list'] = [
 			'is_hotel_check_in' => 'Hotel Check in',
 			'is_welcome_gift' => 'Welcome Gift',
-			'is_return_gift' => 'Return Gift',
-			'is_sada_pind' => 'Sada pind ',
 			'is_golden_temple' => 'Golden Temple ',
-			'is_wagah_border' => 'Wagah Border',
+			'is_sada_pind' => 'Sada pind ',
+			'is_wagah_border' => 'Attari Border',
+			'is_return_gift' => 'Return Gift',
 		];
+		$getScanned = $this->db->query('SELECT * FROM qr_scan_entries where user_id='.$id)->row_array();
+		// echo "<pre>";
+		// print_r($getScanned);
+		// die();
+		$this->data['result'] = $getScanned;
 		$this->data['uid'] = $id;
 		$this->data['qr_id'] = $qr_id;
 		$this->data['scan_by'] = $scan_by;
@@ -32,7 +37,9 @@ class Event_selection extends Public_Controller
 	
 	public function add () {
 		
-		if(count($_POST)!==9) {
+		// print_r($_POST);
+		// die();
+		if(count($_POST) < 4) {
 			$this->session->set_flashdata('event_er','Please select all checkbox');
 			redirect('select_event/'.$_POST['user_id'].'/'.$_POST['qr_id'].'/'.$_POST['scan_by']);
 		}
@@ -47,8 +54,13 @@ class Event_selection extends Public_Controller
 			'is_wagah_border' => isset($_POST['is_wagah_border'])&&$_POST['is_wagah_border']=='on'?1:0,
 			'scan_by' => $_POST['scan_by'],
 		);
-
-		$this->db->insert('qr_scan_entries', $data);
+		$chkexits = $this->db->query('SELECT * FROM qr_scan_entries where user_id='.$_POST['user_id'])->result_array();
+		if($chkexits) {
+			$this->db->update("qr_scan_entries", $data, array('user_id' => $_POST['user_id']));
+		} else {
+			$this->db->insert('qr_scan_entries', $data);
+		}
+		
 
 		$id = $this->db->insert_id();
 		$this->session->set_flashdata('event_sc','Data Submitted');

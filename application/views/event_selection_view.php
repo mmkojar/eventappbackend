@@ -54,6 +54,9 @@
 .container input:checked~.checkmark {
     background-color: #2196F3;
 }
+/* .container input:disabled~.checkmark{
+    background-color: #ccc;
+} */
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
@@ -98,10 +101,13 @@
                     <?php foreach ($list as $key => $val): ?>
                         <div class="form-group">
                             <label class="container" for="<?php echo $key ?>"><?php echo $val ?>
-                                <input type="checkbox" id="<?php echo $key ?>" name="<?php echo $key ?>">
+                                <input type="checkbox" id="<?php echo $key ?>" name="<?php echo isset($result)&&$result[$key]=="1"?'':$key ?>" <?php echo isset($result)&&$result[$key]=="1"?'checked disabled':'' ?>>
                                 <span class="checkmark"></span>
                             </label>
                         </div>
+                    <?php if(isset($result)&&$result[$key]=="1"): ?>
+                        <input type="hidden" name="<?php echo $key ?>" value="on">
+                    <?php endif ?>
                     <?php endforeach ?>
                     <br>
                     <input type="hidden" name="user_id" value="<?php echo $uid ?>">
