@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
-					<p class="header text-danger">Image Size should be 512x512</p>
+					<!-- <p class="header text-danger">Image Size should be 512x512</p> -->
 					<div class="content">
 						<div class="card-body">
 							<?php echo form_open('admin/settings/store',array('id'=>'userFormValidation','class'=>'form_validation','enctype'=>'multipart/form-data'));?>
