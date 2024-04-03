@@ -29,7 +29,7 @@
 							<div class="form-group">
 									<?php
 										echo form_label('About Message','about_msg',$attributes);
-										echo form_textarea('about_msg',set_value('about_msg'),'class="form-control" id="tiny" required = "true"');
+										echo form_textarea('about_msg',set_value('about_msg'),'class="form-control" required = "true"');
 									?>
 							</div>
 							<!-- <div class="form-group">

@@ -28,7 +28,7 @@
 							<div class="form-group">
 									<?php
 										echo form_label('Description','description',$attributes);
-										echo form_textarea('description',set_value('description'),'class="form-control" id="tiny" required = "true"');
+										echo form_textarea('description',set_value('description'),'class="form-control" required = "true"');
 									?>
 							</div>
 							<?php echo form_submit('submit', 'Save', 'class="btn btn-info btn-fill btn-wd"');?>
